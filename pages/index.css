@@ -16,6 +16,15 @@
 /* main */
 @import url("../blocks/main/main.css");
 
+/* profile */
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__add-btn/profile__add-btn.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__edit-btn/profile__edit-btn.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__subtitle/profile__subtitle.css");
+@import url("../blocks/profile/__title/profile__title.css");
+
 /* footer */
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");

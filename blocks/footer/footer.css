@@ -1,10 +1,12 @@
 .footer{
-    width: calc(100% - 200px*2);
+    width: 880px;
+    /* width: calc(100% - 200px*2); */
 }
 
 @media screen and (max-width:1024px){
     .footer{
-        width: calc(100% - 40px*2);
+        /* width: calc(100% - 40px*2); */
+        width: calc(100% - (1024px - 880px));
     }
 }
 
