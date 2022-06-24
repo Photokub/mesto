@@ -1,0 +1,16 @@
+.main{
+    width: calc(100% - 200px*2);
+    padding: 40px 0 66px 0;
+}
+
+@media screen and (max-width:1024px){
+    .main{
+        width: calc(100% - 40px*2);
+    }
+}
+
+@media screen and (max-width:586px){
+    .main{
+        width: calc(100% - 19px*2);
+    }
+}
