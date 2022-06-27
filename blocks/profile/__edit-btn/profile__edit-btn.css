@@ -6,7 +6,9 @@
 
     background-color:#000;
     border-color:#fff;
-    border-width: 1px;
+    outline: 1px solid #fff;
+    border:none;
+    /* border-width: 1px; */
     background-image:url("../../../images/pen.svg");
     background-size: 10px;
     background-repeat: no-repeat;
@@ -15,11 +17,15 @@
     align-self:center;
 }
 
+.profile__edit-btn:active{
+    opacity: .6;
+}
+
+
 @media screen and (max-width:586px){
     .profile__edit-btn{
         width: 18px;
         height: 18px;
-
         background-size: 7.5px;
     }
 }

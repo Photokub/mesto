@@ -1,10 +1,23 @@
 .profile__info{
     display:grid;
-    grid-template-columns: auto 24px;
+    grid-template-columns: 1fr 24px;
     /* grid-template-columns: repeat(auto-fit, minmax(24px, 1fr)); */
     grid-template-rows: repeat(auto-fit,  minmax(24px, 1fr));
     grid-column-gap:18px;
     /* align-items: baseline; */
    
     grid-row-gap:16px;
+
+    margin-right: 20px;
+}
+
+@media  screen and (max-width:586px) {
+    .profile__info{
+        margin-right: 0;
+        margin-top: 26px;
+        margin-left: 30px;
+        justify-items: center;
+        grid-column-gap:10px;
+        grid-row-gap:7px;
+    }
 }

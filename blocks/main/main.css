@@ -1,12 +1,12 @@
 .main{
-    /* width: calc(100% - 200px*2); */
     width:880px;
     padding: 40px 0 66px 0;
+    display: grid;
+    grid-row-gap:50px;
 }
 
 @media screen and (max-width:1024px){
     .main{
-        /* width: calc(100% - 40px*2); */
         width: calc(100% - (1024px - 880px));
     }
 }
@@ -14,5 +14,7 @@
 @media screen and (max-width:586px){
     .main{
         width: calc(100% - 19px*2);
+        padding: 42px 0 48px 0;
+        grid-row-gap:36px;
     }
 }

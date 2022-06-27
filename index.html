@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,15 @@
     <title>Mesto</title>
     <link rel="stylesheet" href="pages/index.css">
 </head>
+
 <body class="page">
     <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="лого Mesto">
         <hr class="header__line" size="1">
     </header>
-    <main class="main border">
-        <section class="profile border">
+    <section class="popup"></section>
+    <main class="main">
+        <section class="profile">
             <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар пользователя">
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -22,10 +25,42 @@
             </div>
             <button class="profile__add-btn">+</button>
         </section>
-        <section class="elements border"></section>
+        <section class="elements">
+            <div class="element">
+                <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
+                <p class="element__title">Карачаевск</p>
+                <img class="element__like" src="./images/like.svg" alt="лайк">
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Elbrus.png" alt="Карачаевск">
+                <p class="element__title">Гора Эльбрус</p>
+                <img class="element__like" src="./images/like.svg" alt="лайк">
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Dombai.png" alt="Карачаевск">
+                <p class="element__title">Домбай</p>
+                <img class="element__like" src="./images/like.svg" alt="лайк">
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Elbrus.png" alt="Карачаевск">
+                <p class="element__title">Гора Эльбрус</p>
+                <img class="element__like" src="./images/like.svg" alt="лайк">
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Dombai.png" alt="Карачаевск">
+                <p class="element__title">Домбай</p>
+                <img class="element__like" src="./images/like.svg" alt="лайк">
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
+                <p class="element__title">Карачаево-Черкессия</p>
+                <img class="element__like" src="./images/like.svg" alt="лайк">
+            </div>
+        </section>
     </main>
     <footer class="footer">
         <cite class="footer__copyright">© 2022 Mesto Russia<cite>
     </footer>
 </body>
+
 </html>

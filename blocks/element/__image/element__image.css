@@ -1,0 +1,6 @@
+.element__image{
+    height: 282px;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    /* margin:0 auto; */
+}

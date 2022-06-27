@@ -1,0 +1,8 @@
+.element__like{
+    max-height: 19px;
+    grid-column:2/3;
+    grid-row:2/3;
+    justify-self: center;
+    margin-right:20px;
+    margin-left:30px;
+}
