@@ -15,6 +15,11 @@
 
 /* popup */
 @import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/__overlay/popup__overlay.css");
+@import url("../blocks/popup/__close/popup__close.css");
+
+/* form */
+@import url("../blocks/form/form.css");
 
 /* main */
 @import url("../blocks/main/main.css");

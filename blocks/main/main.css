@@ -3,6 +3,7 @@
     padding: 40px 0 66px 0;
     display: grid;
     grid-row-gap:50px;
+    z-index: 0;
 }
 
 @media screen and (max-width:1024px){
