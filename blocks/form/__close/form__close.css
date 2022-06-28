@@ -1,12 +1,10 @@
-.popup__close{
+.form__close{
     width: 32px;
     height: 32px;
-    position: relative;
+    position: absolute;
     top:-40px;
     left:438px;
     z-index: 2;
-
-    /* background-color: #000; */
     background: transparent;
     background-image: url("../../../images/Close_Icon.svg");
     background-position: center;
@@ -14,6 +12,6 @@
     border: 0;
 }
 
-.popup__close:active{
-    
+.form__close:active{
+    opacity: .6;
 }
