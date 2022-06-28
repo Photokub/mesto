@@ -29,3 +29,12 @@ function formSubmit(evt){
 }
 
 submitForm.addEventListener('submit', formSubmit);
+
+let like = document.querySelectorAll('.element__like');
+
+function activeLike(){
+    like.src = 'images/like_active.svg';
+    like.innerHTML('<img class="element__like" src="./images/like_active.svg" alt="лайк">');
+}
+
+like.addEventListener('click', activeLike);

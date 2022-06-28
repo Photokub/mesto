@@ -1,5 +1,4 @@
 .header{
-    /* width: calc(100% - 200px*2); */
     width:880px;
     display: flex;
     flex-direction: column;
@@ -9,7 +8,6 @@
 
 @media screen and (max-width:1024px){
     .header{
-        /* width: calc(100% - 40px*2); */
         width: calc(100% - (1024px - 880px));
     }
 }
@@ -17,7 +15,5 @@
 @media screen and (max-width:586px){
     .header{
         width: 100%;
-        /* width: calc(100% - 19px*2); */
-        /* padding:0 19px 0 19px; */
     }
 }

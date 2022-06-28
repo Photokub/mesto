@@ -11,3 +11,9 @@
     font-size: 14px;
     line-height: 17px;
 }
+
+@media screen and (max-width: 586px ) {
+    .form__user-name {
+        margin-top: 63px;
+     }
+ }

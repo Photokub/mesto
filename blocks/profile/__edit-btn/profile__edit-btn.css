@@ -1,5 +1,4 @@
 .profile__edit-btn{
-    /* margin:auto; */
     width: 24px;
     height: 24px;
     padding:7px;
@@ -8,7 +7,6 @@
     border-color:#fff;
     outline: 1px solid #fff;
     border:none;
-    /* border-width: 1px; */
     background-image:url("../../../images/pen.svg");
     background-size: 10px;
     background-repeat: no-repeat;

@@ -8,5 +8,12 @@
     margin:0;
     align-self: start;
     margin-left:36px;
-    /* margin-top:34px; */
 }
+
+@media screen and (max-width: 586px ) {
+    .form__title {
+        font-size: 18px;
+        line-height: 22px;
+        margin-left:22px;
+     }
+ }

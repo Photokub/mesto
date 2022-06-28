@@ -15,3 +15,12 @@
 .form__close:active{
     opacity: .6;
 }
+
+@media screen and (max-width: 586px ) {
+    .form__close {
+        width: 20px;
+        height: 20px;
+        top:calc(-20px - 16px);
+        left:calc(282px - 20px);
+     }
+ }

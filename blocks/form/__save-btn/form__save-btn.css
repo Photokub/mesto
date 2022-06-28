@@ -12,3 +12,10 @@
     line-height: 22px;
     text-align: center;
 }
+
+@media screen and (max-width: 586px ) {
+    .form__save-btn {
+         width:238px;
+         height: 46px;
+     }
+ }
