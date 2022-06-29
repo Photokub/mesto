@@ -12,18 +12,7 @@
 <body class="page">
     <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="лого Mesto">
-        <hr class="header__line">
     </header>
-    <section class="popup" aria-label="профиль">
-        <form class="form">
-            <button class="form__close" type="button"></button>
-            <p class="form__title">Редактировать профиль</p>
-            <input class="form__user-name" type="text" name="user_name_field" value="Жак-Ив Кусто">
-            <input class="form__user-job" type="text" name="user_job_field" value="Исследователь океана">
-            <button class="form__save-btn" type="submit">Сохранить</button>
-        </form>
-        <div class="popup__overlay"></div>
-    </section>
     <main class="main">
         <section class="profile">
             <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар пользователя">
@@ -70,7 +59,19 @@
     <footer class="footer">
         <cite class="footer__copyright">© 2022 Mesto Russia</cite>
     </footer>
-    <script src="./script/index.js"></script>
+    <section class="popup" aria-label="попап">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <form class="form" name="user_data" method="post" action="">
+                <h2 class="form__title">Редактировать профиль</h2>
+                <input class="form__input form__user-name" type="text" name="user_name_field" value="">
+                <input class="form__input form__user-job" type="text" name="user_job_field" value="">
+                <button class="form__save-btn" type="submit">Сохранить</button>
+            </form>
+        </div>
+        <div class="popup__overlay"></div>
+    </section>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>

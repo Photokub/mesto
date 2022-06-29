@@ -1,9 +1,9 @@
-.form__close{
+.popup__close{
     width: 32px;
     height: 32px;
-    position: absolute;
-    top:-40px;
-    left:438px;
+    position:relative;
+    top:calc(-32px - 8px);
+    left: 8px;
     z-index: 2;
     background: transparent;
     background-image: url("../../../images/Close_Icon.svg");
@@ -12,15 +12,15 @@
     border: 0;
 }
 
-.form__close:active{
+.popup__close:active{
     opacity: .6;
 }
 
 @media screen and (max-width: 586px ) {
-    .form__close {
+    .popup__close {
         width: 20px;
         height: 20px;
         top:calc(-20px - 16px);
-        left:calc(282px - 20px);
+        left:-20px
      }
  }

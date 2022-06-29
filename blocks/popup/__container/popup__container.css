@@ -1,0 +1,6 @@
+.popup__container{
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    top:195px;
+}
