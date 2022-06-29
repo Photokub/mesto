@@ -30,11 +30,10 @@ function formSubmit(evt){
 
 submitForm.addEventListener('submit', formSubmit);
 
-let like = document.querySelectorAll('.element__like');
+const likes = document.querySelectorAll('.element__like');
 
-function activeLike(){
-    like.src = 'images/like_active.svg';
-    like.innerHTML('<img class="element__like" src="./images/like_active.svg" alt="лайк">');
+function activeLike(event){
+        event.target.classList.toggle('element__like_active');
 }
 
-like.addEventListener('click', activeLike);
+likes.forEach(like => like.addEventListener('click', activeLike));
