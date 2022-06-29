@@ -1,9 +1,9 @@
 .header__line{
-    color:#545454;
     width:100%;
     margin:41px 0 0 0;
-    border-left:none;
-    border-right:none;
+    border:0;
+    height: 1px;
+    background-color: #545454;;
 }
 
 @media screen and (max-width:586px){

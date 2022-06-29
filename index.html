@@ -12,9 +12,9 @@
 <body class="page">
     <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="лого Mesto">
-        <hr class="header__line" size="1">
+        <hr class="header__line">
     </header>
-    <section class="popup">
+    <section class="popup" aria-label="профиль">
         <form class="form">
             <button class="form__close" type="button"></button>
             <p class="form__title">Редактировать профиль</p>
@@ -34,7 +34,7 @@
             </div>
             <button class="profile__add-btn">+</button>
         </section>
-        <section class="elements">
+        <section class="elements" aria-label="галерея">
             <div class="element">
                 <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
                 <p class="element__title">Карачаевск</p>
@@ -68,7 +68,7 @@
         </section>
     </main>
     <footer class="footer">
-        <cite class="footer__copyright">© 2022 Mesto Russia<cite>
+        <cite class="footer__copyright">© 2022 Mesto Russia</cite>
     </footer>
     <script src="./script/index.js"></script>
 </body>
