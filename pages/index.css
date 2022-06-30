@@ -15,15 +15,13 @@
 @import url("../blocks/popup/__overlay/popup__overlay.css");
 @import url("../blocks/popup/__container/popup__container.css");
 @import url("../blocks/popup/__close/popup__close.css");
-@import url("../blocks/popup/_is-opened/popup_is-opened.css");
+@import url("../blocks/popup/_opened/popup_opened.css");
 
 /* form */
 @import url("../blocks/form/form.css");
 @import url("../blocks/form/__save-btn/form__save-btn.css");
 @import url("../blocks/form/__title/form__title.css");
 @import url("../blocks/form/__input/form__input.css");
-@import url("../blocks/form/__user-job/form__user-job.css");
-@import url("../blocks/form/__user-name/form__user-name.css");
 
 /* main */
 @import url("../blocks/main/main.css");

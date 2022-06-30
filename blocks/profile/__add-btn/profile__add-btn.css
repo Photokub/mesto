@@ -1,25 +1,18 @@
 .profile__add-btn{
-    justify-self: flex-end;
+    padding:0;
     margin-left: auto;
     width:150px;
     height:50px;
-    padding:0;
     color:#fff;
     font-size:40px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    outline-color: #fff;
-    outline: 2px solid #fff;
-    outline-offset: -4px;
     border-radius: 4px;
-    position:relative;
-    left: 2px;
     background-color:#000;
-    border: none;
+    border:2px solid #fff;
+    box-sizing: border-box;
+    transition: .5s;
 }
 
-.profile__add-btn:active{
+.profile__add-btn:hover{
     opacity: .6;
 }
 

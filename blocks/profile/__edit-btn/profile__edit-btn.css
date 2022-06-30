@@ -13,9 +13,12 @@
     background-position:center;
 
     align-self:center;
+
+    transition: .5s;
+
 }
 
-.profile__edit-btn:active{
+.profile__edit-btn:hover{
     opacity: .6;
 }
 

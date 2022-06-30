@@ -3,19 +3,27 @@
     background-color: #000;
     width: 358px;
     height: 50px;
+    border:0;
 
     color: #fff;
-    font-family: 'Inter';
+    font-family: 'Inter','Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    transition: .5s;
+}
+
+.form__save-btn:hover{
+    opacity: 80%;
 }
 
 @media screen and (max-width: 586px ) {
     .form__save-btn {
-         width:238px;
-         height: 46px;
+     width:238px;
+        height: 46px;
+        font-size: 14px;
+        line-height: 17px;
      }
  }

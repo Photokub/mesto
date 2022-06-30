@@ -1,13 +1,21 @@
 .form__input{
     height: 27px;
     width:calc(100% - 36px*2);
-    margin-top: 54px;
+    margin-top: 30px;
     border:none;
     border-bottom: 1px solid #000;
 
-    font-family: 'Inter';
+    font-family: 'Inter','Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
 }
+
+
+@media screen and (max-width: 586px ) {
+    .form__input {
+        margin-top: 70px;
+        width:238px;
+     }
+ }
