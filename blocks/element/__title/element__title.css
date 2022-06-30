@@ -6,7 +6,7 @@
     line-height: 29px;
     grid-column:1/2;
     grid-row:2/3;
-    margin-left:21px;
+    margin: 25px 0 25px 21px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

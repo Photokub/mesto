@@ -12,7 +12,7 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    transition: .5s;
+    transition: .35s;
 }
 
 .form__save-btn:hover{
@@ -21,9 +21,10 @@
 
 @media screen and (max-width: 586px ) {
     .form__save-btn {
-     width:238px;
+        width:238px;
         height: 46px;
         font-size: 14px;
         line-height: 17px;
+        margin-top:45px;
      }
  }

@@ -9,7 +9,7 @@
     background-color:#000;
     border:2px solid #fff;
     box-sizing: border-box;
-    transition: .5s;
+    transition: .35s;
 }
 
 .profile__add-btn:hover{
@@ -18,7 +18,7 @@
 
 @media screen and (max-width:586px) {
     .profile__add-btn{
-        width:100%;
+        width: 282px;
         margin:34px 0 0;
         left: 0;
         font-size:30px;
