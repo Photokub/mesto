@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 586px) {
     .popup__container{
-        left:19px;
+        left:calc(50% - (282px/2));
         top:123px;
     }
 }
