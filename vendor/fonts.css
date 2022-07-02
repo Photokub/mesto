@@ -14,7 +14,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: local('Inter Bold');
+    src: local('Inter Medium');
     src: 
         url("fonts/Inter-Medium.woff") format("woff"),
         url("fonts/Inter-Medium.woff2") format("woff2");

@@ -1,4 +1,5 @@
 .profile__title{
+    max-width: 510px;
     font-family: 'Inter','Arial', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -17,6 +18,6 @@
     .profile__title{
         font-size: 27px;
         line-height: 33px;
-        max-width:282px;
+        max-width:230px;
     }
 }

@@ -6,10 +6,8 @@ const submitBtn = popup.querySelector('.form__save-btn');
 const submitForm = popup.querySelector('.form');
 let userName = document.querySelector('.profile__title');
 let userJob = document.querySelector('.profile__subtitle');
-let userNameInput = popup.querySelector('.form__input-type-name');
-let userJobInput = popup.querySelector('.form__input-type-job');
-
-const likes = document.querySelectorAll('.element__like');
+let userNameInput = popup.querySelector('.form__input_type_name');
+let userJobInput = popup.querySelector('.form__input_type_job');
 
 const openPopupVisibility = function(){
     userNameInput.value = userName.textContent;
@@ -25,7 +23,7 @@ function formSubmit(evt){
     evt.preventDefault();
     userName.textContent = userNameInput.value;
     userJob.textContent = userJobInput.value;
-    closePopupVisibility(evt);
+    closePopupVisibility();
 }
 
 openPopupBtn.addEventListener('click', openPopupVisibility);

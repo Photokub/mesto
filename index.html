@@ -61,15 +61,14 @@
     </footer>
     <section class="popup" aria-label="попап">
         <div class="popup__container">
-            <button class="popup__close" type="button"></button>
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <button class="popup__close" type="button"></button> 
             <form class="form" name="user_data" method="post">
-                <h3 class="form__title">Редактировать профиль</h3>
-                <input class="form__input form__input-type-name" type="text" name="user_name_field" value="">
-                <input class="form__input form__input-type-job" type="text" name="user_job_field" value="">
+                <input class="form__input form__input_type_name" type="text" name="user_name_field" value="">
+                <input class="form__input form__input_type_job" type="text" name="user_job_field" value="">
                 <button class="form__save-btn" type="submit">Сохранить</button>
             </form>
         </div>
-        <div class="popup__overlay"></div>
     </section>
     <script src="./scripts/index.js"></script>
 </body>
