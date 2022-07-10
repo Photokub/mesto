@@ -1,0 +1,18 @@
+.element__remove-btn{
+    width:18px;
+    height: 19px;
+    background-image:url(../../../images/Basket.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #11ffee00;
+    border:none;
+    position:absolute;
+    top:20px;
+    right:20px;
+    transition: .35s;
+}
+
+.element__remove-btn:hover{
+    opacity: 60%;
+    cursor: pointer;
+}

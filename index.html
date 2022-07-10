@@ -23,38 +23,17 @@
             </div>
             <button class="profile__add-btn" type="button">+</button>
         </section>
-        <section class="elements" aria-label="галерея">
-            <div class="element">
-                <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
-                <h2 class="element__title">Карачаевск</h2>
-                <button class="element__like" type="button"></button>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/Elbrus.png" alt="Карачаевск">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button class="element__like"></button>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/Dombai.png" alt="Карачаевск">
-                <h2 class="element__title">Домбай</h2>
-                <button class="element__like" type="button"></button>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/Elbrus.png" alt="Карачаевск">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button class="element__like" type="button"></button>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/Dombai.png" alt="Карачаевск">
-                <h2 class="element__title">Домбай</h2>
-                <button class="element__like" type="button"></button>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
-                <h2 class="element__title">Карачаево-Черкессия</h2>
-                <button class="element__like" type="button"></button>
-            </div>
-        </section>
+        <section class="elements" aria-label="галерея">  <!--галерея начало-->           
+            <template id="element-card">
+                <div class="element">
+                    <button class="element__remove-btn" type="button"></button>
+                    <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
+                    <h2 class="element__title">Карачаевск</h2>
+                    <button class="element__like" type="button"></button>
+                    
+                </div>
+            </template>
+        </section> <!--галерея конец-->        
     </main>
     <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
@@ -62,11 +41,22 @@
     <section class="popup" aria-label="попап">
         <div class="popup__container">
             <h3 class="popup__title">Редактировать профиль</h3>
-            <button class="popup__close" type="button"></button> 
+            <button class="popup__close" type="button"></button>
             <form class="form" name="user_data" method="post">
                 <input class="form__input form__input_type_name" type="text" name="user_name_field" value="">
                 <input class="form__input form__input_type_job" type="text" name="user_job_field" value="">
                 <button class="form__save-btn" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <section class="popup popup_add-new-card" aria-label="попап добавления новой карточки">
+        <div class="popup__container">
+            <h3 class="popup__title">Новое место</h3>
+            <button class="popup__close popup__close_add-new-card" type="button"></button>
+            <form class="form form_add-new-card" name="user_data" method="post">
+                <input class="form__input form__input_type_title" type="text" name="card_title_field" value="Название">
+                <input class="form__input form__input_type_link" type="text" name="card_link_field" value="Ссылка на картинку">
+                <button class="form__save-btn form__add-card-btn" type="submit">Сохранить</button>
             </form>
         </div>
     </section>
