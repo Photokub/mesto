@@ -79,18 +79,18 @@ elementsGallery.addEventListener('click', function(evt){
     evt.target.parentNode.remove();
   }
 }
-);
- 
+); 
 
 //клик на изображение
 const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
+const fullSizeImgTitle = document.querySelector('.popup__fullsize-img-caption');
+
 document.addEventListener('click', function(evt){
   if(!evt.target.classList.contains('element__image')) return
   else{
     openFullSizeImg();
-    //const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
-   // fullSizeImg.classList.add('.element__image_fullsize');
-    fullSizeImg.src = evt.target.src;   
+    fullSizeImg.src = evt.target.src;
+    fullSizeImgTitle.textContent = evt.target.parentNode.textContent;
   }
 }
 );
@@ -172,21 +172,6 @@ closeFullSizeImgBtn.addEventListener('click', closeFullSizeImg);
 submitForm.addEventListener('submit', formSubmit);
 submitAddCard.addEventListener('submit', formSubmit);
 
-//openFullSizeImgBtn.addEventListener('click',openFullSizeImg);
-
-
-
-
-
-
-
-// let likes = document.querySelectorAll('.element__like');
-
-// function activeLike(evt){
-//   evt.target.classList.toggle('element__like_active')
-// }
-
-// likes.forEach((like) => {like.addEventListener('click', activeLike)});
 
 
 
