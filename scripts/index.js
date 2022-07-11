@@ -1,16 +1,16 @@
 const popup = document.querySelector('.popup');
+const popupFullSizeImg = document.querySelector('.popup_full-size-image');
 const popupAddNewCard = document.querySelector('.popup_add-new-card');
 const openPopupBtn = document.querySelector('.profile__edit-btn');
 const openAddNewCardBtn = document.querySelector('.profile__add-btn');
 const closePopupBtn = popup.querySelector('.popup__close');
 const closeAddCardBtn = document.querySelector('.popup__close_add-new-card')
-
+const openFullSizeImgBtn = document.querySelector('.element__image')
+const closeFullSizeImgBtn = popupFullSizeImg.querySelector('.popup__close_full-size-image')
 
 const elementsGallery = document.querySelector('.elements');
-//const removeItemBtn = document.querySelectorAll('.element__remove-btn');
 
 const cardElementTemplate = document.querySelector('#element-card').content;
-
 
 const submitBtn = popup.querySelector('.form__save-btn');
 const submitForm = popup.querySelector('.form');
@@ -72,14 +72,28 @@ elementsGallery.addEventListener('click', function(evt){
 }
 );
 
-// //кнопка удалить
-// elementsGallery.addEventListener('click', function(evt){
-//   if(!evt.target.classList.contains('element__remove-btn')) return
-//   else if(evt.target.classList.contains('element__like_active')){
-//     evt.target.classList.remove('element__like_active')
-//   }else{evt.target.classList.add('element__like_active')}
-// }
-// );
+//кнопка удалить
+elementsGallery.addEventListener('click', function(evt){
+  if(!evt.target.classList.contains('element__remove-btn')) return
+  else if(evt.target.classList.contains('element__remove-btn')){
+    evt.target.parentNode.remove();
+  }
+}
+);
+ 
+
+//клик на изображение
+const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
+document.addEventListener('click', function(evt){
+  if(!evt.target.classList.contains('element__image')) return
+  else{
+    openFullSizeImg();
+    //const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
+   // fullSizeImg.classList.add('.element__image_fullsize');
+    fullSizeImg.src = evt.target.src;   
+  }
+}
+);
 
 //открытие попапа
 const openPopupVisibility = function(item){
@@ -113,6 +127,16 @@ function closeProfileEdit(){
   closePopupVisibility(popup);
 };
 
+//открыть большую картинку
+function openFullSizeImg(){
+  openPopupVisibility(popupFullSizeImg);
+};
+
+//закрыть большую картинку
+function closeFullSizeImg(){
+  closePopupVisibility(popupFullSizeImg);
+};
+
 //функционал кнопки «сохранить» в редактировании профиля
 function formSubmit(evt){
     evt.preventDefault();
@@ -133,10 +157,9 @@ function createCard(){
 //функционал кнопки «сохранить» в добавлении карточки
 function formSubmit(evt){
   evt.preventDefault();
- elementsGallery.append(createCard());
+  elementsGallery.append(createCard());
   closePopupVisibility(closeAddingCard());
 }
-
 
 
 openPopupBtn.addEventListener('click', openProfileEdit);
@@ -144,9 +167,12 @@ openAddNewCardBtn.addEventListener('click', openAddingCard);
 
 closePopupBtn.addEventListener('click', closeProfileEdit);
 closeAddCardBtn.addEventListener('click', closeAddingCard);
+closeFullSizeImgBtn.addEventListener('click', closeFullSizeImg);
 
 submitForm.addEventListener('submit', formSubmit);
 submitAddCard.addEventListener('submit', formSubmit);
+
+//openFullSizeImgBtn.addEventListener('click',openFullSizeImg);
 
 
 

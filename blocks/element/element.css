@@ -1,5 +1,5 @@
 .element{
-    max-width:282px;
+    width:282px;
     background-color: #fff;
     display:grid;
     grid-template-columns: 1fr auto;
