@@ -1,11 +1,6 @@
 .popup__container_full-size-image{
-    /* width: 75vw;
-    height:75vh; */
-    background-color: blue;
     position:relative;
     top:90px;
-    margin:0;
-    padding:0;
 }
 
 @media screen and (max-width:680px) {
