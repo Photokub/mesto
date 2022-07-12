@@ -19,6 +19,8 @@ let userName = document.querySelector('.profile__title');
 let userJob = document.querySelector('.profile__subtitle');
 let userNameInput = popup.querySelector('.form__input_type_name');
 let userJobInput = popup.querySelector('.form__input_type_job');
+let cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
+let cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
 const initialCards = [
   {
@@ -95,20 +97,22 @@ document.addEventListener('click', function(evt){
 }
 );
 
-//открытие попапа
+//функционал открытия попапа
 const openPopupVisibility = function(item){
     userNameInput.value = userName.textContent;
     userJobInput.value = userJob.textContent;
     item.classList.add('popup_opened');
 };
 
-//закрытие попапа
+//функционал закрытия попапа
 const closePopupVisibility = function(item){
   item.classList.remove('popup_opened');
 };
 
 //открыть добавить карточку
 function openAddingCard(){
+  cardTitle.value = "Название";
+  cardLink.value = "Ссылка на картинку";
   openPopupVisibility(popupAddNewCard);
 };
 
@@ -119,6 +123,8 @@ function closeAddingCard(){
 
 //открыть редактировать профиль
 function openProfileEdit(){
+  userNameInput.value = userName.textContent;
+  userJobInput.value = userJob.textContent;
   openPopupVisibility(popup);
 };
 
@@ -142,38 +148,37 @@ function formSubmit(evt){
     evt.preventDefault();
     userName.textContent = userNameInput.value;
     userJob.textContent = userJobInput.value;
-    closePopupVisibility(closeProfileEdit());
+    closeProfileEdit();
 }
 
 //создание новой карточки
 function createCard(){
   const userElementCard = cardElementTemplate.querySelector('.element').cloneNode(true);
-  userElementCard.querySelector('.element__title').textContent = popupAddNewCard.querySelector('.form__input_type_title').value;
-  userElementCard.querySelector('.element__image').src = popupAddNewCard.querySelector('.form__input_type_link').value;
+  userElementCard.querySelector('.element__title').textContent = cardTitle.value;
+  userElementCard.querySelector('.element__image').src = cardLink.value;
   userElementCard.querySelector('.element__image').alt = userElementCard.querySelector('.element__title').textContent;
   return userElementCard;
 }
 
 //функционал кнопки «сохранить» в добавлении карточки
-function formSubmit(evt){
+function cardSubmit(evt){
   evt.preventDefault();
-  elementsGallery.append(createCard());
-  closePopupVisibility(closeAddingCard());
+  if(cardTitle.value === 'Название' || cardLink.value === 'Ссылка на картинку'){    
+    closeAddingCard();
+  }
+  else{
+  elementsGallery.append(createCard());  
+  closeAddingCard();
+}
 }
 
-
 openPopupBtn.addEventListener('click', openProfileEdit);
-openAddNewCardBtn.addEventListener('click', openAddingCard);
-
 closePopupBtn.addEventListener('click', closeProfileEdit);
+
+openAddNewCardBtn.addEventListener('click', openAddingCard);
 closeAddCardBtn.addEventListener('click', closeAddingCard);
+
 closeFullSizeImgBtn.addEventListener('click', closeFullSizeImg);
 
 submitForm.addEventListener('submit', formSubmit);
-submitAddCard.addEventListener('submit', formSubmit);
-
-
-
-
-
-
+submitAddCard.addEventListener('submit', cardSubmit);

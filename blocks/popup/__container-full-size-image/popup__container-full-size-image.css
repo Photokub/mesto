@@ -2,9 +2,3 @@
     position:relative;
     top:90px;
 }
-
-@media screen and (max-width:680px) {
-    .popup__container_full-size-image{
-        /* height:321px; */
-    }
-}
