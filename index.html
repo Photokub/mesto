@@ -37,7 +37,7 @@
     <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
-    <section class="popup" aria-label="попап">
+    <section class="popup profile-popup" aria-label="попап">
         <div class="popup__container">
             <h3 class="popup__title">Редактировать профиль</h3>
             <button class="popup__close" type="button"></button>
@@ -53,8 +53,8 @@
             <h3 class="popup__title">Новое место</h3>
             <button class="popup__close popup__close_add-new-card" type="button"></button>
             <form class="form form_add-new-card" name="card_data" method="post">
-                <input class="form__input form__input_type_title" type="text" name="card_title_field" value="">
-                <input class="form__input form__input_type_link" type="text" name="card_link_field" value="">
+                <input class="form__input form__input_type_title" type="text" name="card_title_field" value="" placeholder="Название">
+                <input class="form__input form__input_type_link" type="text" name="card_link_field" value="" placeholder="Ссылка на картинку">
                 <button class="form__save-btn form__add-card-btn" type="submit">Сохранить</button>
             </form>
         </div>
