@@ -1,21 +1,24 @@
-const popup = document.querySelector('.profile-popup');
+const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
 const popupAddNewCard = document.querySelector('.popup_add-new-card');
 const editProfileBtn = document.querySelector('.profile__edit-btn');
 const openAddNewCardBtn = document.querySelector('.profile__add-btn');
+
+const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
+const fullSizeImgTitle = document.querySelector('.popup__fullsize-img-caption');
 
 const closeButtons = document.querySelectorAll('.popup__close');
 
 const elementsGallery = document.querySelector('.elements');
 const cardElementTemplate = document.querySelector('#element-card').content;
 
-const submitBtn = popup.querySelector('.form__save-btn');
-const profileForm = popup.querySelector('.form');
+const submitBtn = profilePopup.querySelector('.form__save-btn');
+const profileForm = profilePopup.querySelector('.form');
 const submitAddCard = popupAddNewCard.querySelector('.form_add-new-card');
 const userName = document.querySelector('.profile__title');
 const userJob = document.querySelector('.profile__subtitle');
-const userNameInput = popup.querySelector('.form__input_type_name');
-const userJobInput = popup.querySelector('.form__input_type_job');
+const userNameInput = profilePopup.querySelector('.form__input_type_name');
+const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
@@ -57,9 +60,6 @@ function createCard(item) {
   const likeBtn = userElementCard.querySelector('.element__like');
   const removeBtn = userElementCard.querySelector('.element__remove-btn');
 
-  const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
-  const fullSizeImgTitle = document.querySelector('.popup__fullsize-img-caption');
-
   elementTitle.textContent = item.name;
   elementImage.src = item.link;
   elementImage.alt = item.name;
@@ -90,18 +90,15 @@ function handleNewCardViaSubmit(evt) {
     closeAddingCard();
   }
   else {
-    const newCard = [
-      {
-        name: cardTitle.value,
-        link: cardLink.value
-      }
-    ]
-    newCard.forEach((item) => {
-      const card = createCard(item);
-      elementsGallery.prepend(card)
-      closeAddingCard();
-      evt.target.reset()
-    })
+    const newCard =
+    {
+      name: cardTitle.value,
+      link: cardLink.value
+    }
+    const card = createCard(newCard);
+    elementsGallery.prepend(card)
+    closeAddingCard();
+    evt.target.reset()
   }
 }
 
@@ -134,12 +131,12 @@ function closeAddingCard() {
 function openProfileEdit() {
   userNameInput.value = userName.textContent;
   userJobInput.value = userJob.textContent;
-  openPopup(popup);
+  openPopup(profilePopup);
 };
 
 //закрыть редактировать профиль
 function closeProfileEdit() {
-  closePopup(popup);
+  closePopup(profilePopup);
 };
 
 //открыть большую картинку
