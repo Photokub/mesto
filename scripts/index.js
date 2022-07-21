@@ -98,7 +98,7 @@ function handleNewCardViaSubmit(evt) {
     const card = createCard(newCard);
     elementsGallery.prepend(card)
     closeAddingCard();
-    evt.target.reset()
+    //evt.target.reset()
   }
 }
 
