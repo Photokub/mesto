@@ -1,14 +1,15 @@
 const forms = {
-    formAddNewCard: ".form_add-new-card[name = 'add_new_card']",
+    form: ".form_add-new-card[name = 'add_new_card']",
     formEditProfile:".form[name='user_data']",
     button: '.form__save-btn',
     buttonValid: 'form__save-btn_valid',
-    buttonInvalid: 'form__save-btn_invalid'
+    buttonInvalid: 'form__save-btn_invalid',
+    formInput: '.form__input'
 }
 
 function enableValidation(config) {
     // 1. Найти форму в документе
-    const form = document.querySelector(config.formAddNewCard);
+    const form = document.querySelector(config.form);
     console.log(form)
     const formEditProfile = document.querySelector(config.formEditProfile);
     console.log(formEditProfile)
@@ -60,6 +61,29 @@ function showFieldError(input){
     const span = input.nextElementSibling;
     span.textContent = input.validationMessage;
 }
+
+function hideFieldError(input){
+    const span = input.nextElementSibling;
+    span.textContent='';
+}
+
+funuction checkValidity(input) = {
+    if(input.validity.valid){
+        hideFieldError(input)
+    }
+}
+
+// const formElement = document.querySelector('.form');
+// const formInput = formElement.querySelector('.form__input');
+// const formError = formElement.querySelector(`.${formInput.id}-error`);
+
+// const checkInputValidity = () => {
+//     if (!formInput.validity.valid) {
+//       showError(formInput, formInput.validationMessage);
+//     } else {
+//       hideError(formInput);
+//     }
+//   };
 
 function setSubmitButtonState(form, config){
     const button = form.querySelector(config.button);

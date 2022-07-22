@@ -98,7 +98,7 @@ function handleNewCardViaSubmit(evt) {
     const card = createCard(newCard);
     elementsGallery.prepend(card)
     closeAddingCard();
-    //evt.target.reset()
+    evt.target.reset()
   }
 }
 
@@ -128,7 +128,7 @@ function closeAddingCard() {
 };
 
 //открыть редактировать профиль
-function openProfileEdit() {
+function openProfileEdit(evt) {
   userNameInput.value = userName.textContent;
   userJobInput.value = userJob.textContent;
   openPopup(profilePopup);
