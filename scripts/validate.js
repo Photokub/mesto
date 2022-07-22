@@ -40,8 +40,12 @@ function handleFromInput(event, config){
 
     //1. Установить кастомные тексты ошибок
     setCustomError(input);
-    //2. Показать ошибки в контейнере под полем
-    showFieldError(input);
+    //2. Показать/скрыть ошибки 
+    if(!input.validity.valid){
+        showFieldError(input);
+    } else {
+        hideFieldError(input);
+    }
     //3. Включить/отключить кнопку отправки формы
     setSubmitButtonState(form, config);
 }
@@ -51,7 +55,8 @@ function setCustomError(input){
     input.setCustomValidity('');
 
     if(validity.tooShort){
-        input.setCustomValidity('Введите минимум 3 символа!')
+        input.setCustomValidity('Введите минимум 2 символа!')
+
     } if (validity.tooLong){
         input.setCustomValidity('Достигнут лимит символов!')
     }
@@ -60,30 +65,14 @@ function setCustomError(input){
 function showFieldError(input){
     const span = input.nextElementSibling;
     span.textContent = input.validationMessage;
+    input.classList.add("form__input_error-field"); 
 }
 
 function hideFieldError(input){
     const span = input.nextElementSibling;
     span.textContent='';
+    input.classList.remove("form__input_error-field")
 }
-
-funuction checkValidity(input) = {
-    if(input.validity.valid){
-        hideFieldError(input)
-    }
-}
-
-// const formElement = document.querySelector('.form');
-// const formInput = formElement.querySelector('.form__input');
-// const formError = formElement.querySelector(`.${formInput.id}-error`);
-
-// const checkInputValidity = () => {
-//     if (!formInput.validity.valid) {
-//       showError(formInput, formInput.validationMessage);
-//     } else {
-//       hideError(formInput);
-//     }
-//   };
 
 function setSubmitButtonState(form, config){
     const button = form.querySelector(config.button);

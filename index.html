@@ -46,11 +46,11 @@
             <form class="form" name="user_data" method="post" novalidate>
                 <label class="form__field">
                     <input class="form__input form__input_type_name" type="text" name="user_name_field" value=""
-                        required>
+                        required minlength="2" maxlength="40">
                     <span class="form__input_error"></span>
                 </label>
                 <label class="form__field">
-                    <input class="form__input form__input_type_job" type="text" name="user_job_field" value="" required>
+                    <input class="form__input form__input_type_job" type="text" name="user_job_field" value="" required minlength="2" maxlength="200">
                     <span class="form__input_error"></span>
                 </label>
                 <button class="form__save-btn" type="submit">Сохранить</button>

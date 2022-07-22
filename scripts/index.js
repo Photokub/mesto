@@ -22,6 +22,8 @@ const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
+// const inputError = 
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -129,8 +131,10 @@ function closeAddingCard() {
 
 //открыть редактировать профиль
 function openProfileEdit(evt) {
+  const inputErrors = document.querySelectorAll('.form__input_error');
+  inputErrors.forEach((inputError) => {inputError.textContent=""})
   userNameInput.value = userName.textContent;
-  userJobInput.value = userJob.textContent;
+  userJobInput.value = userJob.textContent;  
   openPopup(profilePopup);
 };
 
