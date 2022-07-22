@@ -1,14 +1,23 @@
-const formsAndInputs = {
-    form: ".form_add-new-card[name = 'add_new_card']"
+const forms = {
+    formAddNewCard: ".form_add-new-card[name = 'add_new_card']",
+    formEditProfile:".form[name='user_data']",
+    button: '.form__save-btn',
+    buttonValid: 'form__save-btn_valid',
+    buttonInvalid: 'form__save-btn_invalid'
 }
 
 function enableValidation(config) {
     // 1. Найти форму в документе
-    const form = document.querySelector(config.form)
+    const form = document.querySelector(config.formAddNewCard);
     console.log(form)
+    const formEditProfile = document.querySelector(config.formEditProfile);
+    console.log(formEditProfile)
     // 2. Установить слушатьль сабмита
     form.addEventListener('submit', handleFormSubmit);
-    form.addEventListener('input', handleFromInput);
+    form.addEventListener('input', (event) => handleFromInput(event, config));
+
+    formEditProfile.addEventListener('submit', handleFormSubmit);
+    formEditProfile.addEventListener('input', (event) => handleFromInput(event, config));
 }
 
 function handleFormSubmit(event){
@@ -24,7 +33,7 @@ function handleFormSubmit(event){
     }
 }
 
-function handleFromInput(event){
+function handleFromInput(event, config){
     const input = event.target;
     const form = event.currentTarget;
 
@@ -33,6 +42,7 @@ function handleFromInput(event){
     //2. Показать ошибки в контейнере под полем
     showFieldError(input);
     //3. Включить/отключить кнопку отправки формы
+    setSubmitButtonState(form, config);
 }
 
 function setCustomError(input){
@@ -51,4 +61,21 @@ function showFieldError(input){
     span.textContent = input.validationMessage;
 }
 
-enableValidation(formsAndInputs)
+function setSubmitButtonState(form, config){
+    const button = form.querySelector(config.button);
+    const isValid = form.checkValidity();
+    console.log(button)    
+
+    if (isValid) {
+        button.removeAttribute('disabled');
+        button.classList.remove(config.buttonInvalid);
+        button.classList.add(config.buttonValid);
+    }else{
+        button.setAttribute('disabled', true);
+        button.classList.add(config.buttonInvalid);
+        button.classList.remove(config.buttonValid);
+    }
+}
+
+
+enableValidation(forms)

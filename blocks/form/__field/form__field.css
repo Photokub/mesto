@@ -1,0 +1,13 @@
+.form__field{
+    display:flex;
+    flex-direction:column;
+    width:calc(100% - 36px*2);
+    position:relative;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 586px ) {
+    .form__field {
+        width:238px;
+     }
+ }

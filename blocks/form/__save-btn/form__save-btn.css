@@ -15,10 +15,7 @@
     transition: .35s;
 }
 
-.form__save-btn:hover{
-    opacity: 80%;
-    cursor: pointer;
-}
+
 
 @media screen and (max-width: 586px ) {
     .form__save-btn {
