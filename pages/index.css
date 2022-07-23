@@ -28,8 +28,8 @@
 @import url("../blocks/form/__save-btn/_valid/form__save-btn_valid.css");
 @import url("../blocks/form/__save-btn/_invalid/form__save-btn_invalid.css");
 @import url("../blocks/form/__input/form__input.css");
-@import url("../blocks/form/__input/_error/form__input_error.css");
-@import url("../blocks/form/__input/_error/form__input_error-field.css");
+@import url("../blocks/form/__input-error/form__input-error.css");
+@import url("../blocks/form/__input-error-field/form__input-error-field.css");
 
 /* main */
 @import url("../blocks/main/main.css");

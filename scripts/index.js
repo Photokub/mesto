@@ -144,6 +144,7 @@ document.addEventListener('keydown', function(evt){
 //открыть добавить карточку
 function openAddingCard() {
   openPopup(popupAddNewCard);
+  submitAddCard.reset()
 };
 
 //закрыть добавить карточку

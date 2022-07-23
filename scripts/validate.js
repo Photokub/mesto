@@ -54,13 +54,13 @@ function setCustomError(input){
 function showFieldError(input){
     const span = input.nextElementSibling;
     span.textContent = input.validationMessage;
-    input.classList.add("form__input_error-field"); 
+    input.classList.add("form__input-error-field");
 }
 
 function hideFieldError(input){
     const span = input.nextElementSibling;
     span.textContent='';
-    input.classList.remove("form__input_error-field")
+    input.classList.remove("form__input-error-field")
 }
 
 function setSubmitButtonState(form, config){
