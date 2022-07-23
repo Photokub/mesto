@@ -10,9 +10,8 @@ const forms = {
 function enableValidation(config) {
     // 1. Найти форму в документе
     const form = document.querySelector(config.form);
-    console.log(form)
     const formEditProfile = document.querySelector(config.formEditProfile);
-    console.log(formEditProfile)
+
     // 2. Установить слушатьль сабмита
     form.addEventListener('submit', handleFormSubmit);
     form.addEventListener('input', (event) => handleFromInput(event, config));
@@ -27,10 +26,7 @@ function handleFormSubmit(event){
     const isValid = form.checkValidity();
 
     if(isValid) {
-        alert('форма валидна');
         form.reset();
-    }else{
-        alert('форма НЕ валидна');
     }
 }
 
@@ -53,13 +49,6 @@ function handleFromInput(event, config){
 function setCustomError(input){
     const validity = input.validity; 
     input.setCustomValidity('');
-
-    if(validity.tooShort){
-        input.setCustomValidity('Введите минимум 2 символа!')
-
-    } if (validity.tooLong){
-        input.setCustomValidity('Достигнут лимит символов!')
-    }
 }
 
 function showFieldError(input){
@@ -77,7 +66,6 @@ function hideFieldError(input){
 function setSubmitButtonState(form, config){
     const button = form.querySelector(config.button);
     const isValid = form.checkValidity();
-    console.log(button)    
 
     if (isValid) {
         button.removeAttribute('disabled');
@@ -89,6 +77,5 @@ function setSubmitButtonState(form, config){
         button.classList.remove(config.buttonValid);
     }
 }
-
 
 enableValidation(forms)

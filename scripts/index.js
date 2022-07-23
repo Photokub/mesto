@@ -8,6 +8,7 @@ const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
 const fullSizeImgTitle = document.querySelector('.popup__fullsize-img-caption');
 
 const closeButtons = document.querySelectorAll('.popup__close');
+const closeOverlays = document.querySelectorAll('.popup');
 
 const elementsGallery = document.querySelector('.elements');
 const cardElementTemplate = document.querySelector('#element-card').content;
@@ -21,8 +22,6 @@ const userNameInput = profilePopup.querySelector('.form__input_type_name');
 const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
-
-// const inputError = 
 
 const initialCards = [
   {
@@ -114,9 +113,32 @@ const closePopup = function (item) {
   item.classList.remove('popup_opened');
 };
 
+//выборка навешивание слушателя для каждого крестика
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup))
+  button.addEventListener('click', () => closePopup(popup));
+})
+
+//закрытие по оверлею
+closeOverlays.forEach((button) => {button.addEventListener('mousedown', function closePopupViaOverlay(evt){
+  const popup = button.closest('.popup');
+  if(!evt.target.classList.contains('popup')){
+    return
+  }
+  closePopup(popup);
+ })
+})
+
+//Закрытие по Esc
+const closeAllPopups = () => {
+  closePopup(profilePopup);
+  closePopup(popupAddNewCard);
+  closePopup(popupFullSizeImg);
+};
+document.addEventListener('keydown', function(evt){
+  if(evt.code == 'Escape' ){
+    closeAllPopups();
+  }
 })
 
 //открыть добавить карточку
@@ -160,6 +182,7 @@ function handleProfileFormSubmit(evt) {
   userJob.textContent = userJobInput.value;
   closeProfileEdit();
 }
+
 
 editProfileBtn.addEventListener('click', openProfileEdit);
 

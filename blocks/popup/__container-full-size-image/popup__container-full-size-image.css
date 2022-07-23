@@ -1,4 +1,6 @@
 .popup__container-full-size-image{
     position:relative;
     top:90px;
+    display: inline-table;
+    height: 10px;
 }

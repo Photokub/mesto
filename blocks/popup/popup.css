@@ -11,3 +11,7 @@
     transition: height 0ms 400ms, opacity 400ms 0ms;
 }
 
+.popup:hover{
+    cursor:pointer;
+}
+
