@@ -23,33 +23,6 @@ const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 
 //создание новой карточки
 function createCard(item) {
@@ -87,30 +60,27 @@ for (let i = 0; i < initialCards.length; i++) {
 function handleNewCardViaSubmit(evt) {
   evt.preventDefault();
 
-  if (cardTitle.value === '' || cardLink.value === '') {
-    closeAddingCard();
-  }
-  else {
-    const newCard =
-    {
-      name: cardTitle.value,
-      link: cardLink.value
-    }
-    const card = createCard(newCard);
-    elementsGallery.prepend(card)
-    closeAddingCard();
-    evt.target.reset()
-  }
+  const newCard =
+      {
+        name: cardTitle.value,
+        link: cardLink.value
+      }
+  const card = createCard(newCard);
+  elementsGallery.prepend(card)
+  closeAddingCard();
+  evt.target.reset()
 }
 
 //функционал открытия попапа
 const openPopup = function (item) {
   item.classList.add('popup_opened');
+  document.addEventListener('keydown', closeViaEscapeKey);
 };
 
 //функционал закрытия попапа
 const closePopup = function (item) {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeViaEscapeKey);
 };
 
 //выборка навешивание слушателя для каждого крестика
@@ -135,14 +105,20 @@ const closeAllPopups = () => {
   closePopup(popupAddNewCard);
   closePopup(popupFullSizeImg);
 };
-document.addEventListener('keydown', function(evt){
-  if(evt.code == 'Escape' ){
+
+function closeViaEscapeKey(evt){
+  if(evt.code == 'Escape'){
     closeAllPopups();
   }
-})
+}
 
 //открыть добавить карточку
 function openAddingCard() {
+  const inputErrors = document.querySelectorAll('.form__input-error');
+  const errorsFields = document.querySelectorAll('.form__input-error-field');
+
+  inputErrors.forEach((inputError) => {inputError.textContent=""});
+  errorsFields.forEach((field) => {removeErrorBorder(field)})
   openPopup(popupAddNewCard);
   submitAddCard.reset()
 };
@@ -154,8 +130,12 @@ function closeAddingCard() {
 
 //открыть редактировать профиль
 function openProfileEdit(evt) {
-  const inputErrors = document.querySelectorAll('.form__input_error');
-  inputErrors.forEach((inputError) => {inputError.textContent=""})
+  const inputErrors = document.querySelectorAll('.form__input-error');
+  const errorsFields = profileForm.querySelectorAll('.form__input-error-field');
+
+  inputErrors.forEach((inputError) => {inputError.textContent=""});
+  errorsFields.forEach((field) => {removeErrorBorder(field)})
+
   userNameInput.value = userName.textContent;
   userJobInput.value = userJob.textContent;  
   openPopup(profilePopup);
@@ -182,6 +162,13 @@ function handleProfileFormSubmit(evt) {
   userName.textContent = userNameInput.value;
   userJob.textContent = userJobInput.value;
   closeProfileEdit();
+}
+
+//функция деактивации красного бордера
+function removeErrorBorder(item){
+  if(item.classList.contains('form__input-error-field')){
+    item.classList.remove('form__input-error-field')
+  }
 }
 
 

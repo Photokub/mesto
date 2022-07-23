@@ -1,33 +1,17 @@
 const forms = {
-    form: ".form_add-new-card[name = 'add_new_card']",
-    formEditProfile:".form[name='user_data']",
+    form: 'form',
     button: '.form__save-btn',
     buttonValid: 'form__save-btn_valid',
     buttonInvalid: 'form__save-btn_invalid',
-    formInput: '.form__input'
+    formInput: '.form__input',
+    inputErrorClass:'form__input-error-field'
 }
+
+const formList = Array.from(document.querySelectorAll('.form'));
 
 function enableValidation(config) {
-    // 1. Найти форму в документе
-    const form = document.querySelector(config.form);
-    const formEditProfile = document.querySelector(config.formEditProfile);
-
-    // 2. Установить слушатьль сабмита
-    form.addEventListener('submit', handleFormSubmit);
-    form.addEventListener('input', (event) => handleFromInput(event, config));
-
-    formEditProfile.addEventListener('submit', handleFormSubmit);
-    formEditProfile.addEventListener('input', (event) => handleFromInput(event, config));
-}
-
-function handleFormSubmit(event){
-    event.preventDefault();    
-    const form = event.currentTarget;
-    const isValid = form.checkValidity();
-
-    if(isValid) {
-        form.reset();
-    }
+    formList[0].addEventListener('input', (event) => handleFromInput(event, config));
+    formList[1].addEventListener('input', (event) => handleFromInput(event, config));
 }
 
 function handleFromInput(event, config){
@@ -54,13 +38,13 @@ function setCustomError(input){
 function showFieldError(input){
     const span = input.nextElementSibling;
     span.textContent = input.validationMessage;
-    input.classList.add("form__input-error-field");
+    input.classList.add(forms.inputErrorClass);
 }
 
 function hideFieldError(input){
     const span = input.nextElementSibling;
     span.textContent='';
-    input.classList.remove("form__input-error-field")
+    input.classList.remove(forms.inputErrorClass)
 }
 
 function setSubmitButtonState(form, config){
