@@ -10,9 +10,10 @@ const forms = {
 const formList = Array.from(document.querySelectorAll('.form'));
 
 function enableValidation(config) {
-    formList[0].addEventListener('input', (event) => handleFromInput(event, config));
-    formList[1].addEventListener('input', (event) => handleFromInput(event, config));
+    config.addEventListener('input', (event) => handleFromInput(event, config));
 }
+
+formList.forEach((form) => {enableValidation(form)})
 
 function handleFromInput(event, config){
     const input = event.target;
