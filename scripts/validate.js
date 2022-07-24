@@ -7,11 +7,9 @@ const forms = {
     inputErrorClass:'form__input-error-field'
 }
 
-const formList = Array.from(document.querySelectorAll('.form'));
-
 function enableValidation(config) {
-    formList[0].addEventListener('input', (event) => handleFromInput(event, config));
-    formList[1].addEventListener('input', (event) => handleFromInput(event, config));
+    const formList = Array.from(document.querySelectorAll('.form'));
+    formList.forEach((item) => {item.addEventListener('input', (event) => handleFromInput(event, config))})
 }
 
 function handleFromInput(event, config){
