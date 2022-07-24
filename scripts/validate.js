@@ -1,4 +1,4 @@
-const forms = {
+const validateConfig = {
     form: 'form',
     button: '.form__save-btn',
     buttonValid: 'form__save-btn_valid',
@@ -18,24 +18,27 @@ function handleFromInput(event, config){
 
     //1. Показать/скрыть ошибки
     if(!input.validity.valid){
-        showFieldError(input);
+        showFieldError(input, form);
     } else {
-        hideFieldError(input);
+        hideFieldError(input, form);
     }
     //2. Включить/отключить кнопку отправки формы
     setSubmitButtonState(form, config);
 }
 
-function showFieldError(input){
-    const span = input.nextElementSibling;
+function showFieldError(input, form){
+    const span = form.querySelector(`#${input.name}-error`);
     span.textContent = input.validationMessage;
-    input.classList.add(forms.inputErrorClass);
+    //input.classList.add(validateConfig.inputErrorClass);
+    input.classList.add(form);
 }
 
-function hideFieldError(input){
-    const span = input.nextElementSibling;
+function hideFieldError(input, form){
+    //const span = input.nextElementSibling;
+    const span = form.querySelector(`#${input.name}-error`);
     span.textContent='';
-    input.classList.remove(forms.inputErrorClass)
+    //input.classList.remove(validateConfig.inputErrorClass)
+    input.classList.add(form);
 }
 
 function setSubmitButtonState(form, config){
@@ -53,4 +56,4 @@ function setSubmitButtonState(form, config){
     }
 }
 
-enableValidation(forms)
+enableValidation(validateConfig)

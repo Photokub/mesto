@@ -100,25 +100,25 @@ closeOverlays.forEach((button) => {button.addEventListener('mousedown', function
 })
 
 //Закрытие по Esc
-const closeAllPopups = () => {
-  closePopup(profilePopup);
-  closePopup(popupAddNewCard);
-  closePopup(popupFullSizeImg);
-};
-
 function closeViaEscapeKey(evt){
-  if(evt.code == 'Escape'){
-    closeAllPopups();
+  const openedPopup = document.querySelector('.popup_opened');
+  if(evt.code === 'Escape'){
+    closePopup(openedPopup);
   }
 }
 
-//открыть добавить карточку
-function openAddingCard() {
+//очистка полей с ошибками
+function clearErrors(){
   const inputErrors = document.querySelectorAll('.form__input-error');
   const errorsFields = document.querySelectorAll('.form__input-error-field');
 
   inputErrors.forEach((inputError) => {inputError.textContent=""});
   errorsFields.forEach((field) => {removeErrorBorder(field)})
+}
+
+//открыть добавить карточку
+function openAddingCard() {
+  clearErrors();
   openPopup(popupAddNewCard);
   submitAddCard.reset()
 };
@@ -130,12 +130,7 @@ function closeAddingCard() {
 
 //открыть редактировать профиль
 function openProfileEdit(evt) {
-  const inputErrors = document.querySelectorAll('.form__input-error');
-  const errorsFields = profileForm.querySelectorAll('.form__input-error-field');
-
-  inputErrors.forEach((inputError) => {inputError.textContent=""});
-  errorsFields.forEach((field) => {removeErrorBorder(field)})
-
+  clearErrors();
   userNameInput.value = userName.textContent;
   userJobInput.value = userJob.textContent;  
   openPopup(profilePopup);
