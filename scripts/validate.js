@@ -10,10 +10,9 @@ const forms = {
 const formList = Array.from(document.querySelectorAll('.form'));
 
 function enableValidation(config) {
-    config.addEventListener('input', (event) => handleFromInput(event, config));
+    formList[0].addEventListener('input', (event) => handleFromInput(event, config));
+    formList[1].addEventListener('input', (event) => handleFromInput(event, config));
 }
-
-formList.forEach((form) => {enableValidation(form)})
 
 function handleFromInput(event, config){
     const input = event.target;
@@ -21,7 +20,7 @@ function handleFromInput(event, config){
 
     //1. Установить кастомные тексты ошибок
     setCustomError(input);
-    //2. Показать/скрыть ошибки 
+    //2. Показать/скрыть ошибки
     if(!input.validity.valid){
         showFieldError(input);
     } else {
@@ -32,7 +31,7 @@ function handleFromInput(event, config){
 }
 
 function setCustomError(input){
-    const validity = input.validity; 
+    const validity = input.validity;
     input.setCustomValidity('');
 }
 
