@@ -16,21 +16,14 @@ function handleFromInput(event, config){
     const input = event.target;
     const form = event.currentTarget;
 
-    //1. Установить кастомные тексты ошибок
-    setCustomError(input);
-    //2. Показать/скрыть ошибки
+    //1. Показать/скрыть ошибки
     if(!input.validity.valid){
         showFieldError(input);
     } else {
         hideFieldError(input);
     }
-    //3. Включить/отключить кнопку отправки формы
+    //2. Включить/отключить кнопку отправки формы
     setSubmitButtonState(form, config);
-}
-
-function setCustomError(input){
-    const validity = input.validity;
-    input.setCustomValidity('');
 }
 
 function showFieldError(input){
