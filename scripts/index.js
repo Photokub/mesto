@@ -101,9 +101,8 @@ closeOverlays.forEach((button) => {button.addEventListener('mousedown', function
 
 //Закрытие по Esc
 function closeViaEscapeKey(evt){
-  const openedPopup = document.querySelector('.popup_opened');
   if(evt.code === 'Escape'){
-    closePopup(openedPopup);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
