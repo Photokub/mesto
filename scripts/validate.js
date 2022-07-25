@@ -8,7 +8,7 @@ const validateConfig = {
 }
 
 function enableValidation(config) {
-    const formList = Array.from(document.querySelectorAll('.form'));
+    const formList = Array.from(document.querySelectorAll(config.form));
     formList.forEach((item) => {item.addEventListener('input', (event) => handleFromInput(event, config))})
 }
 
@@ -29,16 +29,11 @@ function handleFromInput(event, config){
 function showFieldError(input, form){
     const span = form.querySelector(`#${input.name}-error`);
     span.textContent = input.validationMessage;
-    //input.classList.add(validateConfig.inputErrorClass);
-    input.classList.add(form);
 }
 
 function hideFieldError(input, form){
-    //const span = input.nextElementSibling;
     const span = form.querySelector(`#${input.name}-error`);
     span.textContent='';
-    //input.classList.remove(validateConfig.inputErrorClass)
-    input.classList.add(form);
 }
 
 function setSubmitButtonState(form, config){
