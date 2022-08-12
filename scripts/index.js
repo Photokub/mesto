@@ -1,3 +1,13 @@
+ import {
+Card,
+   renderElements
+} from './Сard.js'
+
+//renderElements()
+
+
+
+
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
 const popupAddNewCard = document.querySelector('.popup_add-new-card');
@@ -23,28 +33,7 @@ const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
-export {
-profilePopup,
-popupFullSizeImg,
-popupAddNewCard,
-editProfileBtn,
-openAddNewCardBtn,
-fullSizeImg,
-fullSizeImgTitle,
-closeButtons,
-closeOverlays,
-elementsGallery,
-cardElementTemplate,
-submitBtn,
-profileForm,
-submitAddCard,
-userName,
-userJob,
-userNameInput,
-userJobInput,
-cardTitle,
-cardLink
-};
+
 
 //создание новой карточки
 // function createCard(item) {
@@ -79,6 +68,22 @@ cardLink
 // }
 
 //функционал добавления карточки через «сохранить» 
+//function handleNewCardViaSubmit(evt) {
+//  evt.preventDefault();
+
+ // const newCard =
+ //     {
+ //       name: cardTitle.value,
+ //       link: cardLink.value
+ //     }
+ // const card = createCard(newCard);
+ // elementsGallery.prepend(card)
+ // closeAddingCard();
+ // evt.target.reset()
+//}
+
+
+//функционал добавления карточки через «сохранить»
 function handleNewCardViaSubmit(evt) {
   evt.preventDefault();
 
@@ -87,20 +92,34 @@ function handleNewCardViaSubmit(evt) {
         name: cardTitle.value,
         link: cardLink.value
       }
-  const card = createCard(newCard);
-  elementsGallery.prepend(card)
+  const card = new Card (newCard, handleCardClick);
+  const cardElement = card.generateCardElement();
+  elementsGallery.prepend(cardElement);
   closeAddingCard();
   evt.target.reset()
 }
 
+function handleCardClick(name, link){
+  fullSizeImgTitle.textContent = name;
+  popupFullSizeImg.src = link;
+  popupFullSizeImg.alt = name;
+  openPopup(popupFullSizeImg);
+}
+
 //функционал открытия попапа
-export const openPopup = function (item) {
+//const openPopup = function (item) {
+//  item.classList.add('popup_opened');
+//  document.addEventListener('keydown', closeViaEscapeKey);
+//};
+
+//функционал открытия попапа
+const openPopup = function (item) {
   item.classList.add('popup_opened');
   document.addEventListener('keydown', closeViaEscapeKey);
 };
 
 //функционал закрытия попапа
-export const closePopup = function (item) {
+const closePopup = function (item) {
   item.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeViaEscapeKey);
 };
@@ -188,9 +207,40 @@ function removeErrorBorder(item){
 }
 
 
+
+
 editProfileBtn.addEventListener('click', openProfileEdit);
 
 openAddNewCardBtn.addEventListener('click', openAddingCard);
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 submitAddCard.addEventListener('submit', handleNewCardViaSubmit);
+
+export {
+  profilePopup,
+  popupFullSizeImg,
+  popupAddNewCard,
+  editProfileBtn,
+  openAddNewCardBtn,
+  fullSizeImg,
+  fullSizeImgTitle,
+  closeButtons,
+  closeOverlays,
+  elementsGallery,
+  cardElementTemplate,
+  submitBtn,
+  profileForm,
+  submitAddCard,
+  userName,
+  userJob,
+  userNameInput,
+  userJobInput,
+  cardTitle,
+  cardLink,
+  openPopup,
+  closePopup,
+  openFullSizeImg,
+  closeFullSizeImg,
+  handleCardClick,
+  handleNewCardViaSubmit
+};

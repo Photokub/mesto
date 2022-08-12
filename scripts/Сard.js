@@ -20,9 +20,16 @@ import {
     cardTitle,
     cardLink,
     openPopup,
-    closePopup
+    closePopup,
+    openFullSizeImg,
+    closeFullSizeImg,
+    handleCardClick,
+    handleNewCardViaSubmit,
     } from './index.js';
 
+
+
+//console.log (handleCardClick)
     
 
 const initialCards = [
@@ -53,9 +60,10 @@ const initialCards = [
 ];
 
 class Card {
-    constructor(data){
+    constructor(data, handleCardClick){
         this._name = data.name;
         this._link = data.link;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate(){
@@ -81,9 +89,13 @@ class Card {
        this._element.querySelector('.element__remove-btn').addEventListener('click', () =>{
             this._handleRemoveBtn();
        });
-        // document.querySelector('.popup__fullsize-img-picture').addEventListener('click', () => {
-        //     this.openFullSizeImg();
-        // })
+       //this._element.querySelector('.element__image').addEventListener('click', () =>{
+       //    this._handleElementImage();
+       //})
+        this._element.querySelector('.element__image').addEventListener('click' , () =>{
+           this._handleCardClick(this._name, this._link)
+       });
+
     }
 
     _handleLikeBtn(){
@@ -93,19 +105,34 @@ class Card {
     _handleRemoveBtn(){
         this._element.querySelector('.element__remove-btn').closest('.element').remove()
     }
- 
 
-    // _handleOpenFullSizeImg(){
-    //     this._element.document.querySelector('.popup__fullsize-img-picture').classList.add('popup_opened')
-    // }
+    _handleCardClick(name, link){
+        this._element.querySelector('.popup__fullsize-img-picture').textContent = this._name;
+        this._element.querySelector('.popup__fullsize-img-caption').textContent = this._name;
+        this._element.querySelector('.popup_full-size-image').src = this._link;
+        this.popupFullSizeImg.alt = this._name;
+        //openPopup(popupFullSizeImg);
+    }
+}
 
+const renderElements = () => {
+    initialCards.forEach((item, handleNewCardViaSubmit) => {
+        const card = new Card(item, handleNewCardViaSubmit);
+        const cardElement = card.generateCardElement();
+
+        elementsGallery.append(cardElement);
+    })
+}
+
+renderElements();
+
+export {
+    Card,
+    renderElements
+ //   generateCardElement
 }
 
 
 
-initialCards.forEach((item) => {
-    const card = new Card(item);
-    const cardElement = card.generateCardElement();
 
-    elementsGallery.append(cardElement);
-})
+
