@@ -60,9 +60,10 @@ const initialCards = [
 ];
 
 class Card {
-    constructor(data, handleCardClick){
+    constructor(data, templateSelector, handleCardClick){
         this._name = data.name;
         this._link = data.link;
+        this._card = templateSelector;
         this._handleCardClick = handleCardClick;
     }
 
@@ -89,9 +90,6 @@ class Card {
        this._element.querySelector('.element__remove-btn').addEventListener('click', () =>{
             this._handleRemoveBtn();
        });
-       //this._element.querySelector('.element__image').addEventListener('click', () =>{
-       //    this._handleElementImage();
-       //})
         this._element.querySelector('.element__image').addEventListener('click' , () =>{
            this._handleCardClick(this._name, this._link)
        });
@@ -105,19 +103,11 @@ class Card {
     _handleRemoveBtn(){
         this._element.querySelector('.element__remove-btn').closest('.element').remove()
     }
-
-    _handleCardClick(name, link){
-        this._element.querySelector('.popup__fullsize-img-picture').textContent = this._name;
-        this._element.querySelector('.popup__fullsize-img-caption').textContent = this._name;
-        this._element.querySelector('.popup_full-size-image').src = this._link;
-        this.popupFullSizeImg.alt = this._name;
-        //openPopup(popupFullSizeImg);
-    }
 }
 
 const renderElements = () => {
-    initialCards.forEach((item, handleNewCardViaSubmit) => {
-        const card = new Card(item, handleNewCardViaSubmit);
+    initialCards.forEach((item) => {
+        const card = new Card(item, '#element-card', handleCardClick);
         const cardElement = card.generateCardElement();
 
         elementsGallery.append(cardElement);

@@ -3,11 +3,6 @@ Card,
    renderElements
 } from './Сard.js'
 
-//renderElements()
-
-
-
-
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
 const popupAddNewCard = document.querySelector('.popup_add-new-card');
@@ -33,56 +28,6 @@ const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
-
-
-//создание новой карточки
-// function createCard(item) {
-//   const userElementCard = cardElementTemplate.querySelector('.element').cloneNode(true);
-
-//   const elementImage = userElementCard.querySelector('.element__image');
-//   const elementTitle = userElementCard.querySelector('.element__title');
-
-//   const likeBtn = userElementCard.querySelector('.element__like');
-//   const removeBtn = userElementCard.querySelector('.element__remove-btn');
-
-//   elementTitle.textContent = item.name;
-//   elementImage.src = item.link;
-//   elementImage.alt = item.name;
-//   likeBtn.addEventListener('click', function () { likeBtn.classList.toggle('element__like_active') });
-//   removeBtn.addEventListener('click', function () { removeBtn.closest('.element').remove() })
-
-//   elementImage.addEventListener('click', function () {
-//     openFullSizeImg();
-//     fullSizeImg.src = elementImage.src;
-//     fullSizeImgTitle.textContent = elementTitle.textContent;
-//     fullSizeImg.alt = elementTitle.textContent;
-//   })
-
-//   return userElementCard;
-// }
-
-//наполнение дефолтными карточками
-// for (let i = 0; i < initialCards.length; i++) {
-//   const userElementCard = createCard(initialCards[i]);
-//   elementsGallery.append(userElementCard);
-// }
-
-//функционал добавления карточки через «сохранить» 
-//function handleNewCardViaSubmit(evt) {
-//  evt.preventDefault();
-
- // const newCard =
- //     {
- //       name: cardTitle.value,
- //       link: cardLink.value
- //     }
- // const card = createCard(newCard);
- // elementsGallery.prepend(card)
- // closeAddingCard();
- // evt.target.reset()
-//}
-
-
 //функционал добавления карточки через «сохранить»
 function handleNewCardViaSubmit(evt) {
   evt.preventDefault();
@@ -92,7 +37,7 @@ function handleNewCardViaSubmit(evt) {
         name: cardTitle.value,
         link: cardLink.value
       }
-  const card = new Card (newCard, handleCardClick);
+  const card = new Card (newCard, "#element-card",handleCardClick);
   const cardElement = card.generateCardElement();
   elementsGallery.prepend(cardElement);
   closeAddingCard();
@@ -101,16 +46,10 @@ function handleNewCardViaSubmit(evt) {
 
 function handleCardClick(name, link){
   fullSizeImgTitle.textContent = name;
-  popupFullSizeImg.src = link;
-  popupFullSizeImg.alt = name;
+  fullSizeImg.src = link;
+  fullSizeImg.alt = name;
   openPopup(popupFullSizeImg);
 }
-
-//функционал открытия попапа
-//const openPopup = function (item) {
-//  item.classList.add('popup_opened');
-//  document.addEventListener('keydown', closeViaEscapeKey);
-//};
 
 //функционал открытия попапа
 const openPopup = function (item) {
