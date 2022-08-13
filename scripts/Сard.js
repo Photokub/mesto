@@ -1,65 +1,13 @@
 import {
-    profilePopup,
-    popupFullSizeImg,
-    popupAddNewCard,
-    editProfileBtn,
-    openAddNewCardBtn,
-    fullSizeImg,
-    fullSizeImgTitle,
-    closeButtons,
-    closeOverlays,
     elementsGallery,
     cardElementTemplate,
-    submitBtn,
-    profileForm,
-    submitAddCard,
-    userName,
-    userJob,
-    userNameInput,
-    userJobInput,
-    cardTitle,
-    cardLink,
-    openPopup,
-    closePopup,
-    openFullSizeImg,
-    closeFullSizeImg,
     handleCardClick,
-    handleNewCardViaSubmit,
+    initialCards
     } from './index.js';
 
 
 
-//console.log (handleCardClick)
-    
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
-class Card {
+export class Card {
     constructor(data, templateSelector, handleCardClick){
         this._name = data.name;
         this._link = data.link;
@@ -115,12 +63,6 @@ const renderElements = () => {
 }
 
 renderElements();
-
-export {
-    Card,
-    renderElements
- //   generateCardElement
-}
 
 
 

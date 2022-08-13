@@ -1,7 +1,5 @@
- import {
-Card,
-   renderElements
-} from './Сard.js'
+ import {Card} from './Сard.js';
+ import {FormValidator} from './FormValidator.js';
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
@@ -27,6 +25,46 @@ const userNameInput = profilePopup.querySelector('.form__input_type_name');
 const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
+
+const validateConfig = {
+  form: 'form',
+  button: '.form__save-btn',
+  buttonValid: 'form__save-btn_valid',
+  buttonInvalid: 'form__save-btn_invalid',
+  formInput: '.form__input',
+  inputErrorClass:'form__input-error-field'
+}
+
+const initialCards = [
+  {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+//валидация форм
+const formClassCheckValid = new FormValidator(validateConfig)
+formClassCheckValid.enableValidation()
 
 //функционал добавления карточки через «сохранить»
 function handleNewCardViaSubmit(evt) {
@@ -145,9 +183,6 @@ function removeErrorBorder(item){
   }
 }
 
-
-
-
 editProfileBtn.addEventListener('click', openProfileEdit);
 
 openAddNewCardBtn.addEventListener('click', openAddingCard);
@@ -156,30 +191,9 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 submitAddCard.addEventListener('submit', handleNewCardViaSubmit);
 
 export {
-  profilePopup,
-  popupFullSizeImg,
-  popupAddNewCard,
-  editProfileBtn,
-  openAddNewCardBtn,
-  fullSizeImg,
-  fullSizeImgTitle,
-  closeButtons,
-  closeOverlays,
   elementsGallery,
   cardElementTemplate,
-  submitBtn,
-  profileForm,
-  submitAddCard,
-  userName,
-  userJob,
-  userNameInput,
-  userJobInput,
-  cardTitle,
-  cardLink,
-  openPopup,
-  closePopup,
-  openFullSizeImg,
-  closeFullSizeImg,
-  handleCardClick,
-  handleNewCardViaSubmit
+  validateConfig,
+  initialCards,
+  handleCardClick,  
 };
