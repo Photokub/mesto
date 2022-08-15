@@ -4,27 +4,30 @@
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
 const popupAddNewCard = document.querySelector('.popup_add-new-card');
-const editProfileBtn = document.querySelector('.profile__edit-btn');
-const openAddNewCardBtn = document.querySelector('.profile__add-btn');
+const profileEditBtn = document.querySelector('.profile__edit-btn');
+const newCardAddOpenBtn = document.querySelector('.profile__add-btn');
 
-const fullSizeImg = document.querySelector('.popup__fullsize-img-picture');
-const fullSizeImgTitle = document.querySelector('.popup__fullsize-img-caption');
+const imgZoom = document.querySelector('.popup__fullsize-img-picture');
+const imgZoomTitle = document.querySelector('.popup__fullsize-img-caption');
 
-const closeButtons = document.querySelectorAll('.popup__close');
-const closeOverlays = document.querySelectorAll('.popup');
+const popupCloseButtons = document.querySelectorAll('.popup__close');
+const overlaysClose = document.querySelectorAll('.popup');
 
 const elementsGallery = document.querySelector('.elements');
 const cardElementTemplate = document.querySelector('#element-card').content;
 
-const submitBtn = profilePopup.querySelector('.form__save-btn');
+const formSubmitBtn = profilePopup.querySelector('.form__save-btn');
 const profileForm = profilePopup.querySelector('.form');
-const submitAddCard = popupAddNewCard.querySelector('.form_add-new-card');
+const cardAddSubmitBtn = popupAddNewCard.querySelector('.form_add-new-card');
 const userName = document.querySelector('.profile__title');
 const userJob = document.querySelector('.profile__subtitle');
 const userNameInput = profilePopup.querySelector('.form__input_type_name');
 const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
+
+console.log(cardAddSubmitBtn, cardTitle, cardLink, formSubmitBtn)
+
 
 const validateConfig = {
   form: 'form',
@@ -79,13 +82,13 @@ function handleNewCardViaSubmit(evt) {
   const cardElement = card.generateCardElement();
   elementsGallery.prepend(cardElement);
   closeAddingCard();
-  evt.target.reset()
+  evt.target.reset();
 }
 
 function handleCardClick(name, link){
-  fullSizeImgTitle.textContent = name;
-  fullSizeImg.src = link;
-  fullSizeImg.alt = name;
+  imgZoomTitle.textContent = name;
+  imgZoom.src = link;
+  imgZoom.alt = name;
   openPopup(popupFullSizeImg);
 }
 
@@ -102,13 +105,13 @@ const closePopup = function (item) {
 };
 
 //выборка навешивание слушателя для каждого крестика
-closeButtons.forEach((button) => {
+ popupCloseButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 })
 
 //закрытие по оверлею
-closeOverlays.forEach((button) => {button.addEventListener('mousedown', function closePopupViaOverlay(evt){
+overlaysClose.forEach((button) => {button.addEventListener('mousedown', function closePopupViaOverlay(evt){
   const popup = button.closest('.popup');
   if(!evt.target.classList.contains('popup')){
     return
@@ -137,8 +140,17 @@ function clearErrors(){
 function openAddingCard() {
   clearErrors();
   openPopup(popupAddNewCard);
-  submitAddCard.reset()
+  cardAddSubmitBtn.reset()
 };
+
+//деактивация кнопкис «Сохранить»
+//  function disableSaveBtn(){
+//      if ( cardTitle.textContent === '' || cardLink.textContent === '' ) {
+//          formSubmitBtn.setAttribute('disabled', true)
+//          formSubmitBtn.classList.remove('form__save-btn_valid')
+//          formSubmitBtn.classList.add('form__save-btn_invalid');
+//      }
+//  }
 
 //закрыть добавить карточку
 function closeAddingCard() {
@@ -183,12 +195,12 @@ function removeErrorBorder(item){
   }
 }
 
-editProfileBtn.addEventListener('click', openProfileEdit);
+profileEditBtn.addEventListener('click', openProfileEdit);
 
-openAddNewCardBtn.addEventListener('click', openAddingCard);
+newCardAddOpenBtn.addEventListener('click', openAddingCard);
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-submitAddCard.addEventListener('submit', handleNewCardViaSubmit);
+cardAddSubmitBtn.addEventListener('submit', handleNewCardViaSubmit);
 
 export {
   elementsGallery,
