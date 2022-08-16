@@ -1,4 +1,4 @@
- import {Card} from './Сard.js';
+ import {Card, handleCardElement} from './Сard.js';
  import {FormValidator, clearErrors, removeErrorBorder} from './FormValidator.js';
 
 const profilePopup = document.querySelector('.profile-popup');
@@ -64,6 +64,9 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+//console.log(handleCardElement(initialCards)
+
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
@@ -173,6 +176,17 @@ function handleProfileFormSubmit(evt) {
   closeProfileEdit();
 }
 
+ function renderNewCardFromArray(){
+     const card = handleCardElement()
+     elementsGallery.append(card);
+ }
+ renderNewCardFromArray()
+
+//добавление карточки
+ //console.log(handleCardElement)
+ //const cardElement = handleCardElement
+ //elementsGallery.append(cardElement);
+
 
 
 profileEditBtn.addEventListener('click', openProfileEdit);
@@ -183,9 +197,9 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 cardAddSubmitBtn.addEventListener('submit', handleNewCardViaSubmit);
 
 export {
-  elementsGallery,
   cardElementTemplate,
   validateConfig,
   initialCards,
-  handleCardClick,  
+  handleCardClick,
+    elementsGallery
 };

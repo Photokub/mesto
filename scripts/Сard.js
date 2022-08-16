@@ -1,8 +1,8 @@
 import {
-    elementsGallery,
     cardElementTemplate,
     handleCardClick,
-    initialCards
+    initialCards,
+    elementsGallery
     } from './index.js';
 
 
@@ -13,6 +13,7 @@ export class Card {
         this._link = data.link;
         this._card = templateSelector;
         this._handleCardClick = handleCardClick;
+
     }
 
     _getTemplate(){
@@ -22,47 +23,65 @@ export class Card {
 
     generateCardElement(){
         this._element = this._getTemplate();
+        this._elementLike = this._element.querySelector('.element__like');
+        this._elementRemoveBtn = this._element.querySelector('.element__remove-btn');
+        this._elementImage = this._element.querySelector('.element__image');
         this._setEventListeners();
 
         this._element.querySelector('.element__title').textContent = this._name;
-        this._element.querySelector('.element__image').src = this._link;
-        this._element.querySelector('.element__image').alt = this._name;
+        this._elementImage.src = this._link;
+        this._elementImage.alt = this._name;
 
         return this._element;
     }
 
     _setEventListeners(){
-        this._element.querySelector('.element__like').addEventListener('click', () => {
+        this._elementLike.addEventListener('click', () => {
             this._handleLikeBtn();
         });
-       this._element.querySelector('.element__remove-btn').addEventListener('click', () =>{
+        this._elementRemoveBtn.addEventListener('click', () =>{
             this._handleRemoveBtn();
        });
-        this._element.querySelector('.element__image').addEventListener('click' , () =>{
+        this._elementImage.addEventListener('click' , () =>{
            this._handleCardClick(this._name, this._link)
        });
 
     }
 
     _handleLikeBtn(){
-        this._element.querySelector('.element__like').classList.toggle('element__like_active')
+        this._elementLike.classList.toggle('element__like_active')
     }
 
     _handleRemoveBtn(){
-        this._element.querySelector('.element__remove-btn').closest('.element').remove()
+        this._elementRemoveBtn.closest('.element').remove()
     }
 }
 
-const renderElements = () => {
+const handleCardElement = () => {
     initialCards.forEach((item) => {
         const card = new Card(item, '#element-card', handleCardClick);
         const cardElement = card.generateCardElement();
+        console.log(cardElement)
+        return cardElement;
 
-        elementsGallery.append(cardElement);
+
     })
 }
 
-renderElements();
+export{handleCardElement}
+
+//handleCardElement();
+
+// const renderElements = () => {
+//     initialCards.forEach((item) => {
+//         const card = new Card(item, '#element-card', handleCardClick);
+//         const cardElement = card.generateCardElement();
+//
+//         elementsGallery.append(cardElement);
+//     })
+// }
+//
+// renderElements();
 
 
 

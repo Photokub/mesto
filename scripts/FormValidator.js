@@ -2,15 +2,12 @@ export class FormValidator{
     constructor(validationData, formType){
         this._validationData = validationData;
         this._form = validationData.form
-        this._buttonElement = validationData.button;        
+        //this._buttonElement = validationData.button;
         this._inputErrorClass = validationData.inputErrorClass;
-        this._formType = formType;     
+        this._formType = formType;
+        this._input = validationData.formInput
     }
 
-// enableValidation(config) {
-//     const formList = Array.from(document.querySelectorAll(this._form));
-//     formList.forEach((item) => {item.addEventListener('input', (event) => this._handleFromInput(event, config))})
-// }    
 enableValidation(config) {
     this._formType.addEventListener('input', (event) => this._handleFromInput(event, config))
 }    
