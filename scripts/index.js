@@ -1,5 +1,5 @@
  import {Card} from './Сard.js';
- import {FormValidator} from './FormValidator.js';
+ import {FormValidator, clearErrors, removeErrorBorder} from './FormValidator.js';
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
@@ -26,8 +26,8 @@ const userJobInput = profilePopup.querySelector('.form__input_type_job');
 const cardTitle = popupAddNewCard.querySelector('.form__input_type_title');
 const cardLink = popupAddNewCard.querySelector('.form__input_type_link');
 
-console.log(cardAddSubmitBtn, cardTitle, cardLink, formSubmitBtn)
-
+const newCardForm = document.querySelector('.form_add-new-card');
+const newProfileForm = document.querySelector('.form_profile');
 
 const validateConfig = {
   form: 'form',
@@ -66,8 +66,11 @@ const initialCards = [
 ];
 
 //валидация форм
-const formClassCheckValid = new FormValidator(validateConfig)
-formClassCheckValid.enableValidation()
+const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
+formClassProfileCheckValid.enableValidation()
+
+const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
+formClassNewCardCheckValid.enableValidation()
 
 //функционал добавления карточки через «сохранить»
 function handleNewCardViaSubmit(evt) {
@@ -127,30 +130,12 @@ function closeViaEscapeKey(evt){
   }
 }
 
-//очистка полей с ошибками
-function clearErrors(){
-  const inputErrors = document.querySelectorAll('.form__input-error');
-  const errorsFields = document.querySelectorAll('.form__input-error-field');
-
-  inputErrors.forEach((inputError) => {inputError.textContent=""});
-  errorsFields.forEach((field) => {removeErrorBorder(field)})
-}
-
 //открыть добавить карточку
 function openAddingCard() {
   clearErrors();
   openPopup(popupAddNewCard);
   cardAddSubmitBtn.reset()
 };
-
-//деактивация кнопкис «Сохранить»
-//  function disableSaveBtn(){
-//      if ( cardTitle.textContent === '' || cardLink.textContent === '' ) {
-//          formSubmitBtn.setAttribute('disabled', true)
-//          formSubmitBtn.classList.remove('form__save-btn_valid')
-//          formSubmitBtn.classList.add('form__save-btn_invalid');
-//      }
-//  }
 
 //закрыть добавить карточку
 function closeAddingCard() {
@@ -188,12 +173,7 @@ function handleProfileFormSubmit(evt) {
   closeProfileEdit();
 }
 
-//функция деактивации красного бордера
-function removeErrorBorder(item){
-  if(item.classList.contains('form__input-error-field')){
-    item.classList.remove('form__input-error-field')
-  }
-}
+
 
 profileEditBtn.addEventListener('click', openProfileEdit);
 

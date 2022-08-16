@@ -1,16 +1,24 @@
 export class FormValidator{    
-    constructor(validationData){
-        this._validationData  = validationData;
+    constructor(validationData, formType){
+        this._validationData = validationData;
+        this._form = validationData.form
+        this._buttonElement = validationData.button;        
+        this._inputErrorClass = validationData.inputErrorClass;
+        this._formType = formType;     
     }
 
+// enableValidation(config) {
+//     const formList = Array.from(document.querySelectorAll(this._form));
+//     formList.forEach((item) => {item.addEventListener('input', (event) => this._handleFromInput(event, config))})
+// }    
 enableValidation(config) {
-    const formList = Array.from(document.querySelectorAll(this._validationData.form));
-    formList.forEach((item) => {item.addEventListener('input', (event) => this._handleFromInput(event, config))})
+    this._formType.addEventListener('input', (event) => this._handleFromInput(event, config))
 }    
 
-_handleFromInput(event, config){
+_handleFromInput(event){
     this._input = event.target;
     this._form = event.currentTarget;
+    this._buttonElement = this._form.querySelector(this._validationData.button)
 
     //1. Показать/скрыть ошибки
     if(!this._input.validity.valid){
@@ -19,21 +27,23 @@ _handleFromInput(event, config){
         this._hideFieldError(this._input, this._form);
     }
     //2. Включить/отключить кнопку отправки формы
-    this._setSubmitButtonState(this._form, config);
+    this._setSubmitButtonState(this._buttonElement);
 }    
 
-_showFieldError(input, form){
-    this._span = this._form.querySelector(`#${this._input.name}-error`);
-    this._span.textContent = this._input.validationMessage;
-}    
-    
-_hideFieldError(input, form){
-    this._span = this._form.querySelector(`#${this._input.name}-error`);
-    this._span.textContent='';
+_showFieldError(inputElement){
+    const errorElement = this._form.querySelector(`#${this._input.name}-error`); 
+    errorElement.textContent = this._input.validationMessage;
+    inputElement.classList.add(this._inputErrorClass);
+}     
+
+_hideFieldError(inputElement){
+    const errorElement = this._form.querySelector(`#${this._input.name}-error`);
+    errorElement.textContent = '';
+    inputElement.classList.remove(this._inputErrorClass);
 }
 
-_setSubmitButtonState(form, config){
-    this._button = this._form.querySelector(this._validationData.button);   
+_setSubmitButtonState(buttonElement){
+    this._button = buttonElement;   
     this._isValid = this._form.checkValidity();
 
     if (this._isValid) {
@@ -47,3 +57,21 @@ _setSubmitButtonState(form, config){
     }
 }
 }
+
+//очистка полей с ошибками
+function clearErrors(){
+    const inputErrors = document.querySelectorAll('.form__input-error');
+    const errorsFields = document.querySelectorAll('.form__input-error-field');
+  
+    inputErrors.forEach((inputError) => {inputError.textContent=""});
+    errorsFields.forEach((field) => {removeErrorBorder(field)})
+  }
+
+//функция деактивации красного бордера
+function removeErrorBorder(item){
+    if(item.classList.contains('form__input-error-field')){
+      item.classList.remove('form__input-error-field')
+    }
+  } 
+
+ export{ clearErrors, removeErrorBorder } 
