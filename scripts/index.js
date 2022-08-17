@@ -1,6 +1,10 @@
 import { Card, createNewCardElement } from './Сard.js';
 
-import { FormValidator, clearErrors, removeErrorBorder } from './FormValidator.js';
+import { FormValidator,
+  clearErrors,
+  removeErrorBorder,
+  resetBtnState
+} from './FormValidator.js';
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
@@ -94,7 +98,9 @@ function handleNewCardViaSubmit(evt) {
   const cardElement = card.generateCardElement();
   elementsGallery.prepend(cardElement);
   closeAddingCard();
+ //resetBtnState();
   evt.target.reset();
+  //newCardForm.reset()
 }
 
 function handleCardClick(name, link) {
@@ -142,9 +148,12 @@ function closeViaEscapeKey(evt) {
 
 //открыть добавить карточку
 function openAddingCard() {
+  //newCardForm.reset()
   clearErrors();
+
   openPopup(popupAddNewCard);
-  cardAddSubmitBtn.reset()
+  //resetBtnState();
+  //cardAddSubmitBtn.reset()
 };
 
 //закрыть добавить карточку
