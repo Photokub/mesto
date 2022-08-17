@@ -1,5 +1,6 @@
- import {Card, handleCardElement} from './Сard.js';
- import {FormValidator, clearErrors, removeErrorBorder} from './FormValidator.js';
+import { Card, createNewCardElement } from './Сard.js';
+
+import { FormValidator, clearErrors, removeErrorBorder } from './FormValidator.js';
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
@@ -35,38 +36,43 @@ const validateConfig = {
   buttonValid: 'form__save-btn_valid',
   buttonInvalid: 'form__save-btn_invalid',
   formInput: '.form__input',
-  inputErrorClass:'form__input-error-field'
+  inputErrorClass: 'form__input-error-field'
 }
 
 const initialCards = [
   {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
-//console.log(handleCardElement(initialCards)
-
+//рендер карточек из массива
+const renderNewCardFromArray = () => {
+  initialCards.forEach((item) => {
+    elementsGallery.append(createNewCardElement(item));
+  })
+}
+renderNewCardFromArray()
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
@@ -80,18 +86,18 @@ function handleNewCardViaSubmit(evt) {
   evt.preventDefault();
 
   const newCard =
-      {
-        name: cardTitle.value,
-        link: cardLink.value
-      }
-  const card = new Card (newCard, "#element-card",handleCardClick);
+  {
+    name: cardTitle.value,
+    link: cardLink.value
+  }
+  const card = new Card(newCard, "#element-card", handleCardClick);
   const cardElement = card.generateCardElement();
   elementsGallery.prepend(cardElement);
   closeAddingCard();
   evt.target.reset();
 }
 
-function handleCardClick(name, link){
+function handleCardClick(name, link) {
   imgZoomTitle.textContent = name;
   imgZoom.src = link;
   imgZoom.alt = name;
@@ -111,24 +117,25 @@ const closePopup = function (item) {
 };
 
 //выборка навешивание слушателя для каждого крестика
- popupCloseButtons.forEach((button) => {
+popupCloseButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 })
 
 //закрытие по оверлею
-overlaysClose.forEach((button) => {button.addEventListener('mousedown', function closePopupViaOverlay(evt){
-  const popup = button.closest('.popup');
-  if(!evt.target.classList.contains('popup')){
-    return
-  }
-  closePopup(popup);
- })
+overlaysClose.forEach((button) => {
+  button.addEventListener('mousedown', function closePopupViaOverlay(evt) {
+    const popup = button.closest('.popup');
+    if (!evt.target.classList.contains('popup')) {
+      return
+    }
+    closePopup(popup);
+  })
 })
 
 //Закрытие по Esc
-function closeViaEscapeKey(evt){
-  if(evt.code === 'Escape'){
+function closeViaEscapeKey(evt) {
+  if (evt.code === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   }
 }
@@ -149,7 +156,7 @@ function closeAddingCard() {
 function openProfileEdit(evt) {
   clearErrors();
   userNameInput.value = userName.textContent;
-  userJobInput.value = userJob.textContent;  
+  userJobInput.value = userJob.textContent;
   openPopup(profilePopup);
 };
 
@@ -176,16 +183,16 @@ function handleProfileFormSubmit(evt) {
   closeProfileEdit();
 }
 
- function renderNewCardFromArray(){
-     const card = handleCardElement()
-     elementsGallery.append(card);
- }
- renderNewCardFromArray()
+//  function renderNewCardFromArray(){
+//      const card = handleCardElement
+//      elementsGallery.append(card);
+//  }
+//  renderNewCardFromArray()
 
 //добавление карточки
- //console.log(handleCardElement)
- //const cardElement = handleCardElement
- //elementsGallery.append(cardElement);
+//console.log(handleCardElement)
+//const cardElement = handleCardElement
+//elementsGallery.append(cardElement);
 
 
 
@@ -201,5 +208,5 @@ export {
   validateConfig,
   initialCards,
   handleCardClick,
-    elementsGallery
+  elementsGallery
 };

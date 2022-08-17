@@ -2,7 +2,7 @@ import {
     cardElementTemplate,
     handleCardClick,
     initialCards,
-    elementsGallery
+   elementsGallery
     } from './index.js';
 
 
@@ -57,31 +57,14 @@ export class Card {
     }
 }
 
-const handleCardElement = () => {
-    initialCards.forEach((item) => {
-        const card = new Card(item, '#element-card', handleCardClick);
-        const cardElement = card.generateCardElement();
-        console.log(cardElement)
-        return cardElement;
+export const createNewCardElement = (item) => {
+    const card = new Card(item, '#element-card', handleCardClick);
+    const cardElement = card.generateCardElement();
+    return cardElement;
+  }
 
 
-    })
-}
 
-export{handleCardElement}
-
-//handleCardElement();
-
-// const renderElements = () => {
-//     initialCards.forEach((item) => {
-//         const card = new Card(item, '#element-card', handleCardClick);
-//         const cardElement = card.generateCardElement();
-//
-//         elementsGallery.append(cardElement);
-//     })
-// }
-//
-// renderElements();
 
 
 
