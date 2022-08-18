@@ -50,6 +50,7 @@ export class Card {
 
     _handleRemoveBtn() {
         this._elementRemoveBtn.closest('.element').remove()
+        this._element = null;
     }
 }
 
