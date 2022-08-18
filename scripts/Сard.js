@@ -1,14 +1,10 @@
 import {
     cardElementTemplate,
     handleCardClick,
-    initialCards,
-   elementsGallery
-    } from './index.js';
-
-
+} from './index.js';
 
 export class Card {
-    constructor(data, templateSelector, handleCardClick){
+    constructor(data, templateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._card = templateSelector;
@@ -16,12 +12,12 @@ export class Card {
 
     }
 
-    _getTemplate(){
+    _getTemplate() {
         const userElementCard = cardElementTemplate.querySelector('.element').cloneNode(true);
         return userElementCard;
     }
 
-    generateCardElement(){
+    generateCardElement() {
         this._element = this._getTemplate();
         this._elementLike = this._element.querySelector('.element__like');
         this._elementRemoveBtn = this._element.querySelector('.element__remove-btn');
@@ -35,24 +31,24 @@ export class Card {
         return this._element;
     }
 
-    _setEventListeners(){
+    _setEventListeners() {
         this._elementLike.addEventListener('click', () => {
             this._handleLikeBtn();
         });
-        this._elementRemoveBtn.addEventListener('click', () =>{
+        this._elementRemoveBtn.addEventListener('click', () => {
             this._handleRemoveBtn();
-       });
-        this._elementImage.addEventListener('click' , () =>{
-           this._handleCardClick(this._name, this._link)
-       });
+        });
+        this._elementImage.addEventListener('click', () => {
+            this._handleCardClick(this._name, this._link)
+        });
 
     }
 
-    _handleLikeBtn(){
+    _handleLikeBtn() {
         this._elementLike.classList.toggle('element__like_active')
     }
 
-    _handleRemoveBtn(){
+    _handleRemoveBtn() {
         this._elementRemoveBtn.closest('.element').remove()
     }
 }
@@ -61,7 +57,7 @@ export const createNewCardElement = (item) => {
     const card = new Card(item, '#element-card', handleCardClick);
     const cardElement = card.generateCardElement();
     return cardElement;
-  }
+}
 
 
 

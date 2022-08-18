@@ -1,10 +1,5 @@
 import { Card, createNewCardElement } from './Сard.js';
-
-import { FormValidator,
-  clearErrors,
-  removeErrorBorder,
-  resetBtnState
-} from './FormValidator.js';
+import { FormValidator } from './FormValidator.js';
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
@@ -98,9 +93,7 @@ function handleNewCardViaSubmit(evt) {
   const cardElement = card.generateCardElement();
   elementsGallery.prepend(cardElement);
   closeAddingCard();
- //resetBtnState();
   evt.target.reset();
-  //newCardForm.reset()
 }
 
 function handleCardClick(name, link) {
@@ -148,12 +141,8 @@ function closeViaEscapeKey(evt) {
 
 //открыть добавить карточку
 function openAddingCard() {
-  //newCardForm.reset()
-  clearErrors();
-
+  formClassNewCardCheckValid.resetValidation();
   openPopup(popupAddNewCard);
-  //resetBtnState();
-  //cardAddSubmitBtn.reset()
 };
 
 //закрыть добавить карточку
@@ -163,7 +152,7 @@ function closeAddingCard() {
 
 //открыть редактировать профиль
 function openProfileEdit(evt) {
-  clearErrors();
+  formClassProfileCheckValid.resetValidation()
   userNameInput.value = userName.textContent;
   userJobInput.value = userJob.textContent;
   openPopup(profilePopup);
@@ -192,19 +181,6 @@ function handleProfileFormSubmit(evt) {
   closeProfileEdit();
 }
 
-//  function renderNewCardFromArray(){
-//      const card = handleCardElement
-//      elementsGallery.append(card);
-//  }
-//  renderNewCardFromArray()
-
-//добавление карточки
-//console.log(handleCardElement)
-//const cardElement = handleCardElement
-//elementsGallery.append(cardElement);
-
-
-
 profileEditBtn.addEventListener('click', openProfileEdit);
 
 newCardAddOpenBtn.addEventListener('click', openAddingCard);
@@ -215,7 +191,5 @@ cardAddSubmitBtn.addEventListener('submit', handleNewCardViaSubmit);
 export {
   cardElementTemplate,
   validateConfig,
-  initialCards,
   handleCardClick,
-  elementsGallery
 };
