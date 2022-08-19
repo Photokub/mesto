@@ -6,6 +6,10 @@ export class FormValidator {
         this._inputErrorClass = validationData.inputErrorClass;
         this._formType = formType;
         this._input = validationData.formInput
+        this._formInputError = validationData.formInputError
+        this._inputErrorList = this._formType.querySelectorAll(this._formInputError)
+        this._inputList = this._formType.querySelectorAll(this._input)
+        this._submitBtn = this._formType.querySelector(this._buttonElement)
     }
 
     enableValidation(config) {
@@ -54,28 +58,23 @@ export class FormValidator {
         }
     }
 
-    resetValidation() {
-        this._inputErrorList = this._formType.querySelectorAll('.form__input-error')
-        this._inputList = this._formType.querySelectorAll('.form__input')
-        this._submitBtn = this._formType.querySelector('.form__save-btn')
-
+    resetValidation() {     
         this._inputErrorList.forEach((inputErrorElement) => {
             inputErrorElement.textContent = '';
-            if (inputErrorElement.classList.contains('form__input-error-field')) {
+            if (inputErrorElement.classList.contains(this._formErroeField)) {
                 this._hideFieldError(inputErrorElement)
             }
         })
 
         this._inputList.forEach((inputListElement) => {
             inputListElement.value = ''
-            if (inputListElement.classList.contains('form__input-error-field')) {
-                inputListElement.classList.remove('form__input-error-field')
+            if (inputListElement.classList.contains(this._inputErrorClass)) {
+                inputListElement.classList.remove(this._inputErrorClass)
             }
         })
 
-        this._submitBtn.classList.remove('form__save-btn_valid')
-        this._submitBtn.classList.add('form__save-btn_invalid')
+        this._submitBtn.classList.remove(this._validationData.buttonValid)
+        this._submitBtn.classList.add(this._validationData.buttonInvalid)
         this._submitBtn.setAttribute('disabled', true)
-
     }
 }

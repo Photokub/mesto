@@ -1,6 +1,5 @@
 import {
-    cardElementTemplate,
-    handleCardClick,
+    cardElementTemplate
 } from './index.js';
 
 export class Card {
@@ -52,12 +51,6 @@ export class Card {
         this._elementRemoveBtn.closest('.element').remove()
         this._element = null;
     }
-}
-
-export const createNewCardElement = (item) => {
-    const card = new Card(item, '#element-card', handleCardClick);
-    const cardElement = card.generateCardElement();
-    return cardElement;
 }
 
 

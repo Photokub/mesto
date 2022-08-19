@@ -1,4 +1,4 @@
-import { Card, createNewCardElement } from './Сard.js';
+import { Card} from './Сard.js';
 import { FormValidator } from './FormValidator.js';
 import { initialCards } from './initialCards.js';
 
@@ -36,7 +36,15 @@ const validateConfig = {
   buttonValid: 'form__save-btn_valid',
   buttonInvalid: 'form__save-btn_invalid',
   formInput: '.form__input',
+  formInputError: '.form__input-error',
   inputErrorClass: 'form__input-error-field'
+}
+
+//создание карточек из массива 
+const createNewCardElement = (item) => {
+  const card = new Card(item, '#element-card', handleCardClick);
+  const cardElement = card.generateCardElement();
+  return cardElement;
 }
 
 //рендер карточек из массива
@@ -63,9 +71,8 @@ function handleNewCardViaSubmit(evt) {
     name: cardTitle.value,
     link: cardLink.value
   }
-  const card = new Card(newCard, "#element-card", handleCardClick);
-  const cardElement = card.generateCardElement();
-  elementsGallery.prepend(cardElement);
+  
+  elementsGallery.prepend(createNewCardElement(newCard))
   closeAddingCard();
   evt.target.reset();
 }
@@ -164,6 +171,5 @@ cardAddSubmitBtn.addEventListener('submit', handleNewCardViaSubmit);
 
 export {
   cardElementTemplate,
-  validateConfig,
-  handleCardClick,
+  validateConfig,  
 };
