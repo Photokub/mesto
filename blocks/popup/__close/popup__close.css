@@ -23,7 +23,7 @@
     .popup__close {
         width: 20px;
         height: 20px;
-        top:calc(-20px - 16px);
+        top:calc(-20px - 26px);
         right:0;
     }
  }

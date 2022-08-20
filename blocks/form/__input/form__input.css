@@ -1,6 +1,6 @@
 .form__input{
     height: 27px;
-    margin-top: 30px;
+    margin-top: 43px;
     border:none;
     border-bottom: 1px solid rgba(0,0,0, 0.2);
     position:relative;
@@ -12,9 +12,8 @@
     line-height: 17px;
 }
 
-
 @media screen and (max-width: 586px ) {
     .form__input {
-        margin-top: 27px;
+        margin-top: 70px;
      }
  }

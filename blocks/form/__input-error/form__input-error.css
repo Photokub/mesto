@@ -4,8 +4,15 @@
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 15px;
-    margin-top:5px;
+    line-height: 13px;
+    margin-top:2px;
     position:absolute;
     top: calc(100% + 5px);
 }
+
+@media screen and (max-width: 586px ){
+    .form__input-error{
+        font-size: 10px;
+        line-height: 11px;
+    } 
+} 

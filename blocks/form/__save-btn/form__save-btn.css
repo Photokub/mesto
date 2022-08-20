@@ -15,8 +15,6 @@
     transition: .35s;
 }
 
-
-
 @media screen and (max-width: 586px ) {
     .form__save-btn {
         width:238px;

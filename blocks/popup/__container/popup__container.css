@@ -12,12 +12,16 @@
     box-sizing: border-box;
 }
 
+.popup__container:hover{
+    cursor:default;
+}
+
 @media screen and (max-width: 586px) {
     .popup__container{
         left:calc(50% - (282px/2));
         top:123px;
         width:282px;
         height: 322px;
-        padding-top:25px;
+        padding-top:15px;
     }
 }

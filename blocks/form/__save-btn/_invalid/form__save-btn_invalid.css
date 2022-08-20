@@ -1,7 +1,4 @@
 .form__save-btn_invalid{
-    width: 358px;
-    height: 50px;
-    margin-top:48px;
     background-color: unset;
     border: 1px solid #000;
     color: #000;
@@ -9,8 +6,6 @@
     font-family: 'Inter','Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
     text-align: center;
     transition: .35s;
 }

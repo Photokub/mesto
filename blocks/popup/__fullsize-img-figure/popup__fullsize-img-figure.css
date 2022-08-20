@@ -2,3 +2,7 @@
 padding:0;
 margin:0;
 }
+
+.popup__fullsize-img-figure:hover{
+    cursor:default;
+}
