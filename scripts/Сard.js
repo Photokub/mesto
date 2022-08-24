@@ -1,12 +1,12 @@
 import {
     cardElementTemplate
 } from './index.js';
+//import {initialCards} from "./initialCards";
 
 export class Card {
-    constructor(data, templateSelector, handleCardClick) {
+    constructor(data, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
-        this._card = templateSelector;
         this._handleCardClick = handleCardClick;
 
     }
@@ -52,6 +52,8 @@ export class Card {
         this._element = null;
     }
 }
+
+
 
 
 

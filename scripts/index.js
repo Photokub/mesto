@@ -40,42 +40,80 @@ const validateConfig = {
   inputErrorClass: 'form__input-error-field'
 }
 
-//создание карточек из массива 
-const createNewCardElement = (item) => {
-  const card = new Card(item, '#element-card', handleCardClick);
-  const cardElement = card.generateCardElement();
-  return cardElement;
+//создание карточек из массива
+// const createNewCardElement = (item) => {
+//   const card = new Card(item, '#element-card', handleCardClick);
+//   const cardElement = card.generateCardElement();
+//   return cardElement;
+// }
+//
+// //рендер карточек из массива
+// const renderNewCardFromArray = () => {
+//   initialCards.forEach((item) => {
+//     elementsGallery.append(createNewCardElement(item));
+//   })
+// }
+// renderNewCardFromArray()
+
+class Section {
+  constructor({item, renderer}, containerSelector) {
+    this._initialArray = item;
+    this._renderer = renderer;
+    this._container = containerSelector;
+  }
+
+  addItem(element) {
+    this._container.append(element)
+  }
+
+  renderItems() {
+    this._initialArray.forEach(item => {
+      this._renderer(item);
+    })
+  }
 }
 
-//рендер карточек из массива
-const renderNewCardFromArray = () => {
-  initialCards.forEach((item) => {
-    elementsGallery.append(createNewCardElement(item));
-  })
-}
-renderNewCardFromArray()
+//добавление карточек из массива
+const cardList = new Section({
+  item: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, handleCardClick)
+    const cardElement = card.generateCardElement();
+    cardList.addItem(cardElement)
+  }
+}, elementsGallery)
 
-//валидация форм
-const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
-formClassProfileCheckValid.enableValidation()
+cardList.renderItems()
 
-const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
-formClassNewCardCheckValid.enableValidation()
-
-//функционал добавления карточки через «сохранить»
-function handleNewCardViaSubmit(evt) {
-  evt.preventDefault();
-
-  const newCard =
-  {
+const handleNewCardViaSubmit = new Section({
+  item:  {
     name: cardTitle.value,
     link: cardLink.value
+  },
+  renderer: (item) => {
+    const card = new Card(item, handleCardClick)
+    const cardElement = card.generateCardElement();
+    console.log(cardElement)
+    console.log(handleNewCardViaSubmit)
+    handleNewCardViaSubmit.addItem(cardElement)
   }
-  
-  elementsGallery.prepend(createNewCardElement(newCard))
-  closeAddingCard();
-  evt.target.reset();
-}
+}, elementsGallery)
+
+
+//функционал добавления карточки через «сохранить»
+// function handleNewCardViaSubmit(evt) {
+//   evt.preventDefault();
+//
+//   const newCard =
+//   {
+//     name: cardTitle.value,
+//     link: cardLink.value
+//   }
+//
+//   elementsGallery.prepend(createNewCardElement(newCard))
+//   closeAddingCard();
+//   evt.target.reset();
+// }
 
 function handleCardClick(name, link) {
   imgZoomTitle.textContent = name;
@@ -83,6 +121,13 @@ function handleCardClick(name, link) {
   imgZoom.alt = name;
   openPopup(popupFullSizeImg);
 }
+
+//валидация форм
+const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
+formClassProfileCheckValid.enableValidation()
+
+const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
+formClassNewCardCheckValid.enableValidation()
 
 //функционал открытия попапа
 const openPopup = function (item) {
