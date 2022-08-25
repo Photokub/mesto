@@ -72,7 +72,7 @@ function handleNewCardViaSubmit(evt) {
 }, elementsGallery)
 
   newCardViaSubmit.renderItems()
-  closeAddingCard();
+ // closeAddingCard();
   evt.target.reset();
 }
 
@@ -80,7 +80,7 @@ function handleCardClick(name, link) {
   imgZoomTitle.textContent = name;
   imgZoom.src = link;
   imgZoom.alt = name;
-  openPopup(popupFullSizeImg);
+ // openPopup(popupFullSizeImg);
 }
 
 //валидация форм
@@ -93,102 +93,111 @@ formClassNewCardCheckValid.enableValidation()
 class Popup{
   constructor(popupSelector){
     this._popupSelector = popupSelector;
+    this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
   }
 
-  openPopup = function (item) {
-    item.classList.add('popup_opened');
-    document.addEventListener('keydown', closeViaEscapeKey);
+  open() {
+    this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', this._closeViaEscapeKey);
   };
 
-  closePopup = function (item) {
-    item.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeViaEscapeKey);
+  close() {
+    this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._closeViaEscapeKey);
   };
 
   _closeViaEscapeKey(evt) {
     if (evt.code === 'Escape') {
-      closePopup(this._popupSelector);
+      close(this._popupSelector);
     }
   }
 
   setEventListeners(){
-    this._popupSelector.document.querySelector('.popup__close').addEventListener('click', () => closePopup(popup))
+    this._popupSelector.addEventListener('click', () => this.open(this._popupSelector));
+    this._popupSelector.addEventListener('click', () => this.close(this._popupSelector));
   }
 }
 
-const PopupWithForm = new Popup (popupAddNewCard){
-  
+class PopupWithForm extends Popup {
+  constructor({popupSelector, handleNewCardViaSubmit}){
+    super(popupSelector);
+    this._handleNewCardViaSubmit = handleNewCardViaSubmit
+  }
+
 }
+
+const popupWithForm = new PopupWithForm({popupAddNewCard, handleNewCardViaSubmit})
+
 
 //функционал открытия попапа
-const openPopup = function (item) {
-  item.classList.add('popup_opened');
-  document.addEventListener('keydown', closeViaEscapeKey);
-};
+// const openPopup = function (item) {
+//   item.classList.add('popup_opened');
+//   document.addEventListener('keydown', closeViaEscapeKey);
+// };
 
 //функционал закрытия попапа
-const closePopup = function (item) {
-  item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeViaEscapeKey);
-};
+// const closePopup = function (item) {
+//   item.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closeViaEscapeKey);
+// };
 
 //выборка навешивание слушателя для каждого крестика
-popupCloseButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-})
+// popupCloseButtons.forEach((button) => {
+//   const popup = button.closest('.popup');
+//   button.addEventListener('click', () => closePopup(popup));
+// })
 
 //закрытие по оверлею
-overlaysClose.forEach((button) => {
-  button.addEventListener('mousedown', function closePopupViaOverlay(evt) {
-    const popup = button.closest('.popup');
-    if (!evt.target.classList.contains('popup')) {
-      return
-    }
-    closePopup(popup);
-  })
-})
+// overlaysClose.forEach((button) => {
+//   button.addEventListener('mousedown', function closePopupViaOverlay(evt) {
+//     const popup = button.closest('.popup');
+//     if (!evt.target.classList.contains('popup')) {
+//       return
+//     }
+//     closePopup(popup);
+//   })
+// })
 
 //Закрытие по Esc
-function closeViaEscapeKey(evt) {
-  if (evt.code === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
+// function closeViaEscapeKey(evt) {
+//   if (evt.code === 'Escape') {
+//     closePopup(document.querySelector('.popup_opened'));
+//   }
+// }
 
 //открыть добавить карточку
-function openAddingCard() {
-  formClassNewCardCheckValid.resetValidation();
-  openPopup(popupAddNewCard);
-};
+// function openAddingCard() {
+//   formClassNewCardCheckValid.resetValidation();
+//   openPopup(popupAddNewCard);
+// };
 
 //закрыть добавить карточку
-function closeAddingCard() {
-  closePopup(popupAddNewCard);
-};
+// function closeAddingCard() {
+//   closePopup(popupAddNewCard);
+// };
 
 //открыть редактировать профиль
-function openProfileEdit(evt) {
-  formClassProfileCheckValid.resetValidation()
-  userNameInput.value = userName.textContent;
-  userJobInput.value = userJob.textContent;
-  openPopup(profilePopup);
-};
+// function openProfileEdit(evt) {
+//   formClassProfileCheckValid.resetValidation()
+//   userNameInput.value = userName.textContent;
+//   userJobInput.value = userJob.textContent;
+//   openPopup(profilePopup);
+// };
 
 //закрыть редактировать профиль
-function closeProfileEdit() {
-  closePopup(profilePopup);
-};
+// function closeProfileEdit() {
+//   closePopup(profilePopup);
+// };
 
 //открыть большую картинку
-function openFullSizeImg() {
-  openPopup(popupFullSizeImg);
-};
+// function openFullSizeImg() {
+//   openPopup(popupFullSizeImg);
+// };
 
 //закрыть большую картинку
-function closeFullSizeImg() {
-  closePopup(popupFullSizeImg);
-};
+// function closeFullSizeImg() {
+//   closePopup(popupFullSizeImg);
+// };
 
 //функционал кнопки «сохранить» в редактировании профиля
 function handleProfileFormSubmit(evt) {
@@ -198,9 +207,9 @@ function handleProfileFormSubmit(evt) {
   closeProfileEdit();
 }
 
-profileEditBtn.addEventListener('click', openProfileEdit);
+//profileEditBtn.addEventListener('click', openProfileEdit);
 
-newCardAddOpenBtn.addEventListener('click', openAddingCard);
+// newCardAddOpenBtn.addEventListener('click', openAddingCard);
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 cardAddSubmitBtn.addEventListener('submit', handleNewCardViaSubmit);
