@@ -114,7 +114,10 @@ class Popup{
   setEventListeners(){
     this._popupSelector.document.querySelector('.popup__close').addEventListener('click', () => closePopup(popup))
   }
+}
 
+const PopupWithForm = new Popup (popupAddNewCard){
+  
 }
 
 //функционал открытия попапа
