@@ -1,6 +1,7 @@
 import { Card} from './Сard.js';
 import { FormValidator } from './FormValidator.js';
 import { initialCards } from './initialCards.js';
+import Section from './Section.js'
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
@@ -40,39 +41,6 @@ const validateConfig = {
   inputErrorClass: 'form__input-error-field'
 }
 
-//создание карточек из массива
-// const createNewCardElement = (item) => {
-//   const card = new Card(item, '#element-card', handleCardClick);
-//   const cardElement = card.generateCardElement();
-//   return cardElement;
-// }
-//
-// //рендер карточек из массива
-// const renderNewCardFromArray = () => {
-//   initialCards.forEach((item) => {
-//     elementsGallery.append(createNewCardElement(item));
-//   })
-// }
-// renderNewCardFromArray()
-
-class Section {
-  constructor({item, renderer}, containerSelector) {
-    this._initialArray = item;
-    this._renderer = renderer;
-    this._container = containerSelector;
-  }
-
-  addItem(element) {
-    this._container.append(element)
-  }
-
-  renderItems() {
-    this._initialArray.forEach(item => {
-      this._renderer(item);
-    })
-  }
-}
-
 //добавление карточек из массива
 const cardList = new Section({
   item: initialCards,
@@ -85,35 +53,28 @@ const cardList = new Section({
 
 cardList.renderItems()
 
-const handleNewCardViaSubmit = new Section({
-  item:  {
+//функционал добавления карточки через «сохранить»
+function handleNewCardViaSubmit(evt) {
+  evt.preventDefault()
+
+  const newCardViaSubmit = new Section({
+  item:  [{
     name: cardTitle.value,
     link: cardLink.value
-  },
+  }],
   renderer: (item) => {
     const card = new Card(item, handleCardClick)
-    const cardElement = card.generateCardElement();
+    const cardElement = card.generateCardElement();   
+    newCardViaSubmit.addItem(cardElement)
     console.log(cardElement)
-    console.log(handleNewCardViaSubmit)
-    handleNewCardViaSubmit.addItem(cardElement)
+    console.log(newCardViaSubmit)    
   }
 }, elementsGallery)
 
-
-//функционал добавления карточки через «сохранить»
-// function handleNewCardViaSubmit(evt) {
-//   evt.preventDefault();
-//
-//   const newCard =
-//   {
-//     name: cardTitle.value,
-//     link: cardLink.value
-//   }
-//
-//   elementsGallery.prepend(createNewCardElement(newCard))
-//   closeAddingCard();
-//   evt.target.reset();
-// }
+  newCardViaSubmit.renderItems()
+  closeAddingCard();
+  evt.target.reset();
+}
 
 function handleCardClick(name, link) {
   imgZoomTitle.textContent = name;
@@ -128,6 +89,33 @@ formClassProfileCheckValid.enableValidation()
 
 const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
 formClassNewCardCheckValid.enableValidation()
+
+class Popup{
+  constructor(popupSelector){
+    this._popupSelector = popupSelector;
+  }
+
+  openPopup = function (item) {
+    item.classList.add('popup_opened');
+    document.addEventListener('keydown', closeViaEscapeKey);
+  };
+
+  closePopup = function (item) {
+    item.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeViaEscapeKey);
+  };
+
+  _closeViaEscapeKey(evt) {
+    if (evt.code === 'Escape') {
+      closePopup(this._popupSelector);
+    }
+  }
+
+  setEventListeners(){
+    this._popupSelector.document.querySelector('.popup__close').addEventListener('click', () => closePopup(popup))
+  }
+
+}
 
 //функционал открытия попапа
 const openPopup = function (item) {
