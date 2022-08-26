@@ -94,8 +94,7 @@ formClassNewCardCheckValid.enableValidation()
 class Popup{
   constructor(popupSelector){
     this._popupSelector = popupSelector;
-   // определить оверлей
-    this._overlay = document.querySelector(this._popupSelector)
+    this._overlay = this._popupSelector.closest('.popup')
     this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
     this._popupCloseButton = this._popupSelector.querySelector('.popup__close')
   }  
