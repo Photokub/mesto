@@ -94,6 +94,8 @@ formClassNewCardCheckValid.enableValidation()
 class Popup{
   constructor(popupSelector){
     this._popupSelector = popupSelector;
+   // определить оверлей
+  // this._overlay = this._popupSelector.querySelector('.popup')
     this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
     this._popupCloseButton = this._popupSelector.querySelector('.popup__close')
   }
@@ -110,12 +112,13 @@ class Popup{
 
   _closeViaEscapeKey(evt) {
     if (evt.code === 'Escape') {
-      close(this._popupSelector);
+      this.close();
     }
   }
 
   setEventListeners(){
     this._popupCloseButton.addEventListener('click', () => {this.close()});
+    this._popupSelector.addEventListener('click', () => {this.close()})
   }
 }
 
