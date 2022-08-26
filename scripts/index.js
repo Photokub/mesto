@@ -95,10 +95,10 @@ class Popup{
   constructor(popupSelector){
     this._popupSelector = popupSelector;
    // определить оверлей
-  // this._overlay = this._popupSelector.querySelector('.popup')
+    this._overlay = document.querySelector(this._popupSelector)
     this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
     this._popupCloseButton = this._popupSelector.querySelector('.popup__close')
-  }
+  }  
 
   open() {
     this._popupSelector.classList.add('popup_opened');
@@ -118,7 +118,11 @@ class Popup{
 
   setEventListeners(){
     this._popupCloseButton.addEventListener('click', () => {this.close()});
-    this._popupSelector.addEventListener('click', () => {this.close()})
+    this._overlay.addEventListener('mousedown', (evt) => {
+      if(evt.target === this._overlay){
+        this.close()
+      }
+    })
   }
 }
 
