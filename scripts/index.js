@@ -13,6 +13,7 @@ const imgZoom = document.querySelector('.popup__fullsize-img-picture');
 const imgZoomTitle = document.querySelector('.popup__fullsize-img-caption');
 
 const popupCloseButtons = document.querySelectorAll('.popup__close');
+const popupCloseButton = document.querySelector('.popup__close');
 const overlaysClose = document.querySelectorAll('.popup');
 
 const elementsGallery = document.querySelector('.elements');
@@ -94,6 +95,7 @@ class Popup{
   constructor(popupSelector){
     this._popupSelector = popupSelector;
     this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
+    this._popupCloseButton = this._popupSelector.querySelector('.popup__close')
   }
 
   open() {
@@ -113,20 +115,23 @@ class Popup{
   }
 
   setEventListeners(){
-    this._popupSelector.addEventListener('click', () => this.open(this._popupSelector));
-    this._popupSelector.addEventListener('click', () => this.close(this._popupSelector));
+    this._popupCloseButton.addEventListener('click', () => {this.close()});
   }
 }
 
 class PopupWithForm extends Popup {
-  constructor({popupSelector, handleNewCardViaSubmit}){
+  constructor(popupSelector, handleNewCardViaSubmit){
     super(popupSelector);
+    super.setEventListeners()
     this._handleNewCardViaSubmit = handleNewCardViaSubmit
   }
-
 }
 
-const popupWithForm = new PopupWithForm({popupAddNewCard, handleNewCardViaSubmit})
+const popupWithForm = new PopupWithForm(popupAddNewCard, handleNewCardViaSubmit)
+
+
+console.log(popupWithForm)
+
 
 
 //функционал открытия попапа
@@ -209,7 +214,7 @@ function handleProfileFormSubmit(evt) {
 
 //profileEditBtn.addEventListener('click', openProfileEdit);
 
-// newCardAddOpenBtn.addEventListener('click', openAddingCard);
+newCardAddOpenBtn.addEventListener('click', () => {popupWithForm.open()});
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 cardAddSubmitBtn.addEventListener('submit', handleNewCardViaSubmit);
