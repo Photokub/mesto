@@ -43,8 +43,8 @@ const validateConfig = {
 }
 
 const classSelectors = {
-    userNameSelector: '.profile__title',
-    userJobSelector: '.profile__subtitle',
+    userName: '.profile__title',
+    userJob: '.profile__subtitle',
     profilePopup: '.profile-popup',
     addCardPopup: '.popup_add-new-card',
     imgZoomPopup: '.popup__fullsize-img-picture',
