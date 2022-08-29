@@ -42,6 +42,17 @@ const validateConfig = {
     inputErrorClass: 'form__input-error-field'
 }
 
+const classSelectors = {
+    userNameSelector: '.profile__title',
+    userJobSelector: '.profile__subtitle',
+    profilePopup: '.profile-popup',
+    addCardPopup: '.popup_add-new-card',
+    imgZoomPopup: '.popup__fullsize-img-picture',
+    gallery: '.elements',
+}
+
+console.log(classSelectors.userName)
+
 //добавление карточек из массива
 const cardList = new Section({
     item: initialCards,
@@ -84,11 +95,14 @@ function handleCardClick(name, link) {
 //функционал кнопки «сохранить» в редактировании профиля
 function handleProfileFormSubmit() {
     //evt.preventDefault();
-    // userName.textContent = userNameInput.value;
+    // userName.textContent = objData.value;
+     //userJob.textContent = objData.value;
+    // userName.textContent = userData.setUserInfo;
     // userJob.textContent = userJobInput.value;
     //closeProfileEdit();
+    userData.setUserInfo({classSelectors:userName.textContent, userJob})
 
-    userData.setUserInfo()
+    // userData.setUserInfo()
 }
 
 //валидация форм
@@ -105,12 +119,16 @@ class Popup {
         this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
         this._popupCloseButton = this._popupSelector.querySelector('.popup__close')
         this._profileForm = popupSelector.querySelector('.form')
+        //this._profileValue = {_userName: userNameInput.value, _userJob: userJobInput.value }
     }
 
     open() {
         this._profileForm.reset()
         this._popupSelector.classList.add('popup_opened');
         document.addEventListener('keydown', this._closeViaEscapeKey);
+        // userNameInput.value = userName.textContent;
+        // userJobInput.value = userJob.textContent
+        //this._profileValue = getUserInfo(userData)
     };
 
     close() {
@@ -145,6 +163,17 @@ class PopupWithForm extends Popup {
         this._handleDataViaSubmit = handleDataViaSubmit
     }
 
+    _findInput(key) {
+        return Array.from(this._profileForm).find((i) => i.name === key);
+      }
+
+    setDefaultlValues(initialValues) {
+        Object.keys(initialValues).forEach(
+          (key) => (this._findInput(key).value = initialValues[key])
+        );
+      }
+
+    
     _getInputValues() {
         this._inputFormList.forEach((input) => {
             this._inputValues = input.value
@@ -162,45 +191,64 @@ class PopupWithForm extends Popup {
     setEventListeners() {
         super.setEventListeners()
         this._profileForm.addEventListener('submit', (evt) => {
-            evt.preventDefault()
-            this._handleDataViaSubmit(this._getInputValues)
+           if(evt.target === cardAddSubmitBtn) {evt.preventDefault()
+            this._handleDataViaSubmit(this._getInputValues)    
+            this.close()}
+            else{
+                evt.preventDefault()
+                this._handleDataViaSubmit()    
             this.close()
+            }
         })
+    // setEventListeners() {
+    //     super.setEventListeners()
+    //     this._profileForm.addEventListener('submit', (evt) => {
+    //        if(evt.target === cardAddSubmitBtn) {evt.preventDefault()
+    //         this._handleDataViaSubmit(this._getInputValues)    
+    //         this.close()}
+    //         else{
+    //             evt.preventDefault()
+    //             this._handleDataViaSubmit()    
+    //         this.close()
+    //         }
+    //     })
     }
+
+
 }
 
 class UserInfo {
-    constructor({userNameInput, userJobInput}) {
-        this._userName = userNameInput
-        this._userJob = userJobInput
+    constructor({userNameSelector, userJobSelector}) {
+        this._userName = document.querySelector(userNameSelector);
+        this._userJob = document.querySelector(userJobSelector);
     }
 
     getUserInfo() {
         return{
             name:this._userName.textContent,
-            job:this._userJob.textContent
+            job:this._userJob.textContent,
         }
     }
 
-    setUserInfo(item){
-        this._userName.textContent = item.name;
-        this._userJob.textContent = item.job;
+    setUserInfo({userNameSelector, userJobSelector}){
+        this._userName.textContent = userNameSelector;
+        this._userJob.textContent = userJobSelector
     }
 }
 
 
+const userData = new UserInfo({
+    userNameSelector: classSelectors.userName,
+    userJobSelector: classSelectors.userJob
+})
+
 
 const popupWithFormCard = new PopupWithForm(popupAddNewCard, handleNewCardViaSubmit)
 
-const userData = new UserInfo({userNameInput, userJobInput})
 
 const popupWithFormProfile = new PopupWithForm(profilePopup, handleProfileFormSubmit)
 
-// const popupWithFormProfile = new PopupWithForm(profilePopup, handleProfileFormSubmit)
 
-// const user = new UserInfo.getUserInfo()
-//
-// console.log(user)
 
 
 popupWithFormCard.setEventListeners()
@@ -209,7 +257,9 @@ popupWithFormProfile.setEventListeners()
 
 console.log(popupWithFormCard)
 console.log(cardAddSubmitBtn)
-console.log(userData)
+//console.log(userData.getUserInfo())
+
+//console.log(userDataHandle)
 
 
 //функционал открытия попапа
@@ -294,11 +344,12 @@ profileEditBtn.addEventListener('click', () => {
     // userNameInput.value = userName.textContent;
     // userJobInput.value = userJob.textContent;
     formClassProfileCheckValid.resetValidation()
+    popupWithFormProfile.setDefaultlValues(userData.getUserInfo());
     popupWithFormProfile.open();
 });
 
-console.log(userNameInput.value)
-console.log(userName.textContent)
+// console.log(userNameInput.value)
+// console.log(userName.textContent)
 
 
 //profileForm.addEventListener('submit', handleProfileFormSubmit);
