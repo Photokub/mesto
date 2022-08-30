@@ -3,6 +3,7 @@ import {FormValidator} from './FormValidator.js';
 import {initialCards} from './initialCards.js';
 import Section from './Section.js'
 
+
 const profilePopup = document.querySelector('.profile-popup');
 const popupFullSizeImg = document.querySelector('.popup_full-size-image');
 const popupAddNewCard = document.querySelector('.popup_add-new-card');
@@ -53,67 +54,79 @@ const classSelectors = {
     gallery: '.elements',
 }
 
-const createCard = (data) => {
-    const card = new Card(data , (obj) => 
-    popupImage.open(obj)
-    )
-    const cardElement = card.generateCardElement()
-
-    return cardElement;
-}
-
-const section = new section(
-    {
-        item: initialCards,
-        renderer: (item) => {
-            const cardElement = createCard(item);
-            cardList.addItem(cardElement)
-            section.addItem(cardElement)
-        },
-    },
-    elementsGallery
-    )
+// const createCard = (data) => {
+//     const card = new Card(data , (obj) =>
+//     popupImage.open(obj)
+//     )
+//     const cardElement = card.generateCardElement()
+//
+//     return cardElement;
+// }
+//
+// const section = new section(
+//     {
+//         item: initialCards,
+//         renderer: (item) => {
+//             const cardElement = createCard(item);
+//             cardList.addItem(cardElement)
+//             section.addItem(cardElement)
+//         },
+//     },
+//     elementsGallery
+//     )
 
 
 
 //добавление карточек из массива
-// const cardList = new Section({
-//     item: initialCards,
-//     renderer: (item) => {
-//         const card = new Card(item, handleCardClick)
-//         const cardElement = card.generateCardElement();
-//         cardList.addItem(cardElement)
-//     }
-// }, elementsGallery)
+const cardList = new Section({
+    item: initialCards,
+    renderer: (item) => {
+        const card = new Card(item, handleCardClick)
+        const cardElement = card.generateCardElement();
+        cardList.addItem(cardElement)
+    }
+}, elementsGallery)
 
-// cardList.renderItems()
+cardList.renderItems()
 
-// //функционал добавления карточки через «сохранить»
+//функционал добавления карточки через «сохранить»
+// handleNewCardViaSubmit = (item) => {
+//     const submitCard = new Card (item, handleCardClick)
+//     const cardElement = submitCard.generateCardElement();
+//     cardList.addItem(cardElement)
+// }
+
 // function handleNewCardViaSubmit() {
-
-//     const newCardViaSubmit = new Section({
-//         item: [{
-//             name: cardTitle.value,
-//             link: cardLink.value
-//         }],
-//         renderer: (item) => {
-//             const card = new Card(item, handleCardClick)
-//             const cardElement = card.generateCardElement();
-//             newCardViaSubmit.addItem(cardElement);
-//         }
-//     }, elementsGallery)
-
-//     newCardViaSubmit.renderItems()
-
+//
+//
+//
+//     // const newCardViaSubmit = new Section({
+//     //
+//     //     item: [{
+//     //         name: cardTitle.value,
+//     //         link: cardLink.value
+//     //     }],
+//     //
+//     //     renderer: (item) => {
+//     //         const card = new Card(item, handleCardClick)
+//     //         const cardElement = card.generateCardElement();
+//     //         newCardViaSubmit.addItem(cardElement);
+//     //     }
+//     // }, elementsGallery)
+//     //
+//     // newCardViaSubmit.renderItems()
+//
 //     //evt.target.reset();
 // }
 
-// function handleCardClick() {
-//     // imgZoomTitle.textContent = name;
-//     // imgZoom.src = link;
-//     // imgZoom.alt = name;
-//     popupImage.open();
-// }
+function handleCardClick() {
+    const popupImage = new PopupWithImage(popupFullSizeImg)
+    popupImage.setEventListeners()
+    // imgZoomTitle.textContent = name;
+    // imgZoom.src = link;
+    // imgZoom.alt = name;
+    popupImage.open();
+}
 
 //функционал кнопки «сохранить» в редактировании профиля
 // function handleProfileFormSubmit(item) {
@@ -192,10 +205,6 @@ class PopupWithImage extends Popup{
         }
     }
 
-const popupImage = new PopupWithImage(popupFullSizeImg)
-
-console.log(popupImage)
-
 
 class PopupWithForm extends Popup {
     constructor(popupSelector, handleDataViaSubmit) {
@@ -209,9 +218,9 @@ class PopupWithForm extends Popup {
         this._userJobInput = this._popupSelector.querySelector('.form__input_type_job')
     }
 
-    _findInput(key) {
-        return Array.from(this._inputFormList).find((i) => {i.name === key})
-      }
+    // _findInput(key) {
+    //     return Array.from(this._inputFormList).find((i) => {i.name === key})
+    //   }
 
     // setDefaultlValues(initialValues) {
     //     Object.values(initialValues).forEach(
@@ -219,20 +228,21 @@ class PopupWithForm extends Popup {
     //     );
     //   }
 
-    
-    // setInputValues(){
-    //     this._userNameInput.textContent = 'tesst'
-    //     this._userJobInput.textContent = 'test'
-    // }  
 
-    setInputValues(initialValues) {
-        Object.keys(initialValues).forEach(
-            (key) => (this._findInput(key).value = initialValues[key])
-        );
+    setInputValues(){
+        this._userNameInput.value = 'tesst'
+        this._userJobInput.value = 'test'
     }
 
-    
+    // setInputValues(initialValues) {
+    //     Object.keys(initialValues).forEach(
+    //         (key) => (this._findInput(key).value = initialValues[key])
+    //     );
+    // }
+
+
     _getInputValues() {
+        this._inputValues = {};
         this._inputFormList.forEach((input) => {
             this._inputValues[input.name] = input.value
         })
@@ -250,8 +260,8 @@ class PopupWithForm extends Popup {
         super.setEventListeners()
         this._form.addEventListener('submit', (evt) => {
            {evt.preventDefault()
-            this._handleDataViaSubmit(this._getInputValues)
-            this.close()}        
+            this._handleDataViaSubmit(this._getInputValues())
+            this.close()}
         })
 
     // setEventListeners() {
@@ -295,7 +305,11 @@ const userData = new UserInfo({
 })
 
 
-const popupWithFormCard = new PopupWithForm(popupAddNewCard, handleNewCardViaSubmit)
+const popupWithFormCard = new PopupWithForm(popupAddNewCard,   (item) => {
+    const cardSubmitted = new Card (item, handleCardClick)
+    const cardElement = cardSubmitted.generateCardElement();
+    cardList.addItem(cardElement)
+})
 
 
 //const popupWithFormProfile = new PopupWithForm(profilePopup)
@@ -303,7 +317,7 @@ const popupWithFormCard = new PopupWithForm(popupAddNewCard, handleNewCardViaSub
  //const popupWithFormProfile = new PopupWithForm(profilePopup,  handleNewCardViaSubmit)
   const popupWithFormProfile = new PopupWithForm(profilePopup,  (userData) => userData.setUserInfo(userData))
 
-popupImage.setEventListeners()
+
 popupWithFormCard.setEventListeners()
 popupWithFormProfile.setEventListeners()
 
@@ -325,7 +339,7 @@ profileEditBtn.addEventListener('click', () => {
 // document.addEventListener('click', function(evt){
 //     if(!evt.target.classList.contains('element__image')) return
 //     else{
-//         popupImage.open();      
+//         popupImage.open();
 //     }
 //   })
 
