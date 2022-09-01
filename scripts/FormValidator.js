@@ -58,7 +58,7 @@ export class FormValidator {
         }
     }
 
-    resetValidation() {     
+    resetValidation() {
         this._inputErrorList.forEach((inputErrorElement) => {
             inputErrorElement.textContent = '';
             if (inputErrorElement.classList.contains(this._formErroeField)) {

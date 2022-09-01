@@ -1,14 +1,13 @@
 import {
     cardElementTemplate
-} from './index.js';
-//import {initialCards} from "./initialCards";
+} from '../utils/constants.js';
+
 
 export class Card {
     constructor(data, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._handleCardClick = handleCardClick;
-
     }
 
     _getTemplate() {
