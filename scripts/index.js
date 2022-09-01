@@ -52,13 +52,28 @@ const classSelectors = {
     imgZoomPopup: '.popup__fullsize-img-picture',
     popupFullSizeImgSelector: '.popup_full-size-image',
     gallery: '.elements',
+    zoomPicLink:'.popup__fullsize-img-picture',
+    zoomPicName:'.popup__fullsize-img-caption',
 }
+
+
 
 //добавление карточек из массива
 const cardList = new Section({
     item: initialCards,
     renderer: (item) => {
-        const card = new Card(item, handleCardClick)
+        const card = new Card(item, ()=>{
+
+            const popupImage = new PopupWithImage(popupFullSizeImg)
+            popupImage.setEventListeners()
+
+            popupImage.open(
+                {name: card._name,
+                    link: card._link
+                }
+            );
+
+        })
         const cardElement = card.generateCardElement();
         cardList.addItem(cardElement)
     }
@@ -66,14 +81,6 @@ const cardList = new Section({
 
 cardList.renderItems()
 
-function handleCardClick() {
-    const popupImage = new PopupWithImage(popupFullSizeImg)
-    popupImage.setEventListeners()
-    // imgZoomTitle.textContent = name;
-    // imgZoom.src = link;
-    // imgZoom.alt = name;
-    popupImage.open();
-}
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
@@ -126,7 +133,8 @@ class PopupWithImage extends Popup{
         this._imageElement = this._popupSelector.querySelector('.popup__fullsize-img-picture')
         this._titleElement = this._popupSelector.querySelector('.popup__fullsize-img-caption')
     }
-        open(name, link) {
+        open({name, link}) {
+        super.open()
             this._titleElement.textContent = name;
             this._imageElement.src = link;
             this._titleElement = name;
@@ -217,7 +225,18 @@ const userData = new UserInfo({
 const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard, 
     handleDataViaSubmit: (formData) => {
-    const cardSubmitted = new Card (formData, handleCardClick)
+    const cardSubmitted = new Card (formData, ()=>{
+
+        const popupImage = new PopupWithImage(popupFullSizeImg)
+        popupImage.setEventListeners()
+
+        popupImage.open(
+            {name: cardSubmitted._name,
+                link: cardSubmitted._link
+            }
+        );
+
+    })
     const cardElement = cardSubmitted.generateCardElement();
     cardList.addItem(cardElement)
     console.log(cardSubmitted)
@@ -241,10 +260,10 @@ newCardAddOpenBtn.addEventListener('click', () => {
     popupWithFormCard.open()
 });
 
-profileEditBtn.addEventListener('click', () => { 
-    popupWithFormProfile.open();
-    popupWithFormProfile.setInputValues(userData.getUserInfo());
-});
+// profileEditBtn.addEventListener('click', () => {
+//     popupWithFormProfile.open();
+//     popupWithFormProfile.setInputValues(userData.getUserInfo());
+// });
 
 // openFullSizeImgBtn.addEventListener('click', () => {
 //     popupImage.open();
