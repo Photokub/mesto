@@ -1,4 +1,6 @@
-import {initialCards} from '../utils/initialCards.js';
+import './pages/index.css'
+
+import {initialCards} from './utils/initialCards.js';
 import {
     profilePopup,
     popupFullSizeImg,
@@ -10,13 +12,13 @@ import {
     validateConfig,
     classSelectors,
     elementsGallery
-} from '../utils/constants.js'
-import {Card} from './Сard.js';
-import {FormValidator} from './FormValidator.js';
-import Section from './Section.js'
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+} from './utils/constants.js'
+import {Card} from './scripts/Сard.js';
+import {FormValidator} from './scripts/FormValidator.js';
+import Section from './scripts/Section.js'
+import PopupWithImage from "./scripts/PopupWithImage.js";
+import PopupWithForm from "./scripts/PopupWithForm.js";
+import UserInfo from "./scripts/UserInfo.js";
 
 //добавление карточек из массива
 const cardList = new Section({
@@ -95,7 +97,6 @@ profileEditBtn.addEventListener('click', () => {
     formClassProfileCheckValid.resetValidation()
     popupWithFormProfile.open()
     const initialData = userData.getUserInfo()
-    console.log(initialData)
     popupWithFormProfile.setInputValues(initialData)
 })
 
