@@ -1,6 +1,6 @@
-import './pages/index.css'
+import './index.css'
 
-import {initialCards} from './utils/initialCards.js';
+import {initialCards} from '../utils/initialCards.js';
 import {
     profilePopup,
     popupFullSizeImg,
@@ -13,32 +13,32 @@ import {
     classSelectors,
     elementsGallery,
     cardElementTemplate
-} from './utils/constants.js'
-import {Card} from './scripts/Сard.js';
-import {FormValidator} from './scripts/FormValidator.js';
-import Section from './scripts/Section.js'
-import PopupWithImage from "./scripts/PopupWithImage.js";
-import PopupWithForm from "./scripts/PopupWithForm.js";
-import UserInfo from "./scripts/UserInfo.js";
+} from '../utils/constants.js'
+import {Card} from '../components/Сard.js';
+import {FormValidator} from '../components/FormValidator.js';
+import Section from '../components/Section.js'
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+
+function createCard(item) {
+    const card = new Card(item,cardElementTemplate, () => {
+        popupImage.open(
+            {
+                name: card._name,
+                link: card._link
+            }
+        );
+    })
+    const cardElement = card.generateCardElement();
+    return cardElement
+}
 
 //добавление карточек из массива
 const cardList = new Section({
     item: initialCards,
-    renderer: (item) => {
-        const card = new Card(item,cardElementTemplate,() => {
-
-            const popupImage = new PopupWithImage(popupFullSizeImg)
-            popupImage.setEventListeners()
-
-            popupImage.open(
-                {
-                    name: card._name,
-                    link: card._link
-                }
-            );
-        })
-        const cardElement = card.generateCardElement();
-        cardList.addItem(cardElement)
+    renderer: (item) => {;
+        cardList.addItem(createCard(item))
     }
 }, elementsGallery)
 
@@ -47,22 +47,8 @@ cardList.renderItems()
 //добавление карточек по сабмиту
 const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
-    handleDataViaSubmit: (formData) => {
-        const cardSubmitted = new Card(formData,cardElementTemplate, () => {
-
-            const popupImage = new PopupWithImage(popupFullSizeImg)
-            popupImage.setEventListeners()
-
-            popupImage.open(
-                {
-                    name: cardSubmitted._name,
-                    link: cardSubmitted._link
-                }
-            );
-
-        })
-        const cardElement = cardSubmitted.generateCardElement();
-        cardList.addItem(cardElement)
+    handleDataViaSubmit: (item) => {
+        cardList.addItem(createCard(item))
     }
 })
 
@@ -73,6 +59,7 @@ formClassProfileCheckValid.enableValidation()
 const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
 formClassNewCardCheckValid.enableValidation()
 
+const popupImage = new PopupWithImage(popupFullSizeImg)
 
 const userData = new UserInfo({
     userNameSelector: classSelectors.userName,
@@ -88,6 +75,7 @@ const popupWithFormProfile = new PopupWithForm({
 
 popupWithFormCard.setEventListeners()
 popupWithFormProfile.setEventListeners()
+popupImage.setEventListeners()
 
 newCardAddOpenBtn.addEventListener('click', () => {
     formClassNewCardCheckValid.resetValidation()
