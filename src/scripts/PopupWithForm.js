@@ -9,6 +9,7 @@ export default class PopupWithForm extends Popup {
         this._handleDataViaSubmit = handleDataViaSubmit
         this._userNameInput = this._popupSelector.querySelector('.form__input_type_name')
         this._userJobInput = this._popupSelector.querySelector('.form__input_type_job')
+        this._inputFormList = this._popupSelector.querySelectorAll('.form__input')
     }
 
     _initInput(key) {
@@ -22,7 +23,6 @@ export default class PopupWithForm extends Popup {
     }
 
     _getInputValues() {
-        this._inputFormList = this._popupSelector.querySelectorAll('.form__input')
 
         const formValues = {};
         this._inputFormList.forEach((input) => {
@@ -33,12 +33,10 @@ export default class PopupWithForm extends Popup {
         return formValues;
     }
 
-
     close() {
-        this._popupSelector.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._closeViaEscapeKey);
+        super.close()
+        this._profileForm.reset()
     }
-
 
     setEventListeners() {
         super.setEventListeners()

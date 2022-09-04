@@ -1,16 +1,12 @@
-import {newProfileForm} from "../utils/constants.js";
-
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
         this._overlay = this._popupSelector;
         this._closeViaEscapeKey = this._closeViaEscapeKey.bind(this)
         this._popupCloseButton = this._popupSelector.querySelector('.popup__close')
-        this._profileForm = newProfileForm
     }
 
     open() {
-        this._profileForm.reset()
         this._popupSelector.classList.add('popup_opened');
         document.addEventListener('keydown', this._closeViaEscapeKey);
     };

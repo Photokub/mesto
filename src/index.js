@@ -11,7 +11,8 @@ import {
     newProfileForm,
     validateConfig,
     classSelectors,
-    elementsGallery
+    elementsGallery,
+    cardElementTemplate
 } from './utils/constants.js'
 import {Card} from './scripts/Сard.js';
 import {FormValidator} from './scripts/FormValidator.js';
@@ -24,7 +25,7 @@ import UserInfo from "./scripts/UserInfo.js";
 const cardList = new Section({
     item: initialCards,
     renderer: (item) => {
-        const card = new Card(item, () => {
+        const card = new Card(item,cardElementTemplate,() => {
 
             const popupImage = new PopupWithImage(popupFullSizeImg)
             popupImage.setEventListeners()
@@ -47,7 +48,7 @@ cardList.renderItems()
 const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
     handleDataViaSubmit: (formData) => {
-        const cardSubmitted = new Card(formData, () => {
+        const cardSubmitted = new Card(formData,cardElementTemplate, () => {
 
             const popupImage = new PopupWithImage(popupFullSizeImg)
             popupImage.setEventListeners()

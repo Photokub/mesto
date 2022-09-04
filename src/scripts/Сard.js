@@ -1,17 +1,14 @@
-import {
-    cardElementTemplate
-} from '../utils/constants.js';
-
 
 export class Card {
-    constructor(data, handleCardClick) {
+    constructor(data,cardSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._handleCardClick = handleCardClick;
+        this._cardSelector = cardSelector
     }
 
     _getTemplate() {
-        const userElementCard = cardElementTemplate.querySelector('.element').cloneNode(true);
+        const userElementCard = this._cardSelector.querySelector('.element').cloneNode(true);
         return userElementCard;
     }
 
