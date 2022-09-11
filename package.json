@@ -6,7 +6,9 @@
   "scripts": {
     "build": "webpack --mode=production",
     "build:dev": "webpack",
-    "devserver": "webpack serve"
+    "devserver": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -20,13 +22,14 @@
   },
   "homepage": "https://github.com/Photokub/mesto#readme",
   "devDependencies": {
-    "@babel/core": "^7.18.13",
-    "@babel/preset-env": "^7.18.10",
+    "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.19.0",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "cssnano": "^5.1.13",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.1",
@@ -35,6 +38,6 @@
     "webpack-dev-server": "^4.10.1"
   },
   "dependencies": {
-    "core-js": "^3.25.0"
+    "core-js": "^3.25.1"
   }
 }
