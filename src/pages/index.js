@@ -1,6 +1,6 @@
 //import './index.css'
 
-import {initialCards} from '../utils/initialCards.js';
+//import {initialCards} from '../utils/initialCards.js';
 import {
     profilePopup,
     popupFullSizeImg,
@@ -32,44 +32,32 @@ const api = new Api({
     }
 })
 
-// function createCard(item) {
-//     const card = new Card(item,cardElementTemplate, () => {
-//         popupImage.open(
-//             {
-//                 name: card._name,
-//                 link: card._link
-//             }
-//         );
-//     })
-//     const cardElement = card.generateCardElement();
-//     return cardElement
-// }
-// function createCard(item) {
-//     const card = new Card(item,cardElementTemplate, () => {
-//         popupImage.open(
-//             {
-//                 name: card._name,
-//                 link: card._link
-//             }
-//         );
-//     })
-//     const cardElement = card.generateCardElement();
-//     return cardElement
-// }
+//функция создания карточки
+function createCard(item) {
+    const card = new Card(item,cardElementTemplate, () => {
+        popupImage.open(
+            {
+                name: card._name,
+                link: card._link
+            }
+        );
+    })
+    const cardElement = card.generateCardElement();
+    return cardElement
+}
 
-//добавление карточек из массива
+//добавление карточек из массива с сервера
 const cardsServerArr =[]
+console.log( cardsServerArr)
+
 const cardList = new Section({
     item: cardsServerArr,
     renderer: (item) => {
-        const card = createCard(item)
-        cardList.addItem(card)
+        cardList.addItem(createCard(item))
     }
 }, elementsGallery)
 
-
-//cardList.renderItems()
-
+// API с дефолтными карточками с сервера
 function getCardsFromServer(){
     // popupImage.open(
     //     {
@@ -78,27 +66,18 @@ function getCardsFromServer(){
     //     })
     api
     .getDefaultCards()
-    .then((res) => {
-        res.reverse().map((element) => {
+    .then((cards) => {
+        cards.reverse().map((element) => {
             cardsServerArr.push(element);
         });
-       // const cardElement = card.generateCardElement()
-       // cardList.addItem(cardElement);
+        cardsServerArr.forEach((card) => {
+            const cardElement = createCard(card)
+            cardList.addItem(cardElement);
+        })
       })
       .catch((error) => console.log(error))
 }
-
 getCardsFromServer()
-
-// const cardList = new Section({
-//     item: initialCards,
-//     renderer: (item) => {;
-//         cardList.addItem(createCard(item))
-//     }
-// }, elementsGallery)
-
-// cardList.renderItems()
-
 
 
 //добавление карточек по сабмиту
@@ -128,17 +107,12 @@ const popupWithFormProfile = new PopupWithForm({
     }),
 })
 
-
-
-
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
 formClassProfileCheckValid.enableValidation()
 
 const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
 formClassNewCardCheckValid.enableValidation()
-
-
 
 
 popupWithFormCard.setEventListeners()
