@@ -79,12 +79,14 @@ function getCardsFromServer(){
 }
 getCardsFromServer()
 
-
 //добавление карточек по сабмиту
 const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
-    handleDataViaSubmit: (item) => {
-        cardList.addItem(createCard(item))
+    handleDataViaSubmit: (data) => {
+        api.postCard(data).then((res)=>{
+            console.log(data)
+            cardList.addItem(createCard(data))
+        })
     }
 })
 
