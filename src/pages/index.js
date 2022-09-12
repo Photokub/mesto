@@ -22,22 +22,45 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-function createCard(item) {
-    const card = new Card(item,cardElementTemplate, () => {
-        popupImage.open(
-            {
-                name: card._name,
-                link: card._link
-            }
-        );
-    })
-    const cardElement = card.generateCardElement();
-    return cardElement
-}
+const popupImage = new PopupWithImage(popupFullSizeImg)
+
+const api = new Api({
+    baseUrl:  'https://nomoreparties.co/v1/cohort-50',
+    headers:   {
+        "content-type": "application/json",
+        Authorization: "a923fc14-3b54-43fb-958c-955df8eb7a09",
+    }
+})
+
+// function createCard(item) {
+//     const card = new Card(item,cardElementTemplate, () => {
+//         popupImage.open(
+//             {
+//                 name: card._name,
+//                 link: card._link
+//             }
+//         );
+//     })
+//     const cardElement = card.generateCardElement();
+//     return cardElement
+// }
+// function createCard(item) {
+//     const card = new Card(item,cardElementTemplate, () => {
+//         popupImage.open(
+//             {
+//                 name: card._name,
+//                 link: card._link
+//             }
+//         );
+//     })
+//     const cardElement = card.generateCardElement();
+//     return cardElement
+// }
 
 //добавление карточек из массива
+const cardsServerArr =[]
 const cardList = new Section({
-    item: initialCards,
+    item: cardsServerArr,
     renderer: (item) => {;
         cardList.addItem(createCard(item))
     }
@@ -45,11 +68,42 @@ const cardList = new Section({
 
 cardList.renderItems()
 
-const api = new Api({
-    baseUrl:  'https://nomoreparties.co/v1/cohort-50',
-    headers:   {
-        "content-type": "application/json",
-        Authorization: "a923fc14-3b54-43fb-958c-955df8eb7a09",
+const getCardsFromServer = () => {
+    // popupImage.open(
+    //     {
+    //         name: card._name,
+    //         link: card._link
+    //     })
+    api
+    .getDefaultCards()
+    .then((res) => {
+        res.reverse().map((element) => {
+            cardsServerArr.push(element);
+        });
+       // const cardElement = card.generateCardElement()
+       cardList.renderItems()
+      })
+      .catch((error) => console.log(error))
+}
+
+getCardsFromServer()
+
+// const cardList = new Section({
+//     item: initialCards,
+//     renderer: (item) => {;
+//         cardList.addItem(createCard(item))
+//     }
+// }, elementsGallery)
+
+// cardList.renderItems()
+
+
+
+//добавление карточек по сабмиту
+const popupWithFormCard = new PopupWithForm({
+    popupSelector: popupAddNewCard,
+    handleDataViaSubmit: (item) => {
+        cardList.addItem(createCard(item))
     }
 })
 
@@ -73,13 +127,7 @@ const popupWithFormProfile = new PopupWithForm({
 })
 
 
-//добавление карточек по сабмиту
-const popupWithFormCard = new PopupWithForm({
-    popupSelector: popupAddNewCard,
-    handleDataViaSubmit: (item) => {
-        cardList.addItem(createCard(item))
-    }
-})
+
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
@@ -88,7 +136,7 @@ formClassProfileCheckValid.enableValidation()
 const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
 formClassNewCardCheckValid.enableValidation()
 
-const popupImage = new PopupWithImage(popupFullSizeImg)
+
 
 
 popupWithFormCard.setEventListeners()

@@ -4,7 +4,7 @@ export default class Api{
         this._headers = setting.headers;
     }
 
-    handelResponse(res) {
+    handleResp(res) {
         if (!res.ok) {
           return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
         }
@@ -31,7 +31,15 @@ patchUserInfo({user_name_field, user_job_field}){
             about:user_job_field,
         })
 })
-.then((res) => this.handelResponse(res));
+.then((res) => this.handleResp(res));
+}
+
+getDefaultCards(){
+    return fetch(`${this._adress}/cards`,{
+        method: "GET",
+        headers: this._headers,
+    })
+    .then((res) => this.handleResp(res))
 }
 
 }
