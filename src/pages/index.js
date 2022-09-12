@@ -63,8 +63,14 @@ const user = api.getUserInfo()
     user.then(result => { userData.setUserInfo(result) })
     user.catch(error => console.log(`Ошибка: ${error}`))
 
-//добавление данных о полльзователе на сервер
-
+//добавление данных о полльзователе на сервер и в профиль
+const popupWithFormProfile = new PopupWithForm({
+    popupSelector: profilePopup,
+    handleDataViaSubmit: (data) => 
+    api.patchUserInfo(data).then((res) => {
+        userData.setUserInfo({name: res.name, about: res.about})     
+    }),
+})
 
 
 //добавление карточек по сабмиту
@@ -84,25 +90,6 @@ formClassNewCardCheckValid.enableValidation()
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
 
-// const userData = new UserInfo({
-//     userNameSelector: classSelectors.userName,
-//     userJobSelector: classSelectors.userJob
-// })
-
-// const popupWithFormProfile = new PopupWithForm({
-//     popupSelector: profilePopup,
-//     handleDataViaSubmit: (data) => {
-//         userData.setUserInfo(data)
-//     }
-// })
-
-const popupWithFormProfile = new PopupWithForm({
-    popupSelector: profilePopup,
-    handleDataViaSubmit: (data) => 
-    api.patchUserInfo(data).then((res) => {
-        userData.setUserInfo({name: res.name, about: res.about})     
-    }),
-})
 
 popupWithFormCard.setEventListeners()
 popupWithFormProfile.setEventListeners()
@@ -116,7 +103,6 @@ newCardAddOpenBtn.addEventListener('click', () => {
 profileEditBtn.addEventListener('click', () => {
     formClassProfileCheckValid.resetValidation()
     popupWithFormProfile.open()
-    //const initialData = api.getUserInfo()
     const initialData = userData.getUserInfo()
     popupWithFormProfile.setInputValues(initialData)
 })
