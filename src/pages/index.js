@@ -98,10 +98,10 @@ const popupImage = new PopupWithImage(popupFullSizeImg)
 
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: profilePopup,
-    handleDataViaSubmit: (data) => {
-        userData.setUserInfo(data)
-    },
-    api
+    handleDataViaSubmit: (data) => 
+    api.patchUserInfo(data).then((res) => {
+        userData.setUserInfo({name: res.name, about: res.about})     
+    }),
 })
 
 popupWithFormCard.setEventListeners()
