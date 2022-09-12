@@ -61,14 +61,16 @@ const api = new Api({
 const cardsServerArr =[]
 const cardList = new Section({
     item: cardsServerArr,
-    renderer: (item) => {;
-        cardList.addItem(createCard(item))
+    renderer: (item) => {
+        const card = createCard(item)
+        cardList.addItem(card)
     }
 }, elementsGallery)
 
-cardList.renderItems()
 
-const getCardsFromServer = () => {
+//cardList.renderItems()
+
+function getCardsFromServer(){
     // popupImage.open(
     //     {
     //         name: card._name,
@@ -81,7 +83,7 @@ const getCardsFromServer = () => {
             cardsServerArr.push(element);
         });
        // const cardElement = card.generateCardElement()
-       cardList.renderItems()
+       // cardList.addItem(cardElement);
       })
       .catch((error) => console.log(error))
 }
