@@ -1,0 +1,17 @@
+.element__like-counter{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    position: relative;
+    top:10px;
+    margin-right: 20px;
+    margin-left: 30px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+
+    color: #000000;
+}
