@@ -1,6 +1,6 @@
 
 export class Card {
-    constructor(data,cardSelector, handleCardClick) {
+    constructor(data,cardSelector, handleCardClick, handleLikeCounter) {
         this._name = data.name;
         this._link = data.link;
         this._handleCardClick = handleCardClick;
@@ -15,6 +15,7 @@ export class Card {
     generateCardElement() {
         this._element = this._getTemplate();
         this._elementLike = this._element.querySelector('.element__like');
+        this._likeCounter = this._element.querySelector('.element__like-counter')
         this._elementRemoveBtn = this._element.querySelector('.element__remove-btn');
         this._elementImage = this._element.querySelector('.element__image');
         this._setEventListeners();
@@ -24,6 +25,10 @@ export class Card {
         this._elementImage.alt = this._name;
 
         return this._element;
+    }
+
+    resetLikes(number){
+        this._likeCounter.textContent = number
     }
 
     _setEventListeners() {

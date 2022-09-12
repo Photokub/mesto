@@ -41,7 +41,14 @@ function createCard(item) {
                 link: card._link
             }
         );
-    })
+    },
+         (id) =>
+    api.putLike(id)
+        .then((res) => {
+        card.resetLikes(res.likes.length);
+    }),
+
+    )
     const cardElement = card.generateCardElement();
     return cardElement
 }
@@ -103,9 +110,9 @@ const user = api.getUserInfo()
 //добавление данных о полльзователе на сервер и в профиль
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: profilePopup,
-    handleDataViaSubmit: (data) => 
+    handleDataViaSubmit: (data) =>
     api.patchUserInfo(data).then((res) => {
-        userData.setUserInfo({name: res.name, about: res.about})     
+        userData.setUserInfo({name: res.name, about: res.about})
     }),
 })
 

@@ -8,6 +8,7 @@ export const cardElementTemplate = document.querySelector('#element-card').conte
 export const newCardForm = document.querySelector('.form_add-new-card');
 export const newProfileForm = document.querySelector('.form_profile');
 
+
 export const validateConfig = {
     form: 'form',
     button: '.form__save-btn',
