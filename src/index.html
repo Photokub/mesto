@@ -11,12 +11,12 @@
 
 <body class="page">
     <header class="header">
-<!--        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="лого Mesto">-->
+        <!--        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="лого Mesto">-->
         <img class="header__logo" src='./images/logo.svg' alt="лого Mesto">
     </header>
     <main class="main">
         <section class="profile">
-<!--            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя">-->
+            <!--            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя">-->
             <img class="profile__avatar" src='./images/avatar.png' alt="Аватар пользователя">
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -25,7 +25,8 @@
             </div>
             <button class="profile__add-btn" type="button">+</button>
         </section>
-        <section class="elements" aria-label="галерея"> <!--галерея начало-->            
+        <section class="elements" aria-label="галерея">
+            <!--галерея начало-->
             <template id="element-card">
                 <div class="element">
                     <button class="element__remove-btn" type="button"></button>
@@ -35,12 +36,13 @@
                     <span class="element__like-counter">0</span>
                 </div>
             </template>
-        </section> <!--галерея конец-->        
+        </section>
+        <!--галерея конец-->
     </main>
     <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
-    <section class="popup profile-popup"  type='button'  aria-label="попап">
+    <section class="popup profile-popup" type='button' aria-label="попап">
         <div class="popup__container">
             <h3 class="popup__title">Редактировать профиль</h3>
             <button class="popup__close" type="button"></button>
@@ -51,14 +53,15 @@
                     <span class="form__input-error" id="user_name_field-error"></span>
                 </label>
                 <label class="form__field">
-                    <input class="form__input form__input_type_job" type="text" name="user_job_field" value="" required minlength="2" maxlength="200">
+                    <input class="form__input form__input_type_job" type="text" name="user_job_field" value="" required
+                        minlength="2" maxlength="200">
                     <span class="form__input-error" id="user_job_field-error"></span>
                 </label>
                 <button class="form__save-btn" type="submit">Сохранить</button>
             </form>
         </div>
     </section>
-    <section class="popup popup_add-new-card"  type='button' aria-label="попап добавления новой карточки">
+    <section class="popup popup_add-new-card" type='button' aria-label="попап добавления новой карточки">
         <div class="popup__container">
             <h3 class="popup__title">Новое место</h3>
             <button class="popup__close popup__close_add-new-card" type="button"></button>
@@ -78,7 +81,7 @@
             </form>
         </div>
     </section>
-    <section class="popup popup_full-size-image"  type='button' aria-label="попап полноразмерного изображения">
+    <section class="popup popup_full-size-image" type='button' aria-label="попап полноразмерного изображения">
         <div class="popup__container-full-size-image">
             <button class="popup__close popup__close_full-size-image" type="button"></button>
             <figure class="popup__fullsize-img-figure">
@@ -87,6 +90,14 @@
             </figure>
         </div>
     </section>
+    <section class='popup popup_confirm-delete' type="button" aria-label="попап подтверждения удаления">
+        <div class="popup__container-confirm-delete">
+            <h3 class = 'popup__title'>Вы уверены?</h3>
+            <button class="popup__close" type="button"></button>
+            <button class="popup__confirm-delete-button">Да</button>
+        </div>
+    </section>
 </body>
 <script src='./pages/index.js' type="module"></script>
+
 </html>

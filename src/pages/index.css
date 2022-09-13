@@ -20,6 +20,7 @@
 @import url("../blocks/popup/__fullsize-img-figure/popup__fullsize-img-figure.css");
 @import url("../blocks/popup/__fullsize-img-picture/popup__fullsize-img-picture.css");
 @import url("../blocks/popup/__fullsize-img-caption/popup__fullsize-img-caption.css");
+@import url("../blocks/popup/__container-confirm-delete/popup__container-confirm-delete.css");
 
 /* form */
 @import url("../blocks/form/form.css");
