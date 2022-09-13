@@ -24,6 +24,8 @@ import Api from "../components/Api.js";
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
 
+
+
 const api = new Api({
     baseUrl:  'https://nomoreparties.co/v1/cohort-50',
     headers:   {
@@ -47,6 +49,8 @@ function createCard(item) {
         .then((res) => {
         card.resetLikes(res.likes.length);
     }),
+
+    //this._elementRemoveBtn.addEventListener('click', () => )
 
     )
     const cardElement = card.generateCardElement();
@@ -90,7 +94,7 @@ getCardsFromServer()
 const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
     handleDataViaSubmit: (data) => {
-        api.postCard(data).then((res)=>{
+        api.postCard(data).then(()=>{
             console.log(data)
             cardList.addItem(createCard(data))
         })
@@ -104,7 +108,11 @@ const userData = new UserInfo({
 
 //добавление данных о пользователе с сервера
 const user = api.getUserInfo()
-    user.then(result => { userData.setUserInfo(result) })
+
+    user.then (result => { userData.setUserInfo(result) })  
+    user.then (result => { console.log(result) })  
+    user.then (result => { localStorage.setItem("userId", result._id) }) 
+    user.then (result => { console.log(result._id) }) 
     user.catch(error => console.log(`Ошибка: ${error}`))
 
 //добавление данных о полльзователе на сервер и в профиль
@@ -112,8 +120,10 @@ const popupWithFormProfile = new PopupWithForm({
     popupSelector: profilePopup,
     handleDataViaSubmit: (data) =>
     api.patchUserInfo(data).then((res) => {
-        userData.setUserInfo({name: res.name, about: res.about})
-    }),
+        userData.setUserInfo({name: res.name, about: res.about});
+       // localStorage.setItem("userId", res._id);        
+    })
+    .catch((error) => console.log(error))
 })
 
 //валидация форм
@@ -139,4 +149,6 @@ profileEditBtn.addEventListener('click', () => {
     const initialData = userData.getUserInfo()
     popupWithFormProfile.setInputValues(initialData)
 })
+
+
 

@@ -18,12 +18,15 @@ export class Card {
         this._likeCounter = this._element.querySelector('.element__like-counter')
         this._elementRemoveBtn = this._element.querySelector('.element__remove-btn');
         this._elementImage = this._element.querySelector('.element__image');
-        this._popup_confirmDelete = document.querySelector('.popup_confirm-delete')
+        //this._popup_confirmDelete = document.querySelector('.popup_confirm-delete')
         this._setEventListeners();
 
         this._element.querySelector('.element__title').textContent = this._name;
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
+
+        this._currentUserId = localStorage.getItem("userId");
+        
 
         return this._element;
     }
@@ -37,8 +40,8 @@ export class Card {
             this._handleLikeBtn();
         });
         this._elementRemoveBtn.addEventListener('click', () => {
-           // this._handleRemoveBtn();
-           this._popup_confirmDelete.classList.add('popup_opened')
+            this._handleRemoveBtn();
+          // this._popup_confirmDelete.classList.add('popup_opened')
 
         });
         this._elementImage.addEventListener('click', () => {
