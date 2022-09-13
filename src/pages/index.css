@@ -54,7 +54,9 @@
 @import url("../blocks/element/__like/element__like.css");
 @import url("../blocks/element/__like/_active/element__like_active.css");
 @import url("../blocks/element/__remove-btn/element__remove-btn.css");
+@import url("../blocks/element/__remove-btn/element__remove-btn_hidden.css");
 @import url("../blocks/element/__like-counter/element__like-counter.css");
+
 /* footer */
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");

@@ -5,6 +5,8 @@ export class Card {
         this._link = data.link;
         this._handleCardClick = handleCardClick;
         this._cardSelector = cardSelector
+        this._owner = data.owner._id
+        this._currentUserId = localStorage.getItem("userId");
     }
 
     _getTemplate() {
@@ -25,10 +27,18 @@ export class Card {
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
 
-        this._currentUserId = localStorage.getItem("userId");
-        
+        if (!this._isOwner()) {
+            this._elementRemoveBtn.classList.add('element__remove-btn_hidden')
+        }
 
         return this._element;
+    }
+
+    _isOwner() {
+        if (this._owner === this._currentUserId) {
+            return true;
+        }
+        return false;
     }
 
     resetLikes(number){

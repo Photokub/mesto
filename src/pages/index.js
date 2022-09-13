@@ -35,8 +35,11 @@ const api = new Api({
 })
 
 //функция создания карточки
-function createCard(item) {
-    const card = new Card(item,cardElementTemplate, () => {
+function createCard(data) {
+    const card = new Card(
+        data,
+        cardElementTemplate,
+        () => {
         popupImage.open(
             {
                 name: card._name,
@@ -110,10 +113,11 @@ const userData = new UserInfo({
 const user = api.getUserInfo()
 
     user.then (result => { userData.setUserInfo(result) })  
-    user.then (result => { console.log(result) })  
+    //user.then (result => { console.log(result) })
     user.then (result => { localStorage.setItem("userId", result._id) }) 
-    user.then (result => { console.log(result._id) }) 
+   // user.then (result => { console.log(result._id) })
     user.catch(error => console.log(`Ошибка: ${error}`))
+
 
 //добавление данных о полльзователе на сервер и в профиль
 const popupWithFormProfile = new PopupWithForm({
