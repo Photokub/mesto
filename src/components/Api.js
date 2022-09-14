@@ -70,8 +70,8 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-    deleteCard(cardId){
-        return fetch(`${this._adress}/cards/${_id}`, {
+    deleteMyCard(id){
+        return fetch(`${this._adress}/cards/${id}`, {
             method: "DELETE",
             headers: this._headers,
         })

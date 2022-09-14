@@ -36,6 +36,22 @@ const api = new Api({
     }
 })
 
+const popupConfirm = new PopupConfirm(
+    popupConfirmDelete,
+    (cardId, card) => {
+        api
+            .deleteMyCard(cardId)
+            .then(() =>
+                    card.remove(),
+                popupConfirm.close())
+            .catch((error) => console.log(error))
+    }
+)
+
+const openPopupConfirm = (cardId, card) => {
+    popupConfirm.open(cardId, card);
+};
+
 //функция создания карточки
 function createCard(data) {
     const card = new Card(
@@ -49,6 +65,8 @@ function createCard(data) {
             }
         );
     },
+        (cardId, card) =>
+            openPopupConfirm(cardId, card),
          (id) =>
     api.putLike(id)
         .then((res) => {
@@ -58,6 +76,7 @@ function createCard(data) {
     //this._elementRemoveBtn.addEventListener('click', () => )
 
     )
+
     const cardElement = card.generateCardElement();
     return cardElement
 }
@@ -99,9 +118,9 @@ getCardsFromServer()
 const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
     handleDataViaSubmit: (data) => {
-        api.postCard(data).then(()=>{
-            console.log(data)
-            cardList.addItem(createCard(data))
+        api.postCard(data).then((res)=>{
+            console.log(res)
+            cardList.addItem(createCard(res))
         })
     }
 })
@@ -127,19 +146,11 @@ const popupWithFormProfile = new PopupWithForm({
     handleDataViaSubmit: (data) =>
     api.patchUserInfo(data).then((res) => {
         userData.setUserInfo({name: res.name, about: res.about});
-       // localStorage.setItem("userId", res._id);        
     })
     .catch((error) => console.log(error))
 })
 
-const popupConfirm = new PopupConfirm(
-    popupConfirmDelete,
-    (cardId) => {
-        api
-        .deleteCard(cardId)
-            .then(() => popupConfirm.close())
-    }
-)
+
 
 
 
