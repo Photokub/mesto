@@ -7,6 +7,7 @@ export const elementsGallery = document.querySelector('.elements');
 export const cardElementTemplate = document.querySelector('#element-card').content;
 export const newCardForm = document.querySelector('.form_add-new-card');
 export const newProfileForm = document.querySelector('.form_profile');
+export const popupConfirmDelete = document.querySelector('.popup_confirm-delete')
 
 
 export const validateConfig = {
@@ -29,4 +30,5 @@ export const classSelectors = {
     gallery: '.elements',
     zoomPicLink: '.popup__fullsize-img-picture',
     zoomPicName: '.popup__fullsize-img-caption',
+    //popupConfirm: '.popup_confirm-delete'
 }

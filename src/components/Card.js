@@ -20,7 +20,8 @@ export class Card {
         this._likeCounter = this._element.querySelector('.element__like-counter')
         this._elementRemoveBtn = this._element.querySelector('.element__remove-btn');
         this._elementImage = this._element.querySelector('.element__image');
-        //this._popup_confirmDelete = document.querySelector('.popup_confirm-delete')
+        this._popup_confirmDelete = document.querySelector('.popup_confirm-delete')
+        //this._confirmBtn = this._popup_confirmDelete.querySelector('.popup__confirm-delete-button')
         this._setEventListeners();
 
         this._element.querySelector('.element__title').textContent = this._name;
@@ -50,14 +51,13 @@ export class Card {
             this._handleLikeBtn();
         });
         this._elementRemoveBtn.addEventListener('click', () => {
-            this._handleRemoveBtn();
-          // this._popup_confirmDelete.classList.add('popup_opened')
+            //this._handleRemoveBtn();
+           this._popup_confirmDelete.classList.add('popup_opened')
 
         });
         this._elementImage.addEventListener('click', () => {
             this._handleCardClick(this._name, this._link)
         });
-
     }
 
     _handleLikeBtn() {
@@ -65,6 +65,7 @@ export class Card {
     }
 
     _handleRemoveBtn() {
+        //this._elementRemoveBtn.closest('.element').remove()
         this._elementRemoveBtn.closest('.element').remove()
         this._element = null;
     }

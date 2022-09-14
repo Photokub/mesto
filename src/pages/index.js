@@ -12,7 +12,8 @@ import {
     validateConfig,
     classSelectors,
     elementsGallery,
-    cardElementTemplate
+    cardElementTemplate,
+    popupConfirmDelete
 } from '../utils/constants.js'
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -21,6 +22,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupConfirm from "../components/PopupConfirm.js";
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
 
@@ -130,6 +132,19 @@ const popupWithFormProfile = new PopupWithForm({
     .catch((error) => console.log(error))
 })
 
+const popupConfirm = new PopupConfirm(
+    popupConfirmDelete,
+    (cardId) => {
+        api
+        .deleteCard(cardId)
+            .then(() => popupConfirm.close())
+    }
+)
+
+
+
+
+
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
 formClassProfileCheckValid.enableValidation()
@@ -141,6 +156,7 @@ formClassNewCardCheckValid.enableValidation()
 popupWithFormCard.setEventListeners()
 popupWithFormProfile.setEventListeners()
 popupImage.setEventListeners()
+popupConfirm.setEventListeners()
 
 newCardAddOpenBtn.addEventListener('click', () => {
     formClassNewCardCheckValid.resetValidation()

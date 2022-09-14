@@ -70,6 +70,16 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
+    deleteCard(cardId){
+        return fetch(`${this._adress}/cards/${_id}`, {
+            method: "DELETE",
+            headers: this._headers,
+        })
+            .then((res) => this.handleResp(res))
+    }
+
+
+
 
 }
 
