@@ -13,7 +13,8 @@ import {
     classSelectors,
     elementsGallery,
     cardElementTemplate,
-    popupConfirmDelete
+    popupConfirmDelete,
+    likesCounter
 } from '../utils/constants.js'
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -23,8 +24,10 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupConfirm from "../components/PopupConfirm.js";
+//const counter = document.querySelector('.element__like-counter')
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
+
 
 
 
@@ -71,7 +74,8 @@ function createCard(data) {
     api.putLike(cardId)
         .then((res) => {
             likeArray.push[res]
-            //setLikes(likeArray.length)
+            likesCounter.textContent = res.likes.length
+            //evt.resetLikes(likeArray, evt)
     }),
 
     //this._elementRemoveBtn.addEventListener('click', () => )

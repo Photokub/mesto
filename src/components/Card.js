@@ -31,11 +31,14 @@ export class Card {
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
 
-        this._setLikes(this._likesArray.length)
+        this.setLikes(this._likesArray.length)
+        this._findOwnLike(this._likesArray)
 
         if (!this._isOwner()) {
             this._elementRemoveBtn.classList.add('element__remove-btn_hidden')
         }
+
+       this._counterNumber = Number(this._likeCounter.textContent)
 
         return this._element;
     }
@@ -47,16 +50,26 @@ export class Card {
         return false;
     };
 
-     _setLikes(number)  {
+    _findOwnLike(arr){
+        arr.forEach(obj => {
+            if (obj._id === this._currentUserId){
+                this._elementLike.classList.add('element__like_active')
+            }
+        })
+    }
+
+     setLikes (number)   {
         this._likeCounter.textContent = number
     };
+
+    resetLikes(arr){
+        this._likeCounter.textContent=(arr.length)
+    }
 
     _setEventListeners() {
         this._elementLike.addEventListener('click', () => {
             this._handleLikeBtn();
             this._changeLikesArray();
-            //this._setLikes(this._likesArray.length)
-
         });
         this._elementRemoveBtn.addEventListener('click', () => {
             this._handleRemoveBtn();
@@ -68,15 +81,16 @@ export class Card {
 
     _handleLikeBtn() {
         this._elementLike.classList.toggle('element__like_active')
+
+        //this._counterNumber = this._counterNumber+1
+        //this._setLikes(this._likesArray.length)
+        //this._counterNumber.textContent = this._counterNumber
     }
 
     _changeLikesArray(){
         this._handleLikeCounter(this._likesArray, this._cardId)
-        //this._likeCounter.textContent = 'Liked';
     }
-    // _handleLikeCounter(){
-    //     this._likeCounter(this._likesArray, this._element)
-    // }
+
 
     _handleRemoveBtn() {
         this._handlePopupConfirm(this._cardId, this._element);
