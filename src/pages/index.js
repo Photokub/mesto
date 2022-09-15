@@ -71,6 +71,7 @@ function createCard(data) {
     api.putLike(cardId)
         .then((res) => {
             likeArray.push[res]
+            //setLikes(likeArray.length)
     }),
 
     //this._elementRemoveBtn.addEventListener('click', () => )

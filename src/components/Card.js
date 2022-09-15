@@ -43,16 +43,17 @@ export class Card {
             return true;
         }
         return false;
-    }
+    };
 
-    resetLikes(number){
+     _setLikes(number)  {
         this._likeCounter.textContent = number
-    }
+    };
 
     _setEventListeners() {
         this._elementLike.addEventListener('click', () => {
             this._handleLikeBtn();
-            this._changeLikeCounterValue();
+            this._changeLikesArray();
+            this._setLikes(this._likesArray.length)
 
         });
         this._elementRemoveBtn.addEventListener('click', () => {
@@ -67,9 +68,9 @@ export class Card {
         this._elementLike.classList.toggle('element__like_active')
     }
 
-    _changeLikeCounterValue(){
+    _changeLikesArray(){
         this._handleLikeCounter(this._likesArray, this._cardId)
-        this._likeCounter.textContent = 'Liked';
+        //this._likeCounter.textContent = 'Liked';
     }
     // _handleLikeCounter(){
     //     this._likeCounter(this._likesArray, this._element)
