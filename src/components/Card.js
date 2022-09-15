@@ -31,6 +31,8 @@ export class Card {
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
 
+        this._setLikes(this._likesArray.length)
+
         if (!this._isOwner()) {
             this._elementRemoveBtn.classList.add('element__remove-btn_hidden')
         }
@@ -53,7 +55,7 @@ export class Card {
         this._elementLike.addEventListener('click', () => {
             this._handleLikeBtn();
             this._changeLikesArray();
-            this._setLikes(this._likesArray.length)
+            //this._setLikes(this._likesArray.length)
 
         });
         this._elementRemoveBtn.addEventListener('click', () => {
