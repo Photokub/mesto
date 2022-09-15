@@ -6,9 +6,11 @@ export class Card {
         this._cardId = data._id;
         this._handleCardClick = handleCardClick;
         this._handlePopupConfirm = handlePopupConfirm;
-        this._cardSelector = cardSelector
-        this._owner = data.owner._id
+        this._handleLikeCounter = handleLikeCounter;
+        this._cardSelector = cardSelector;
+        this._owner = data.owner._id;
         this._currentUserId = localStorage.getItem("userId");
+        this._likesArray = data.likes;
     }
 
     _getTemplate() {
@@ -50,6 +52,8 @@ export class Card {
     _setEventListeners() {
         this._elementLike.addEventListener('click', () => {
             this._handleLikeBtn();
+            this._changeLikeCounterValue();
+
         });
         this._elementRemoveBtn.addEventListener('click', () => {
             this._handleRemoveBtn();
@@ -63,8 +67,16 @@ export class Card {
         this._elementLike.classList.toggle('element__like_active')
     }
 
+    _changeLikeCounterValue(){
+        this._handleLikeCounter(this._likesArray, this._cardId)
+        this._likeCounter.textContent = 'Liked';
+    }
+    // _handleLikeCounter(){
+    //     this._likeCounter(this._likesArray, this._element)
+    // }
+
     _handleRemoveBtn() {
-        this._handlePopupConfirm(this._cardId, this._element)
+        this._handlePopupConfirm(this._cardId, this._element);
     }
 }
 

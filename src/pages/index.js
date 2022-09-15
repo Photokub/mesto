@@ -67,10 +67,10 @@ function createCard(data) {
     },
         (cardId, card) =>
             openPopupConfirm(cardId, card),
-         (id) =>
-    api.putLike(id)
+         (likeArray, cardId) =>
+    api.putLike(cardId)
         .then((res) => {
-        card.resetLikes(res.likes.length);
+            likeArray.push[res]
     }),
 
     //this._elementRemoveBtn.addEventListener('click', () => )
