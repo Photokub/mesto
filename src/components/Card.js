@@ -61,9 +61,9 @@ export class Card {
         this._likeCounter.textContent = number
     };
 
-    resetLikes(arr) {
-        this._likeCounter.textContent = (arr.length)
-    }
+    // resetLikes(arr) {
+    //     this._likeCounter.textContent = (arr.length)
+    // }
 
     _setEventListeners() {
         this._elementLike.addEventListener('click', (evt) => {
@@ -78,31 +78,21 @@ export class Card {
         });
     }
 
-    // _handleLikeBtn() {
-    //     this._elementLike.classList.toggle('element__like_active')
-    //     this._counterNumber = this._counterNumber + 1;
-    //     this._likeCounter.textContent = this._counterNumber;
-    // }
-
     _handleLikeBtn(evt) {
-        //console.log(evt.target)
         if(evt.target.classList.contains('element__like_active')){
             this._elementLike.classList.remove('element__like_active')
             this._counterNumber = this._counterNumber - 1;
             this._likeCounter.textContent = this._counterNumber;
-            console.log(this._elementLike)
         } else {
             this._elementLike.classList.add('element__like_active')
             this._counterNumber = this._counterNumber + 1;
             this._likeCounter.textContent = this._counterNumber;
-            console.log(this._elementLike)
         }
     }
 
     _changeLikesArray() {
         this._handleLikeCounter(this._likesArray, this._cardId)
     }
-
 
     _handleRemoveBtn() {
         this._handlePopupConfirm(this._cardId, this._element);

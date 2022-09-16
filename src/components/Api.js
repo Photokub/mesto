@@ -54,6 +54,14 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
+    getLikeArray(id){
+        return fetch(`${this._adress}/cards/${id}/likes`, {
+            method: "GET",
+            headers: this._headers,
+        })
+            .then((res) => this.handleResp(res))
+    }
+
     putLike(id){
         return fetch(`${this._adress}/cards/${id}/likes`, {
             method: "PUT",

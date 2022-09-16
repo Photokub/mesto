@@ -55,6 +55,19 @@ const openPopupConfirm = (cardId, card) => {
     popupConfirm.open(cardId, card);
 };
 
+// const isLiked = (evt) => {
+//   evt.target.classList.contains('element__like_active')
+//     console.log(evt.target)
+// }
+
+function isLiked(like){
+    return  like._id === 'ecf400e5fa96a2f1cc3657c8'
+}
+
+// const isCardLiked = evt.target.classList.contains(
+//     'element__like_active'
+// );
+
 //функция создания карточки
 function createCard(data) {
     const card = new Card(
@@ -70,18 +83,22 @@ function createCard(data) {
     },
         (cardId, card) =>
             openPopupConfirm(cardId, card),
-         (likeArray, cardId) =>
-    api.putLike(cardId)
-        .then((res) => {
-            likeArray.push[res]
-            //likesCounter.textContent = res.likes.length
-            //evt.resetLikes(likeArray, evt)
-    }),
-
-    //this._elementRemoveBtn.addEventListener('click', () => )
-
+         (likeArray, cardId) =>{
+             if(!likeArray.some(isLiked))
+                 api.putLike(cardId)
+                     .then((res) => {
+                         likeArray.push[res]
+                         console.log(res)
+                         console.log(res.likes)
+                     })
+              else
+                 api.deleteLike(cardId)
+                     .then((res) => {
+                         likeArray.pop[res]
+                         console.log('Сработал else')
+                     })
+        }
     )
-
     const cardElement = card.generateCardElement();
     return cardElement
 }
@@ -138,9 +155,9 @@ const userData = new UserInfo({
 //добавление данных о пользователе с сервера
 const user = api.getUserInfo()
 
-    user.then (result => { userData.setUserInfo(result) })  
+    user.then (result => { userData.setUserInfo(result) })
     //user.then (result => { console.log(result) })
-    user.then (result => { localStorage.setItem("userId", result._id) }) 
+    user.then (result => { localStorage.setItem("userId", result._id) })
    // user.then (result => { console.log(result._id) })
     user.catch(error => console.log(`Ошибка: ${error}`))
 
