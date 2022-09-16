@@ -66,8 +66,8 @@ export class Card {
     }
 
     _setEventListeners() {
-        this._elementLike.addEventListener('click', () => {
-            this._handleLikeBtn();
+        this._elementLike.addEventListener('click', (evt) => {
+            this._handleLikeBtn(evt);
             this._changeLikesArray();
         });
         this._elementRemoveBtn.addEventListener('click', () => {
@@ -78,14 +78,25 @@ export class Card {
         });
     }
 
-    _handleLikeBtn() {
-        this._elementLike.classList.toggle('element__like_active')
-        //this._counterNumber = this._counterNumber+1
-        //this._setLikes(this._likesArray.length)
-        // let counterContent = Number(this._likeCounter.textContent)
-        this._counterNumber = this._counterNumber + 1;
-        this._likeCounter.textContent = this._counterNumber;
-        //this._likeCounter.textContent = this._likeCounter.textContent+1
+    // _handleLikeBtn() {
+    //     this._elementLike.classList.toggle('element__like_active')
+    //     this._counterNumber = this._counterNumber + 1;
+    //     this._likeCounter.textContent = this._counterNumber;
+    // }
+
+    _handleLikeBtn(evt) {
+        //console.log(evt.target)
+        if(evt.target.classList.contains('element__like_active')){
+            this._elementLike.classList.remove('element__like_active')
+            this._counterNumber = this._counterNumber - 1;
+            this._likeCounter.textContent = this._counterNumber;
+            console.log(this._elementLike)
+        } else {
+            this._elementLike.classList.add('element__like_active')
+            this._counterNumber = this._counterNumber + 1;
+            this._likeCounter.textContent = this._counterNumber;
+            console.log(this._elementLike)
+        }
     }
 
     _changeLikesArray() {
