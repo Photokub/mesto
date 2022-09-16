@@ -1,6 +1,5 @@
-
 export class Card {
-    constructor(data, cardSelector, handleCardClick, handlePopupConfirm ,handleLikeCounter) {
+    constructor(data, cardSelector, handleCardClick, handlePopupConfirm, handleLikeCounter) {
         this._name = data.name;
         this._link = data.link;
         this._cardId = data._id;
@@ -38,7 +37,7 @@ export class Card {
             this._elementRemoveBtn.classList.add('element__remove-btn_hidden')
         }
 
-       this._counterNumber = Number(this._likeCounter.textContent)
+        this._counterNumber = Number(this._likeCounter.textContent)
 
         return this._element;
     }
@@ -50,20 +49,20 @@ export class Card {
         return false;
     };
 
-    _findOwnLike(arr){
+    _findOwnLike(arr) {
         arr.forEach(obj => {
-            if (obj._id === this._currentUserId){
+            if (obj._id === this._currentUserId) {
                 this._elementLike.classList.add('element__like_active')
             }
         })
     }
 
-     setLikes (number)   {
+    setLikes(number) {
         this._likeCounter.textContent = number
     };
 
-    resetLikes(arr){
-        this._likeCounter.textContent=(arr.length)
+    resetLikes(arr) {
+        this._likeCounter.textContent = (arr.length)
     }
 
     _setEventListeners() {
@@ -81,13 +80,15 @@ export class Card {
 
     _handleLikeBtn() {
         this._elementLike.classList.toggle('element__like_active')
-
         //this._counterNumber = this._counterNumber+1
         //this._setLikes(this._likesArray.length)
-        //this._counterNumber.textContent = this._counterNumber
+        // let counterContent = Number(this._likeCounter.textContent)
+        this._counterNumber = this._counterNumber + 1;
+        this._likeCounter.textContent = this._counterNumber;
+        //this._likeCounter.textContent = this._likeCounter.textContent+1
     }
 
-    _changeLikesArray(){
+    _changeLikesArray() {
         this._handleLikeCounter(this._likesArray, this._cardId)
     }
 

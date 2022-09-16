@@ -74,7 +74,7 @@ function createCard(data) {
     api.putLike(cardId)
         .then((res) => {
             likeArray.push[res]
-            likesCounter.textContent = res.likes.length
+            //likesCounter.textContent = res.likes.length
             //evt.resetLikes(likeArray, evt)
     }),
 
