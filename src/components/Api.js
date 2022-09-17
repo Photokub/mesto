@@ -54,8 +54,8 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-    getLikeArray(id){
-        return fetch(`${this._adress}/cards/${id}/likes`, {
+    changeLikeCardStatus(id){
+        return fetch(`${this._adress}/cards/${id}`, {
             method: "GET",
             headers: this._headers,
         })
@@ -86,9 +86,18 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
+    changeAvatar(avatar) {
+        return fetch(`${this._adress}/users/me/avatar`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar,
+            }),
+        }).then((res) => this.handelResponse(res));
+    }
 
 
 
-}
+    }
 
 

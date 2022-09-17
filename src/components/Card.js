@@ -65,6 +65,11 @@ export class Card {
     //     this._likeCounter.textContent = (arr.length)
     // }
 
+    isLiked(likesArray){
+       // return  like._id === this._owner
+        return likesArray.some((ownLike) => ownLike._id === this._currentUserId)
+    }
+
     _setEventListeners() {
         this._elementLike.addEventListener('click', (evt) => {
             this._handleLikeBtn(evt);
@@ -81,18 +86,42 @@ export class Card {
     _handleLikeBtn(evt) {
         if(evt.target.classList.contains('element__like_active')){
             this._elementLike.classList.remove('element__like_active')
-            this._counterNumber = this._counterNumber - 1;
-            this._likeCounter.textContent = this._counterNumber;
+           // this._counterNumber = this._counterNumber - 1;
+            //this._likeCounter.textContent = this._counterNumber;
         } else {
             this._elementLike.classList.add('element__like_active')
-            this._counterNumber = this._counterNumber + 1;
-            this._likeCounter.textContent = this._counterNumber;
+            //this._counterNumber = this._counterNumber + 1;
+           // this._likeCounter.textContent = this._counterNumber;
         }
     }
 
     _changeLikesArray() {
         this._handleLikeCounter(this._likesArray, this._cardId)
+
+        // function isLiked(like){
+        //     return  like._id === 'ecf400e5fa96a2f1cc3657c8'
+        // }
+        //
+        // if(!this._likesArray.some(isLiked)){
+        //     console.log('сработал if')
+        // } else {
+        //     console.log('сработал else')
+        // }
     }
+
+    // _changeLikesArray() {
+    //     function isLiked(like){
+    //         return  like._id === 'ecf400e5fa96a2f1cc3657c8'
+    //     }
+    //
+    //     this._handleLikeCounter(this._likesArray, this._cardId)
+    //
+    //     if(!this._likesArray.some(isLiked)){
+    //         console.log('сработал if')
+    //     } else {
+    //         console.log('сработал else')
+    //     }
+    // }
 
     _handleRemoveBtn() {
         this._handlePopupConfirm(this._cardId, this._element);

@@ -1,0 +1,43 @@
+.profile__avatar-container{
+    position:relative;
+    border:none;
+    background: none;
+}
+
+.profile__avatar-container:before{
+    content: "";
+    background: transparent;
+    pointer-events: none;
+    position:absolute;
+    transition: .3s;
+    height: 120px;
+    width: 120px;
+    opacity:0;
+}
+
+.profile__avatar-container:after{
+    content:"";
+    background-image: url(../../../images/pen.svg);
+    background-size: contain;
+    height:26px;
+    width:26px;
+    left:40%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    transition: .3s;
+    position:absolute;
+    opacity:0;
+}
+
+.profile__avatar-container:hover{
+    cursor: pointer;
+}
+
+.profile__avatar-container:hover:before{
+    background: rgba(0, 0, 0, .8);
+    opacity:1;
+}
+
+.profile__avatar-container:hover:after{
+    opacity:1;
+}

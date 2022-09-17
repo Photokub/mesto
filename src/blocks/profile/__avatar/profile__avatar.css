@@ -3,7 +3,51 @@
     height:120px;
     margin-right: 30px;
     border-radius: 50%;
+    /*display: block;*/
+    /*position: relative;*/
 }
+
+/*.profile__avatar:before{*/
+/*    content: "";*/
+/*    background: transparent;*/
+/*    bottom: 0;*/
+/*    top: 0;*/
+/*    left:0;*/
+/*    right:0;*/
+/*    pointer-events: none;*/
+/*    position:absolute;*/
+/*    transition: .3s;*/
+/*    height: 120px;*/
+/*    width: 120px;*/
+/*    opacity:0;*/
+/*}*/
+
+/*.profile__avatar:after{*/
+/*    content:"";*/
+/*    background-image: url(../../../images/pen.svg);*/
+/*    background-size: contain;*/
+/*    height:26px;*/
+/*    width:26px;*/
+/*    left:50%;*/
+/*    top:50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    position:absolute;*/
+/*    opacity:0;*/
+/*}*/
+
+/*.profile__avatar:hover{*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.profile__avatar:hover::before{*/
+/*    background: rgba(0, 0, 0, .8);*/
+/*    opacity:1;*/
+/*}*/
+
+/*.profile__avatar:hover::after{*/
+/*    opacity:1;*/
+/*}*/
+
 
 @media screen and (max-width:586px){
     .profile__avatar{

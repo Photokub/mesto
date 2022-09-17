@@ -60,9 +60,11 @@ const openPopupConfirm = (cardId, card) => {
 //     console.log(evt.target)
 // }
 
-function isLiked(like){
-    return  like._id === 'ecf400e5fa96a2f1cc3657c8'
-}
+// function isLiked(like){
+//     return  like._id === 'ecf400e5fa96a2f1cc3657c8'
+// }
+
+//const action = isCardLiked ? api.removeCardLike(id) : api.likeCard(id);
 
 // const isCardLiked = evt.target.classList.contains(
 //     'element__like_active'
@@ -83,22 +85,48 @@ function createCard(data) {
     },
         (cardId, card) =>
             openPopupConfirm(cardId, card),
-         (likeArray, cardId) =>{
-             if(!likeArray.some(isLiked))
-                 api.putLike(cardId)
-                     .then((res) => {
-                         likeArray.push[res]
-                         console.log(res)
-                         console.log(res.likes)
-                     })
-              else
-                 api.deleteLike(cardId)
-                     .then((res) => {
-                         likeArray.pop[res]
-                         console.log('Сработал else')
-                     })
-        }
-    )
+        //  (likeArray, cardId) =>{
+        //          api.putLike(cardId)
+        //              .then((res) => {
+        //                  likeArray.push[res]
+        //                  return res
+        //              })
+        //          api.deleteLike(cardId)
+        //              .then((res) => {
+        //                  likeArray.pop[res]
+        //              })
+        // }
+        // api.changeLikeCardStatus(...)
+        //     .then(data => {
+        //         card.setLikesInfo({ ...data });
+        //     })
+//     const action = isCardLiked ? api.removeCardLike(id) : api.likeCard(id);
+//
+//     action
+//         .then((res) => {
+//             card.setLikesValue(res);
+//             card.handleLikeButtonState({ isLoadig: false });
+//         })
+//         .catch((error) => console.log(error));
+// };
+        (card) => {
+        api.changeLikeCardStatus(card.id(), !card.isLiked())
+            .then(data => {
+                card.setLikes({...data});
+            })
+            .catch((error) => console.log(error));
+    })
+
+    // (likeArray, cardId) =>{
+    //     const action = card.isLiked(likeArray) ? api.deleteLike(cardId) : api. putLike(cardId)
+    //
+    //     action
+    //         .then((res) => {
+    //             card.setLikes(res.likes.length);
+    //         })
+    //         .catch((error) => console.log(error));
+    // }
+    // )
     const cardElement = card.generateCardElement();
     return cardElement
 }
