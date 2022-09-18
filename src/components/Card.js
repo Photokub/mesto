@@ -37,6 +37,8 @@ export class Card {
             this._elementRemoveBtn.classList.add('element__remove-btn_hidden')
         }
 
+       //this. _updateLikesArray()
+
         this._counterNumber = Number(this._likeCounter.textContent)
 
         return this._element;
@@ -57,22 +59,30 @@ export class Card {
         })
     }
 
+    _updateLikesArray(){
+    this._isLiked = this.isLiked();
+    this._likeCounter.textContent = this._likesArray.length
+}
+
     setLikes(number) {
         this._likeCounter.textContent = number
+       // this. _updateLikesArray()
     };
 
     // resetLikes(arr) {
     //     this._likeCounter.textContent = (arr.length)
     // }
 
-    // isLiked(likesArray){
-    //    // return  like._id === this._owner
-    //     return likesArray.some((ownLike) => ownLike._id === this._currentUserId)
-    // }
-
-    isLiked() {
-        return Boolean( this._likesArray.find(item => item._id === this._currentUserId));
+    isLiked(){
+       // return  like._id === this._owner
+        return  this._likesArray.some((ownLike) => ownLike._id === this._currentUserId)
     }
+
+
+
+    // isLiked() {
+    //     return Boolean( this._likesArray.find(item => item._id === this._currentUserId));
+    // }
 
     _setEventListeners() {
         this._elementLike.addEventListener('click', (evt) => {
@@ -100,7 +110,9 @@ export class Card {
     }
 
     _changeLikesArray() {
+
         this._handleLikeCounter(this._cardId)
+        //this. _updateLikesArray()
 
         //this._handleLikeCounter(this._likesArray, this._cardId)
 

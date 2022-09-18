@@ -1,6 +1,5 @@
 //import './index.css'
 
-//import {initialCards} from '../utils/initialCards.js';
 import {
     profilePopup,
     popupFullSizeImg,
@@ -17,7 +16,6 @@ import {
     popupAvatar,
     avatarEditBtn,
     avatarChangeForm,
-    likesCounter
 } from '../utils/constants.js'
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -27,7 +25,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupConfirm from "../components/PopupConfirm.js";
-//const counter = document.querySelector('.element__like-counter')
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
 
@@ -71,32 +68,23 @@ function createCard(data) {
         (cardId, card) =>
             openPopupConfirm(cardId, card),
 
-        (card) => {
-            api.changeLikeCardStatus(card.id, !card.isLiked())
-            .then(data => {
-                card.setLikes({...data});
+    (cardId) =>{
+        const action = card.isLiked() ? api.deleteLike(cardId) : api. putLike(cardId)
+
+        action
+            .then((res) => {
+                card.setLikes(res.likes.length);
+                card._likesArray = res.likes
             })
             .catch((error) => console.log(error));
     }
-
     )
-    // (likeArray, cardId) =>{
-    //     const action = card.isLiked(likeArray) ? api.deleteLike(cardId) : api. putLike(cardId)
-    //
-    //     action
-    //         .then((res) => {
-    //             card.setLikes(res.likes.length);
-    //         })
-    //         .catch((error) => console.log(error));
-    // }
-    // )
     const cardElement = card.generateCardElement();
     return cardElement
 }
 
 //добавление карточек из массива с сервера
 const cardsServerArr =[]
-console.log( cardsServerArr)
 
 const cardList = new Section({
     item: cardsServerArr,
