@@ -1,0 +1,28 @@
+.popup__confirm-delete-button{
+    margin-top:48px;
+    background-color: #000;
+    width: 358px;
+    height: 50px;
+    border:0;
+
+    color: #fff;
+    font-family: 'Inter','Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    transition: .35s;
+
+    cursor:pointer;
+}
+
+@media screen and (max-width: 586px ) {
+    .popup__confirm-delete-button {
+        width:238px;
+        height: 46px;
+        font-size: 14px;
+        line-height: 17px;
+        margin-top:45px;
+    }
+}

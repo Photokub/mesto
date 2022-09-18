@@ -21,6 +21,7 @@
 @import url("../blocks/popup/__fullsize-img-picture/popup__fullsize-img-picture.css");
 @import url("../blocks/popup/__fullsize-img-caption/popup__fullsize-img-caption.css");
 @import url("../blocks/popup/__container-confirm-delete/popup__container-confirm-delete.css");
+@import url("../blocks/popup/__confirm-delete-button/popup__confirm-delete-button.css");
 @import url("../blocks/popup/__change-avatar/popup__container-change-avatar.css");
 
 /* form */

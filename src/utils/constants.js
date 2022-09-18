@@ -8,7 +8,7 @@ export const cardElementTemplate = document.querySelector('#element-card').conte
 export const newCardForm = document.querySelector('.form_add-new-card');
 export const newProfileForm = document.querySelector('.form_profile');
 export const popupConfirmDelete = document.querySelector('.popup_confirm-delete')
-export const popupAvatar = document.querySelector('.popup__change-avatar')
+export const popupAvatar = document.querySelector('.popup_change-avatar')
 export const avatarEditBtn = document.querySelector('.profile__avatar-container')
 export const avatarChangeForm = document.querySelector('.form_change-avatar')
 
