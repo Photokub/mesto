@@ -4,6 +4,7 @@ export default class PopupWithForm extends Popup {
     constructor({popupSelector, handleDataViaSubmit}) {
         super(popupSelector);
         this._submitBtn = popupSelector.querySelector('.form__save-btn')
+        this._defaultBtnText = this._submitBtn.textContent;
         this._profileForm = document.querySelector('.form_profile')
         this._form = this._popupSelector.querySelector('.form')
         this._handleDataViaSubmit = handleDataViaSubmit
@@ -57,11 +58,24 @@ export default class PopupWithForm extends Popup {
         this._profileForm.reset()
     }
 
+    handleSubmitButton({ isLoading }) {
+        if (isLoading) {
+            this._submitBtn.disabled = true;
+            //this._submitBtn.classList.add(".form__save-btn_loading");
+            this._submitBtn.textContent = "Сохранение...";
+        } else {
+            this._submitBtn.disabled = false;
+            //this._submitBtn.classList.remove(".form__save-btn_loading");
+            this._submitBtn.textContent = this._defaultBtnText;
+        }
+    }
+
     setEventListeners() {
         super.setEventListeners()
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault()            
-            this._handleDataViaSubmit(this._getInputValues())  
+            this._handleDataViaSubmit(this._getInputValues())
+            this.handleSubmitButton({ isLoading: true })
             this.close()
         })
     }

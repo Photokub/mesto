@@ -65,9 +65,13 @@ export class Card {
     //     this._likeCounter.textContent = (arr.length)
     // }
 
-    isLiked(likesArray){
-       // return  like._id === this._owner
-        return likesArray.some((ownLike) => ownLike._id === this._currentUserId)
+    // isLiked(likesArray){
+    //    // return  like._id === this._owner
+    //     return likesArray.some((ownLike) => ownLike._id === this._currentUserId)
+    // }
+
+    isLiked() {
+        return Boolean( this._likesArray.find(item => item._id === this._currentUserId));
     }
 
     _setEventListeners() {
@@ -96,7 +100,9 @@ export class Card {
     }
 
     _changeLikesArray() {
-        this._handleLikeCounter(this._likesArray, this._cardId)
+        this._handleLikeCounter(this._cardId)
+
+        //this._handleLikeCounter(this._likesArray, this._cardId)
 
         // function isLiked(like){
         //     return  like._id === 'ecf400e5fa96a2f1cc3657c8'

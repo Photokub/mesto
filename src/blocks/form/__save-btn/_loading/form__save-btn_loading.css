@@ -1,0 +1,12 @@
+.form__save-btn_loading{
+    background-image: url(../../../../images/loader.svg);
+    background-position: 15% 50%;
+    background-repeat: no-repeat;
+    background-size: 15%;
+}
+
+.form__save-btn_loading:hover{
+    cursor: not-allowed;
+    opacity: 1;
+}
+

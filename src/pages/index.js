@@ -14,6 +14,9 @@ import {
     elementsGallery,
     cardElementTemplate,
     popupConfirmDelete,
+    popupAvatar,
+    avatarEditBtn,
+    avatarChangeForm,
     likesCounter
 } from '../utils/constants.js'
 import {Card} from '../components/Card.js';
@@ -27,9 +30,6 @@ import PopupConfirm from "../components/PopupConfirm.js";
 //const counter = document.querySelector('.element__like-counter')
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
-
-
-
 
 const api = new Api({
     baseUrl:  'https://nomoreparties.co/v1/cohort-50',
@@ -55,21 +55,6 @@ const openPopupConfirm = (cardId, card) => {
     popupConfirm.open(cardId, card);
 };
 
-// const isLiked = (evt) => {
-//   evt.target.classList.contains('element__like_active')
-//     console.log(evt.target)
-// }
-
-// function isLiked(like){
-//     return  like._id === 'ecf400e5fa96a2f1cc3657c8'
-// }
-
-//const action = isCardLiked ? api.removeCardLike(id) : api.likeCard(id);
-
-// const isCardLiked = evt.target.classList.contains(
-//     'element__like_active'
-// );
-
 //функция создания карточки
 function createCard(data) {
     const card = new Card(
@@ -85,38 +70,16 @@ function createCard(data) {
     },
         (cardId, card) =>
             openPopupConfirm(cardId, card),
-        //  (likeArray, cardId) =>{
-        //          api.putLike(cardId)
-        //              .then((res) => {
-        //                  likeArray.push[res]
-        //                  return res
-        //              })
-        //          api.deleteLike(cardId)
-        //              .then((res) => {
-        //                  likeArray.pop[res]
-        //              })
-        // }
-        // api.changeLikeCardStatus(...)
-        //     .then(data => {
-        //         card.setLikesInfo({ ...data });
-        //     })
-//     const action = isCardLiked ? api.removeCardLike(id) : api.likeCard(id);
-//
-//     action
-//         .then((res) => {
-//             card.setLikesValue(res);
-//             card.handleLikeButtonState({ isLoadig: false });
-//         })
-//         .catch((error) => console.log(error));
-// };
+
         (card) => {
-        api.changeLikeCardStatus(card.id(), !card.isLiked())
+            api.changeLikeCardStatus(card.id, !card.isLiked())
             .then(data => {
                 card.setLikes({...data});
             })
             .catch((error) => console.log(error));
-    })
+    }
 
+    )
     // (likeArray, cardId) =>{
     //     const action = card.isLiked(likeArray) ? api.deleteLike(cardId) : api. putLike(cardId)
     //
@@ -144,11 +107,6 @@ const cardList = new Section({
 
 // API с дефолтными карточками с сервера
 function getCardsFromServer(){
-    // popupImage.open(
-    //     {
-    //         name: card._name,
-    //         link: card._link
-    //     })
     api
     .getDefaultCards()
     .then((cards) => {
@@ -177,34 +135,38 @@ const popupWithFormCard = new PopupWithForm({
 
 const userData = new UserInfo({
     userNameSelector: classSelectors.userName,
-    userJobSelector: classSelectors.userJob
+    userJobSelector: classSelectors.userJob,
+    userAvatarSelector: classSelectors.userAvatar,
+})
+
+const popupAvatarEdit = new PopupWithForm({
+    popupSelector: popupAvatar,
+    handleDataViaSubmit: (data) => {
+        api.patchAvatar(data.ava_link_field)
+            .then((res) => {
+            userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar})
+            console.log(userData)
+        })
+    }
 })
 
 //добавление данных о пользователе с сервера
 const user = api.getUserInfo()
 
     user.then (result => { userData.setUserInfo(result) })
-    //user.then (result => { console.log(result) })
     user.then (result => { localStorage.setItem("userId", result._id) })
-   // user.then (result => { console.log(result._id) })
     user.catch(error => console.log(`Ошибка: ${error}`))
 
 
-//добавление данных о полльзователе на сервер и в профиль
+//добавление данных о пользователе на сервер и в профиль
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: profilePopup,
     handleDataViaSubmit: (data) =>
     api.patchUserInfo(data).then((res) => {
-        userData.setUserInfo({name: res.name, about: res.about});
+        userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
     })
     .catch((error) => console.log(error))
 })
-
-
-
-
-
-
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
@@ -213,11 +175,15 @@ formClassProfileCheckValid.enableValidation()
 const formClassNewCardCheckValid = new FormValidator(validateConfig, newCardForm)
 formClassNewCardCheckValid.enableValidation()
 
+const formClassChangeAvatar = new FormValidator(validateConfig, avatarChangeForm)
+formClassChangeAvatar.enableValidation()
+
 
 popupWithFormCard.setEventListeners()
 popupWithFormProfile.setEventListeners()
 popupImage.setEventListeners()
 popupConfirm.setEventListeners()
+popupAvatarEdit.setEventListeners()
 
 newCardAddOpenBtn.addEventListener('click', () => {
     formClassNewCardCheckValid.resetValidation()
@@ -229,6 +195,11 @@ profileEditBtn.addEventListener('click', () => {
     popupWithFormProfile.open()
     const initialData = userData.getUserInfo()
     popupWithFormProfile.setInputValues(initialData)
+})
+
+avatarEditBtn.addEventListener('click', () => {
+    formClassChangeAvatar.resetValidation()
+    popupAvatarEdit.open()
 })
 
 

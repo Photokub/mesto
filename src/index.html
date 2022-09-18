@@ -17,9 +17,9 @@
     <main class="main">
         <section class="profile">
             <!--            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя">-->
-            <button class="profile__avatar-container">
+            <div class="profile__avatar-container">
                 <img class="profile__avatar" src='./images/avatar.png' alt="Аватар пользователя">
-            </button>
+            </div>
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <p class="profile__subtitle">Исследователь океана</p>
@@ -101,13 +101,15 @@
     </section>
     <section class="popup popup__change-avatar" aria-label="попап изменения аватара">
         <div class="popup__container-change-avatar">
-            <form method="post"  novalidate>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form  class="form form_change-avatar" method="post"  name = "change-avatar-form" novalidate>
                 <label class="form__field">
-                <input class="form__input form__input_type_link" type="url" name="link" value="" placeholder="Ссылка на картинку" required>
-                <span class="form__input-error" id="ava-link-error"></span>
+                <input class="form__input form__input_type_link" type="url" name="ava_link_field" value="" placeholder="Ссылка на картинку" required>
+                <span class="form__input-error" id="ava_link_field-error"></span>
                 </label>
                 <button class="form__save-btn form__change-ava-btn form__save-btn_invalid" type="submit" disabled>Сохранить</button>
             </form>
+            <button class="popup__close" type="button"></button>
         </div>
     </section>
 </body>

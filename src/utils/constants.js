@@ -9,6 +9,9 @@ export const newCardForm = document.querySelector('.form_add-new-card');
 export const newProfileForm = document.querySelector('.form_profile');
 export const popupConfirmDelete = document.querySelector('.popup_confirm-delete')
 export const  likesCounter = cardElementTemplate.querySelector('.element__like-counter')
+export const popupAvatar = document.querySelector('.popup__change-avatar')
+export const avatarEditBtn = document.querySelector('.profile__avatar-container')
+export const avatarChangeForm = document.querySelector('.form_change-avatar')
 
 
 export const validateConfig = {
@@ -33,4 +36,5 @@ export const classSelectors = {
     zoomPicName: '.popup__fullsize-img-caption',
     //popupConfirm: '.popup_confirm-delete'
     likesCounter:'.element__like-counter',
+    userAvatar:'.profile__avatar'
 }

@@ -54,28 +54,35 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-    changeLikeCardStatus(id){
-        return fetch(`${this._adress}/cards/${id}`, {
-            method: "GET",
-            headers: this._headers,
-        })
-            .then((res) => this.handleResp(res))
-    }
 
-    putLike(id){
-        return fetch(`${this._adress}/cards/${id}/likes`, {
-            method: "PUT",
-            headers: this._headers,
-        })
-            .then((res) => this.handleResp(res))
-    }
+    // putLike(id){
+    //     return fetch(`${this._adress}/cards/${id}/likes`, {
+    //         method: "PUT",
+    //         headers: this._headers,
+    //     })
+    //         .then((res) => this.handleResp(res))
+    // }
+    //
+    // deleteLike(id){
+    //     return fetch(`${this._adress}/cards/${id}/likes`, {
+    //         method: "DELETE",
+    //         headers: this._headers,
+    //     })
+    //         .then((res) => this.handleResp(res))
+    // }
 
-    deleteLike(id){
-        return fetch(`${this._adress}/cards/${id}/likes`, {
-            method: "DELETE",
-            headers: this._headers,
-        })
-            .then((res) => this.handleResp(res))
+    changeLikeCardStatus(id, like){
+            return fetch(`${this._adress}/cards/${id}/likes`, {
+                method: like ? 'PUT' : 'DELETE',
+                headers: this._headers,
+            })
+                .then((res) => this.handleResp(res))
+
+            return fetch(`${this._adress}/cards/${id}/likes`, {
+                method: "DELETE",
+                headers: this._headers,
+            })
+                .then((res) => this.handleResp(res))
     }
 
     deleteMyCard(id){
@@ -86,14 +93,14 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-    changeAvatar(avatar) {
+    patchAvatar(avatar) {
         return fetch(`${this._adress}/users/me/avatar`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
                 avatar,
             }),
-        }).then((res) => this.handelResponse(res));
+        }).then((res) => this.handleResp(res));
     }
 
 
