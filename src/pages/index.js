@@ -128,6 +128,7 @@ const popupWithFormCard = new PopupWithForm({
     handleDataViaSubmit: (data) => {
         api.postCard(data).then((res)=>{
             console.log(res)
+            popupWithFormCard.handleSubmitButton({ isLoading: false })
             cardList.addItem(createCard(res))
         })
     }
@@ -164,6 +165,7 @@ const popupWithFormProfile = new PopupWithForm({
     handleDataViaSubmit: (data) =>
     api.patchUserInfo(data).then((res) => {
         userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
+        popupWithFormProfile.handleSubmitButton({ isLoading: false })
     })
     .catch((error) => console.log(error))
 })
