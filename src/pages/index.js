@@ -128,6 +128,7 @@ const popupAvatarEdit = new PopupWithForm({
     handleDataViaSubmit: (data) => {
         api.patchAvatar(data.ava_link_field)
             .then((res) => {
+                popupAvatarEdit.handleSubmitButton({isLoading: false})
                 userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar})
             })
             .catch((error) => console.log(error))
