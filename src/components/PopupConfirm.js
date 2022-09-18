@@ -5,12 +5,26 @@ export default class PopupConfirm extends Popup{
         super(popupselector);
         this._confirmBtn = popupselector.querySelector('.popup__confirm-delete-button')
         this._deleteCard = handleDeleteCard
+        this. _confirmationViaEnterKey = this. _confirmationViaEnterKey.bind(this);
     }
 
     open(id, card){
         super.open()
         this._cardId= id;
         this.card=card;
+        document.addEventListener('keydown', this._confirmationViaEnterKey);
+    }
+
+    close(){
+        super.close()
+    }
+
+    _confirmationViaEnterKey(evt) {
+        if (evt.code === 'Enter') {
+            this._deleteCard(this._cardId, this.card)
+            this.close()
+            document.removeEventListener('keydown', this._confirmationViaEnterKey);
+        }
     }
 
     setEventListeners(){

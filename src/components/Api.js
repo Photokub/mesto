@@ -16,7 +16,6 @@ export default class Api {
             method: "GET",
             headers: this._headers,
         })
-            //.then(res => res.json())
             .then((result) => {
                 return result.json()
             })
@@ -54,8 +53,7 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-
-    putLike(id){
+    putLike(id) {
         return fetch(`${this._adress}/cards/${id}/likes`, {
             method: "PUT",
             headers: this._headers,
@@ -63,7 +61,7 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-    deleteLike(id){
+    deleteLike(id) {
         return fetch(`${this._adress}/cards/${id}/likes`, {
             method: "DELETE",
             headers: this._headers,
@@ -71,21 +69,21 @@ export default class Api {
             .then((res) => this.handleResp(res))
     }
 
-    changeLikeCardStatus(id, like){
-            return fetch(`${this._adress}/cards/${id}/likes`, {
-                method: like ? 'PUT' : 'DELETE',
-                headers: this._headers,
-            })
-                .then((res) => this.handleResp(res))
+    changeLikeCardStatus(id, like) {
+        return fetch(`${this._adress}/cards/${id}/likes`, {
+            method: like ? 'PUT' : 'DELETE',
+            headers: this._headers,
+        })
+            .then((res) => this.handleResp(res))
 
-            return fetch(`${this._adress}/cards/${id}/likes`, {
-                method: "DELETE",
-                headers: this._headers,
-            })
-                .then((res) => this.handleResp(res))
+        return fetch(`${this._adress}/cards/${id}/likes`, {
+            method: "DELETE",
+            headers: this._headers,
+        })
+            .then((res) => this.handleResp(res))
     }
 
-    deleteMyCard(id){
+    deleteMyCard(id) {
         return fetch(`${this._adress}/cards/${id}`, {
             method: "DELETE",
             headers: this._headers,
@@ -104,7 +102,6 @@ export default class Api {
     }
 
 
-
-    }
+}
 
 

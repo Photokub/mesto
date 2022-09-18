@@ -11,9 +11,6 @@ export default class PopupWithForm extends Popup {
         this._userNameInput = this._popupSelector.querySelector('.form__input_type_name')
         this._userJobInput = this._popupSelector.querySelector('.form__input_type_job')
         this._inputFormList = this._popupSelector.querySelectorAll('.form__input')
-        //this._api = api
-        this._profileTitle=document.querySelector('.profile__title')
-        this._profileSubtitle=document.querySelector('.profile__subtitle')
     }
 
     _initInput(key) {
@@ -35,23 +32,6 @@ export default class PopupWithForm extends Popup {
         })
         return formValues;
     }
-
-    // _saveUserInfo = (data) => {
-    //     this._api
-    //         .patchUserInfo({
-    //             name: data.name,
-    //             about: data.about
-    //         })
-    //         //.then(this.setInputValues(data))
-    // }
-    // _saveUserInfo = (data) => {
-    //     return this._api
-    //         .patchUserInfo({
-    //             name: data.name,
-    //             about: data.about
-    //         })
-    //         .then(setInputValues(data))
-    // }
 
     close() {
         super.close()

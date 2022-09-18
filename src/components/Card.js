@@ -37,10 +37,6 @@ export class Card {
             this._elementRemoveBtn.classList.add('element__remove-btn_hidden')
         }
 
-       //this. _updateLikesArray()
-
-        this._counterNumber = Number(this._likeCounter.textContent)
-
         return this._element;
     }
 
@@ -59,30 +55,14 @@ export class Card {
         })
     }
 
-    _updateLikesArray(){
-    this._isLiked = this.isLiked();
-    this._likeCounter.textContent = this._likesArray.length
-}
-
     setLikes(number) {
         this._likeCounter.textContent = number
-       // this. _updateLikesArray()
     };
 
-    // resetLikes(arr) {
-    //     this._likeCounter.textContent = (arr.length)
-    // }
 
-    isLiked(){
-       // return  like._id === this._owner
-        return  this._likesArray.some((ownLike) => ownLike._id === this._currentUserId)
+    isLiked() {
+        return this._likesArray.some((ownLike) => ownLike._id === this._currentUserId)
     }
-
-
-
-    // isLiked() {
-    //     return Boolean( this._likesArray.find(item => item._id === this._currentUserId));
-    // }
 
     _setEventListeners() {
         this._elementLike.addEventListener('click', (evt) => {
@@ -98,48 +78,16 @@ export class Card {
     }
 
     _handleLikeBtn(evt) {
-        if(evt.target.classList.contains('element__like_active')){
+        if (evt.target.classList.contains('element__like_active')) {
             this._elementLike.classList.remove('element__like_active')
-           // this._counterNumber = this._counterNumber - 1;
-            //this._likeCounter.textContent = this._counterNumber;
         } else {
             this._elementLike.classList.add('element__like_active')
-            //this._counterNumber = this._counterNumber + 1;
-           // this._likeCounter.textContent = this._counterNumber;
         }
     }
 
     _changeLikesArray() {
-
         this._handleLikeCounter(this._cardId)
-        //this. _updateLikesArray()
-
-        //this._handleLikeCounter(this._likesArray, this._cardId)
-
-        // function isLiked(like){
-        //     return  like._id === 'ecf400e5fa96a2f1cc3657c8'
-        // }
-        //
-        // if(!this._likesArray.some(isLiked)){
-        //     console.log('сработал if')
-        // } else {
-        //     console.log('сработал else')
-        // }
     }
-
-    // _changeLikesArray() {
-    //     function isLiked(like){
-    //         return  like._id === 'ecf400e5fa96a2f1cc3657c8'
-    //     }
-    //
-    //     this._handleLikeCounter(this._likesArray, this._cardId)
-    //
-    //     if(!this._likesArray.some(isLiked)){
-    //         console.log('сработал if')
-    //     } else {
-    //         console.log('сработал else')
-    //     }
-    // }
 
     _handleRemoveBtn() {
         this._handlePopupConfirm(this._cardId, this._element);

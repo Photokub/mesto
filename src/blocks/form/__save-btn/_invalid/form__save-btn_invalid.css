@@ -9,3 +9,7 @@
     text-align: center;
     transition: .35s;
 }
+
+.form__save-btn_invalid{
+    cursor: default;
+}

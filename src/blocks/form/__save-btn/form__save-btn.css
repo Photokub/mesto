@@ -13,6 +13,8 @@
     line-height: 22px;
     text-align: center;
     transition: .35s;
+
+    cursor:pointer;
 }
 
 @media screen and (max-width: 586px ) {
