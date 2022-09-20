@@ -37,6 +37,20 @@ const api = new Api({
 //добавление карточек из массива с сервера
 //const cardsServerArr = []
 
+Promise.all([ api.getUserInfo(), api.getDefaultCards()])
+    .then(([userData,item]) => {
+        popupImage.close();
+        userData.setUserInfo({
+            name: userData.name,
+            job: userData.about,
+            avatar: userData.avatar,
+        });
+        localStorage.setItem("userId", userData._id);
+        //section.generateCards(initialCards);
+        section.addItem(createCard(item))
+    })
+.catch((error) => console.log(error))
+
 
 // API с дефолтными карточками с сервера
 function getCardsFromServer() {
