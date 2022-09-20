@@ -40,33 +40,32 @@ const api = new Api({
 
 
 // API с дефолтными карточками с сервера
-// function getCardsFromServer() {
-//     api
-//         .getDefaultCards()
-//         .then((cards) => {
-//             cards.reverse().map((element) => {
-//                 cardsServerArr.push(element);
-//             });
-//             cardsServerArr.forEach((card) => {
-//                 const cardElement = createCard(card)
-//                 cardList.addItem(cardElement);
-//             })
-//         })
-//         .catch((error) => console.log(error))
-// }
-// getCardsFromServer()
+function getCardsFromServer() {
+    api
+        .getDefaultCards()
+        .then((cards) => {
+            section.renderItems(cards.reverse())
+            // cards.reverse().map((element) => {
+            //     // cardsServerArr.push(element);
+            // });
+            // cardsServerArr.forEach((card) => {
+            //     const cardElement = createCard(card)
+            //     cardList.addItem(cardElement);
+            // })
+        })
+        .catch((error) => console.log(error))
+}
+getCardsFromServer()
 
-api.getDefaultCards()
-    .then(cardList =>
-   cardList.forEach( data => section.addItem()))
-
+// api.getDefaultCards()
+//     .then(cardList =>
+//    cardList.forEach( data => section.addItem(createCard(data))))
+//
 const section = new Section({
-    item: [],
     renderer: (item) => {
         section.addItem(createCard(item))
-    }
-}, elementsGallery)
-
+    }}
+, elementsGallery)
 
 
 const popupConfirm = new PopupConfirm(
@@ -119,9 +118,9 @@ const popupWithFormCard = new PopupWithForm({
     handleDataViaSubmit: (data) => {
         api.postCard(data).then((res) => {
             popupWithFormCard.handleSubmitButton({isLoading: false})
-            cardList.addItem(createCard(res))
+            section.addItem(createCard(res))
             popupWithFormCard.close()
-            popupWithFormCard.reset()
+           // popupWithFormCard.reset()
         })
             .catch((error) => console.log(error))
     }
