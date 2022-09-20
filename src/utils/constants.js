@@ -4,7 +4,6 @@ export const popupAddNewCard = document.querySelector('.popup_add-new-card');
 export const profileEditBtn = document.querySelector('.profile__edit-btn');
 export const newCardAddOpenBtn = document.querySelector('.profile__add-btn');
 export const elementsGallery = document.querySelector('.elements');
-export const cardElementTemplate = document.querySelector('#element-card').content;
 export const newCardForm = document.querySelector('.form_add-new-card');
 export const newProfileForm = document.querySelector('.form_profile');
 export const popupConfirmDelete = document.querySelector('.popup_confirm-delete')
@@ -34,5 +33,6 @@ export const classSelectors = {
     zoomPicLink: '.popup__fullsize-img-picture',
     zoomPicName: '.popup__fullsize-img-caption',
     likesCounter:'.element__like-counter',
-    userAvatar:'.profile__avatar'
+    userAvatar:'.profile__avatar',
+    cardTemplate: '#element-card'
 }

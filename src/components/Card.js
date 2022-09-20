@@ -1,21 +1,22 @@
 export class Card {
-    constructor(data, cardSelector, handleCardClick, handlePopupConfirm, handleLikeCounter) {
+    constructor(data, cardTemplateSelector, handleCardClick, handlePopupConfirm, handleLikeCounter) {
         this._name = data.name;
         this._link = data.link;
         this._cardId = data._id;
         this._handleCardClick = handleCardClick;
         this._handlePopupConfirm = handlePopupConfirm;
         this._handleLikeCounter = handleLikeCounter;
-        this._cardSelector = cardSelector;
+        this._cardTemplate = cardTemplateSelector;
         this._owner = data.owner._id;
         this._currentUserId = localStorage.getItem("userId");
         this._likesArray = data.likes;
     }
 
     _getTemplate() {
-        const userElementCard = this._cardSelector.querySelector('.element').cloneNode(true);
+        const userElementCard = document.querySelector(this._cardTemplate).content.querySelector('.element').cloneNode(true);
         return userElementCard;
     }
+
 
     generateCardElement() {
         this._element = this._getTemplate();
@@ -59,6 +60,9 @@ export class Card {
         this._likeCounter.textContent = number
     };
 
+    resetLikes(data){
+        this._likesArray = data.likes
+    }
 
     isLiked() {
         return this._likesArray.some((ownLike) => ownLike._id === this._currentUserId)

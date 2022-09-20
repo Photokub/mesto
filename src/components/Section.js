@@ -13,6 +13,5 @@ export default class Section {
         array.forEach(item => {
             this._renderer(item);
         })
-
     }
   }

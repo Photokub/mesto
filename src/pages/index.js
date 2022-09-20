@@ -11,7 +11,6 @@ import {
     validateConfig,
     classSelectors,
     elementsGallery,
-    cardElementTemplate,
     popupConfirmDelete,
     popupAvatar,
     avatarEditBtn,
@@ -37,19 +36,31 @@ const api = new Api({
 //добавление карточек из массива с сервера
 //const cardsServerArr = []
 
-Promise.all([ api.getUserInfo(), api.getDefaultCards()])
-    .then(([userData,item]) => {
+const section = new Section({
+        renderer: (item) => {
+            section.addItem(createCard(item))
+        }
+    }
+    , elementsGallery)
+
+const userData = new UserInfo({
+    userNameSelector: classSelectors.userName,
+    userJobSelector: classSelectors.userJob,
+    userAvatarSelector: classSelectors.userAvatar,
+})
+
+Promise.all([api.getUserInfo(), api.getDefaultCards()])
+    .then(([data, item]) => {
         popupImage.close();
         userData.setUserInfo({
-            name: userData.name,
-            job: userData.about,
-            avatar: userData.avatar,
+            name: data.name,
+            about: data.about,
+            avatar: data.avatar,
         });
-        localStorage.setItem("userId", userData._id);
-        //section.generateCards(initialCards);
-        section.addItem(createCard(item))
+        localStorage.setItem("userId", data._id);
+        section.renderItems(item.reverse())
     })
-.catch((error) => console.log(error))
+    .catch((error) => console.log(error))
 
 
 // API с дефолтными карточками с сервера
@@ -58,36 +69,18 @@ function getCardsFromServer() {
         .getDefaultCards()
         .then((cards) => {
             section.renderItems(cards.reverse())
-            // cards.reverse().map((element) => {
-            //     // cardsServerArr.push(element);
-            // });
-            // cardsServerArr.forEach((card) => {
-            //     const cardElement = createCard(card)
-            //     cardList.addItem(cardElement);
-            // })
         })
         .catch((error) => console.log(error))
 }
 
 getCardsFromServer()
 
-// api.getDefaultCards()
-//     .then(cardList =>
-//    cardList.forEach( data => section.addItem(createCard(data))))
-//
-const section = new Section({
-        renderer: (item) => {
-            section.addItem(createCard(item))
-        }
-    }
-    , elementsGallery)
-
 
 //функция создания карточки
 function createCard(data) {
     const card = new Card(
         data,
-        cardElementTemplate,
+        classSelectors.cardTemplate,
         () => {
             popupImage.open(
                 {
@@ -115,7 +108,7 @@ function createCard(data) {
                 .then((res) => {
                     card.setLikes(res.likes.length);
                     card.handleLikeBtn()
-                    card._likesArray = res.likes
+                    card.resetLikes(res)
                 })
                 .catch((error) => console.log(error));
         }
@@ -129,20 +122,16 @@ const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
     handleDataViaSubmit: (data) => {
         api.postCard(data).then((res) => {
-            popupWithFormCard.handleSubmitButton({isLoading: false})
+            //popupWithFormCard.handleSubmitButton({isLoading: false})
             section.addItem(createCard(res))
             popupWithFormCard.close()
             // popupWithFormCard.reset()
         })
             .catch((error) => console.log(error))
+            .finally(popupWithFormCard.handleSubmitButton({isLoading: false}))
     }
 })
 
-const userData = new UserInfo({
-    userNameSelector: classSelectors.userName,
-    userJobSelector: classSelectors.userJob,
-    userAvatarSelector: classSelectors.userAvatar,
-})
 
 const popupConfirm = new PopupConfirm(
     popupConfirmDelete
@@ -162,24 +151,26 @@ const popupAvatarEdit = new PopupWithForm({
     handleDataViaSubmit: (data) => {
         api.patchAvatar(data.ava_link_field)
             .then((res) => {
-                popupAvatarEdit.handleSubmitButton({isLoading: false})
-                userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
+                //popupAvatarEdit.handleSubmitButton({isLoading: false})
+                //userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
                 popupAvatarEdit.close();
-                popupAvatarEdit.reset()
+                // popupAvatarEdit.reset()
             })
             .catch((error) => console.log(error))
+            .finally(popupAvatarEdit.handleSubmitButton({isLoading: false}))
     }
 })
 
 //добавление данных о пользователе с сервера
 const user = api.getUserInfo()
-user.then(result => {
-    userData.setUserInfo(result)
-})
-user.then(result => {
-    localStorage.setItem("userId", result._id)
-})
-user.catch(error => console.log(`Ошибка: ${error}`))
+    .then(result => {
+        userData.setUserInfo(result)
+        return result
+    })
+    .then(result => {
+        localStorage.setItem("userId", result._id)
+    })
+    .catch(error => console.log(`Ошибка: ${error}`))
 
 
 //добавление данных о пользователе на сервер и в профиль
@@ -188,18 +179,19 @@ const popupWithFormProfile = new PopupWithForm({
     handleDataViaSubmit: (data) =>
         api.patchUserInfo(data).then((res) => {
             userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
-            popupWithFormProfile.handleSubmitButton({isLoading: false})
+            //popupWithFormProfile.handleSubmitButton({isLoading: false})
             popupWithFormProfile.close();
-            popupWithFormProfile.reset()
+            //popupWithFormProfile.reset()
         })
             .catch((error) => console.log(error))
+            .finally(popupWithFormProfile.handleSubmitButton({isLoading: false}))
 })
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
 
-const openPopupConfirm = (cardId, card) => {
-    popupConfirm.open(cardId, card);
-};
+// const openPopupConfirm = (cardId, card) => {
+//     popupConfirm.open(cardId, card);
+// };
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
