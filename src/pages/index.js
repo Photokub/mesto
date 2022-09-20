@@ -38,7 +38,6 @@ const api = new Api({
 //const cardsServerArr = []
 
 
-
 // API с дефолтными карточками с сервера
 function getCardsFromServer() {
     api
@@ -55,6 +54,7 @@ function getCardsFromServer() {
         })
         .catch((error) => console.log(error))
 }
+
 getCardsFromServer()
 
 // api.getDefaultCards()
@@ -62,23 +62,12 @@ getCardsFromServer()
 //    cardList.forEach( data => section.addItem(createCard(data))))
 //
 const section = new Section({
-    renderer: (item) => {
-        section.addItem(createCard(item))
-    }}
-, elementsGallery)
-
-
-const popupConfirm = new PopupConfirm(
-    popupConfirmDelete,
-    (cardId, card) => {
-        api
-            .deleteMyCard(cardId)
-            .then(() =>
-                    card.remove(),
-                popupConfirm.close())
-            .catch((error) => console.log(error))
+        renderer: (item) => {
+            section.addItem(createCard(item))
+        }
     }
-)
+    , elementsGallery)
+
 
 //функция создания карточки
 function createCard(data) {
@@ -93,8 +82,17 @@ function createCard(data) {
                 }
             );
         },
-        (cardId, card) =>
-            openPopupConfirm(cardId, card),
+        (cardId) => {
+            popupConfirm.open();
+            popupConfirm.submitHandler(() => {
+                api
+                    .deleteMyCard(cardId)
+                    .then(() =>
+                            card.removeCard(),
+                        popupConfirm.close())
+                    .catch((error) => console.log(error))
+            })
+        },
 
         (cardId) => {
             const action = card.isLiked() ? api.deleteLike(cardId) : api.putLike(cardId)
@@ -120,7 +118,7 @@ const popupWithFormCard = new PopupWithForm({
             popupWithFormCard.handleSubmitButton({isLoading: false})
             section.addItem(createCard(res))
             popupWithFormCard.close()
-           // popupWithFormCard.reset()
+            // popupWithFormCard.reset()
         })
             .catch((error) => console.log(error))
     }
@@ -131,6 +129,19 @@ const userData = new UserInfo({
     userJobSelector: classSelectors.userJob,
     userAvatarSelector: classSelectors.userAvatar,
 })
+
+const popupConfirm = new PopupConfirm(
+    popupConfirmDelete
+    // (cardId, card) => {
+    //     //cardElement.removeCard(card)
+    //     api
+    //         .deleteMyCard(cardId)
+    //         .then(() =>
+    //                 card.removeCard(),
+    //             popupConfirm.close())
+    //         .catch((error) => console.log(error))
+    // }
+)
 
 const popupAvatarEdit = new PopupWithForm({
     popupSelector: popupAvatar,

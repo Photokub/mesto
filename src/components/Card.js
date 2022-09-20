@@ -64,6 +64,11 @@ export class Card {
         return this._likesArray.some((ownLike) => ownLike._id === this._currentUserId)
     }
 
+    removeCard() {
+        this._element.remove();
+        this._element = null;
+    }
+
     _setEventListeners() {
         this._elementLike.addEventListener('click', (evt) => {
             this._changeLikesArray();
