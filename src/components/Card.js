@@ -66,7 +66,6 @@ export class Card {
 
     _setEventListeners() {
         this._elementLike.addEventListener('click', (evt) => {
-            this._handleLikeBtn(evt);
             this._changeLikesArray();
         });
         this._elementRemoveBtn.addEventListener('click', () => {
@@ -77,8 +76,8 @@ export class Card {
         });
     }
 
-    _handleLikeBtn(evt) {
-        if (evt.target.classList.contains('element__like_active')) {
+    handleLikeBtn() {
+        if ( this._elementLike.classList.contains('element__like_active')) {
             this._elementLike.classList.remove('element__like_active')
         } else {
             this._elementLike.classList.add('element__like_active')

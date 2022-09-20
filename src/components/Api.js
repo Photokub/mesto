@@ -16,9 +16,7 @@ export default class Api {
             method: "GET",
             headers: this._headers,
         })
-            .then((result) => {
-                return result.json()
-            })
+            .then((res) => this.handleResp(res))
     }
 
     patchUserInfo({user_name_field, user_job_field}) {
@@ -62,20 +60,6 @@ export default class Api {
     }
 
     deleteLike(id) {
-        return fetch(`${this._adress}/cards/${id}/likes`, {
-            method: "DELETE",
-            headers: this._headers,
-        })
-            .then((res) => this.handleResp(res))
-    }
-
-    changeLikeCardStatus(id, like) {
-        return fetch(`${this._adress}/cards/${id}/likes`, {
-            method: like ? 'PUT' : 'DELETE',
-            headers: this._headers,
-        })
-            .then((res) => this.handleResp(res))
-
         return fetch(`${this._adress}/cards/${id}/likes`, {
             method: "DELETE",
             headers: this._headers,

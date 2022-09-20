@@ -5,12 +5,12 @@ export default class PopupWithForm extends Popup {
         super(popupSelector);
         this._submitBtn = popupSelector.querySelector('.form__save-btn')
         this._defaultBtnText = this._submitBtn.textContent;
-        this._profileForm = document.querySelector('.form_profile')
-        this._form = this._popupSelector.querySelector('.form')
+        //this._profileForm = document.querySelector('.form_profile')
+        this._form = this._popup.querySelector('.form')
         this._handleDataViaSubmit = handleDataViaSubmit
-        this._userNameInput = this._popupSelector.querySelector('.form__input_type_name')
-        this._userJobInput = this._popupSelector.querySelector('.form__input_type_job')
-        this._inputFormList = this._popupSelector.querySelectorAll('.form__input')
+       // this._userNameInput = this._popupSelector.querySelector('.form__input_type_name')
+        //this._userJobInput = this._popupSelector.querySelector('.form__input_type_job')
+        this._inputFormList = this._popup.querySelectorAll('.form__input')
     }
 
     _initInput(key) {
@@ -35,7 +35,7 @@ export default class PopupWithForm extends Popup {
 
     close() {
         super.close()
-        this._profileForm.reset()
+        //this._profileForm.reset()
     }
 
     handleSubmitButton({ isLoading }) {
@@ -56,7 +56,6 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault()            
             this._handleDataViaSubmit(this._getInputValues())
             this.handleSubmitButton({ isLoading: true })
-            this.close()
         })
     }
 }

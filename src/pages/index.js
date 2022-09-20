@@ -1,4 +1,4 @@
-import './index.css'
+// import './index.css'
 
 import {
     profilePopup,
@@ -35,32 +35,39 @@ const api = new Api({
 })
 
 //добавление карточек из массива с сервера
-const cardsServerArr = []
+//const cardsServerArr = []
 
-const cardList = new Section({
-    item: cardsServerArr,
+
+
+// API с дефолтными карточками с сервера
+// function getCardsFromServer() {
+//     api
+//         .getDefaultCards()
+//         .then((cards) => {
+//             cards.reverse().map((element) => {
+//                 cardsServerArr.push(element);
+//             });
+//             cardsServerArr.forEach((card) => {
+//                 const cardElement = createCard(card)
+//                 cardList.addItem(cardElement);
+//             })
+//         })
+//         .catch((error) => console.log(error))
+// }
+// getCardsFromServer()
+
+api.getDefaultCards()
+    .then(cardList =>
+   cardList.forEach( data => section.addItem()))
+
+const section = new Section({
+    item: [],
     renderer: (item) => {
-        cardList.addItem(createCard(item))
+        section.addItem(createCard(item))
     }
 }, elementsGallery)
 
-// API с дефолтными карточками с сервера
-function getCardsFromServer() {
-    api
-        .getDefaultCards()
-        .then((cards) => {
-            cards.reverse().map((element) => {
-                cardsServerArr.push(element);
-            });
-            cardsServerArr.forEach((card) => {
-                const cardElement = createCard(card)
-                cardList.addItem(cardElement);
-            })
-        })
-        .catch((error) => console.log(error))
-}
 
-getCardsFromServer()
 
 const popupConfirm = new PopupConfirm(
     popupConfirmDelete,
@@ -96,6 +103,7 @@ function createCard(data) {
             action
                 .then((res) => {
                     card.setLikes(res.likes.length);
+                    card.handleLikeBtn()
                     card._likesArray = res.likes
                 })
                 .catch((error) => console.log(error));
@@ -112,6 +120,8 @@ const popupWithFormCard = new PopupWithForm({
         api.postCard(data).then((res) => {
             popupWithFormCard.handleSubmitButton({isLoading: false})
             cardList.addItem(createCard(res))
+            popupWithFormCard.close()
+            popupWithFormCard.reset()
         })
             .catch((error) => console.log(error))
     }
@@ -129,7 +139,9 @@ const popupAvatarEdit = new PopupWithForm({
         api.patchAvatar(data.ava_link_field)
             .then((res) => {
                 popupAvatarEdit.handleSubmitButton({isLoading: false})
-                userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar})
+                userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
+                popupAvatarEdit.close();
+                popupAvatarEdit.reset()
             })
             .catch((error) => console.log(error))
     }
@@ -153,6 +165,8 @@ const popupWithFormProfile = new PopupWithForm({
         api.patchUserInfo(data).then((res) => {
             userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
             popupWithFormProfile.handleSubmitButton({isLoading: false})
+            popupWithFormProfile.close();
+            popupWithFormProfile.reset()
         })
             .catch((error) => console.log(error))
 })
