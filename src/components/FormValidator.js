@@ -34,7 +34,7 @@ export class FormValidator {
     }
 
     _hideFieldError(inputElement) {
-        this._spanError = inputElement.nextElementSibling
+        this._spanError = this._form.querySelector(`#${inputElement.name}-error`);
        this._spanError.textContent = "";
         inputElement.classList.remove(this._inputErrorClass);
     }
