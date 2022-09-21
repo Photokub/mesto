@@ -1,4 +1,4 @@
-// import './index.css'
+ import './index.css'
 
 import {
     profilePopup,
@@ -34,8 +34,6 @@ const api = new Api({
 })
 
 //добавление карточек из массива с сервера
-//const cardsServerArr = []
-
 const section = new Section({
         renderer: (item) => {
             section.addItem(createCard(item))
@@ -49,6 +47,7 @@ const userData = new UserInfo({
     userAvatarSelector: classSelectors.userAvatar,
 })
 
+//Получение сайта с начальными данными
 Promise.all([api.getUserInfo(), api.getDefaultCards()])
     .then(([data, item]) => {
         popupImage.close();
@@ -61,20 +60,6 @@ Promise.all([api.getUserInfo(), api.getDefaultCards()])
         section.renderItems(item.reverse())
     })
     .catch((error) => console.log(error))
-
-
-// API с дефолтными карточками с сервера
-function getCardsFromServer() {
-    api
-        .getDefaultCards()
-        .then((cards) => {
-            section.renderItems(cards.reverse())
-        })
-        .catch((error) => console.log(error))
-}
-
-getCardsFromServer()
-
 
 //функция создания карточки
 function createCard(data) {
@@ -122,10 +107,8 @@ const popupWithFormCard = new PopupWithForm({
     popupSelector: popupAddNewCard,
     handleDataViaSubmit: (data) => {
         api.postCard(data).then((res) => {
-            //popupWithFormCard.handleSubmitButton({isLoading: false})
             section.addItem(createCard(res))
             popupWithFormCard.close()
-            // popupWithFormCard.reset()
         })
             .catch((error) => console.log(error))
             .finally(popupWithFormCard.handleSubmitButton({isLoading: false}))
@@ -135,15 +118,6 @@ const popupWithFormCard = new PopupWithForm({
 
 const popupConfirm = new PopupConfirm(
     popupConfirmDelete
-    // (cardId, card) => {
-    //     //cardElement.removeCard(card)
-    //     api
-    //         .deleteMyCard(cardId)
-    //         .then(() =>
-    //                 card.removeCard(),
-    //             popupConfirm.close())
-    //         .catch((error) => console.log(error))
-    // }
 )
 
 const popupAvatarEdit = new PopupWithForm({
@@ -151,10 +125,8 @@ const popupAvatarEdit = new PopupWithForm({
     handleDataViaSubmit: (data) => {
         api.patchAvatar(data.ava_link_field)
             .then((res) => {
-                //popupAvatarEdit.handleSubmitButton({isLoading: false})
-                //userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
+                userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
                 popupAvatarEdit.close();
-                // popupAvatarEdit.reset()
             })
             .catch((error) => console.log(error))
             .finally(popupAvatarEdit.handleSubmitButton({isLoading: false}))
@@ -179,19 +151,13 @@ const popupWithFormProfile = new PopupWithForm({
     handleDataViaSubmit: (data) =>
         api.patchUserInfo(data).then((res) => {
             userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
-            //popupWithFormProfile.handleSubmitButton({isLoading: false})
             popupWithFormProfile.close();
-            //popupWithFormProfile.reset()
         })
             .catch((error) => console.log(error))
             .finally(popupWithFormProfile.handleSubmitButton({isLoading: false}))
 })
 
 const popupImage = new PopupWithImage(popupFullSizeImg)
-
-// const openPopupConfirm = (cardId, card) => {
-//     popupConfirm.open(cardId, card);
-// };
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
