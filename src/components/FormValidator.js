@@ -28,7 +28,7 @@ export class FormValidator {
     }
 
     _showFieldError(inputElement, errorMessage) {
-        this._spanError = this._form.querySelector(`#${this._input.name}-error`);
+        this._spanError = this._form.querySelector(`#${inputElement.name}-error`);
         this._spanError.textContent = errorMessage;
         inputElement.classList.add(this._inputErrorClass);
     }
