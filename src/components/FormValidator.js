@@ -35,7 +35,7 @@ export class FormValidator {
 
     _hideFieldError(inputElement) {
         this._spanError = this._form.querySelector(`#${inputElement.name}-error`);
-       this._spanError.textContent = "";
+        this._spanError.textContent = "";
         inputElement.classList.remove(this._inputErrorClass);
     }
 
@@ -56,11 +56,7 @@ export class FormValidator {
     resetValidation() {
         this._inputList.forEach((inputListElement) => {
             this._hideFieldError(inputListElement);
-            inputListElement.value = ''
         })
-
-        this._submitBtn.classList.remove(this._config.buttonValid)
-        this._submitBtn.classList.add(this._config.buttonInvalid)
         this._setSubmitButtonState()
     }
 }

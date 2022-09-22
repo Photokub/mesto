@@ -1,9 +1,6 @@
- import './index.css'
+import './index.css'
 
 import {
-    profilePopup,
-    popupFullSizeImg,
-    popupAddNewCard,
     profileEditBtn,
     newCardAddOpenBtn,
     newCardForm,
@@ -11,8 +8,6 @@ import {
     validateConfig,
     classSelectors,
     elementsGallery,
-    popupConfirmDelete,
-    popupAvatar,
     avatarEditBtn,
     avatarChangeForm,
 } from '../utils/constants.js'
@@ -50,7 +45,6 @@ const userData = new UserInfo({
 //Получение сайта с начальными данными
 Promise.all([api.getUserInfo(), api.getDefaultCards()])
     .then(([data, item]) => {
-        popupImage.close();
         userData.setUserInfo({
             name: data.name,
             about: data.about,
@@ -104,24 +98,26 @@ function createCard(data) {
 
 //добавление карточек по сабмиту
 const popupWithFormCard = new PopupWithForm({
-    popupSelector: popupAddNewCard,
+    popupSelector: classSelectors.addCardPopup,
     handleDataViaSubmit: (data) => {
         api.postCard(data).then((res) => {
             section.addItem(createCard(res))
             popupWithFormCard.close()
         })
             .catch((error) => console.log(error))
-            .finally(popupWithFormCard.handleSubmitButton({isLoading: false}))
+            .finally(() => {
+                popupWithFormCard.handleSubmitButton({isLoading: false})
+            })
     }
 })
 
 
 const popupConfirm = new PopupConfirm(
-    popupConfirmDelete
+    classSelectors.popupConfirm
 )
 
 const popupAvatarEdit = new PopupWithForm({
-    popupSelector: popupAvatar,
+    popupSelector: classSelectors.changeAvatarPopup,
     handleDataViaSubmit: (data) => {
         api.patchAvatar(data.ava_link_field)
             .then((res) => {
@@ -129,35 +125,27 @@ const popupAvatarEdit = new PopupWithForm({
                 popupAvatarEdit.close();
             })
             .catch((error) => console.log(error))
-            .finally(popupAvatarEdit.handleSubmitButton({isLoading: false}))
+            .finally(() => {
+                popupAvatarEdit.handleSubmitButton({isLoading: false})
+            })
     }
 })
 
-//добавление данных о пользователе с сервера
-const user = api.getUserInfo()
-    .then(result => {
-        userData.setUserInfo(result)
-        return result
-    })
-    .then(result => {
-        localStorage.setItem("userId", result._id)
-    })
-    .catch(error => console.log(`Ошибка: ${error}`))
-
-
 //добавление данных о пользователе на сервер и в профиль
 const popupWithFormProfile = new PopupWithForm({
-    popupSelector: profilePopup,
+    popupSelector: classSelectors.profilePopup,
     handleDataViaSubmit: (data) =>
         api.patchUserInfo(data).then((res) => {
             userData.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});
             popupWithFormProfile.close();
         })
             .catch((error) => console.log(error))
-            .finally(popupWithFormProfile.handleSubmitButton({isLoading: false}))
+            .finally(() => {
+                popupWithFormProfile.handleSubmitButton({isLoading: false})
+            })
 })
 
-const popupImage = new PopupWithImage(popupFullSizeImg)
+const popupImage = new PopupWithImage(classSelectors.popupFullSizeImgSelector)
 
 //валидация форм
 const formClassProfileCheckValid = new FormValidator(validateConfig, newProfileForm)
@@ -168,7 +156,6 @@ formClassNewCardCheckValid.enableValidation()
 
 const formClassChangeAvatar = new FormValidator(validateConfig, avatarChangeForm)
 formClassChangeAvatar.enableValidation()
-
 
 popupWithFormCard.setEventListeners()
 popupWithFormProfile.setEventListeners()

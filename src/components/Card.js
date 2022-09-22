@@ -17,7 +17,6 @@ export class Card {
         return userElementCard;
     }
 
-
     generateCardElement() {
         this._element = this._getTemplate();
         this._elementLike = this._element.querySelector('.element__like');
@@ -60,7 +59,7 @@ export class Card {
         this._likeCounter.textContent = number
     };
 
-    resetLikes(data){
+    resetLikes(data) {
         this._likesArray = data.likes
     }
 
@@ -86,7 +85,7 @@ export class Card {
     }
 
     handleLikeBtn() {
-        if ( this._elementLike.classList.contains('element__like_active')) {
+        if (this._elementLike.classList.contains('element__like_active')) {
             this._elementLike.classList.remove('element__like_active')
         } else {
             this._elementLike.classList.add('element__like_active')
