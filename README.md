@@ -3,7 +3,7 @@
 ### Обзор
 
 Адаптивный сайт-галерея с интерактивными элементами. Пользователь может менять данные профиля и управлять галереей.
-Логика элементов реализована на языке Java Script в парадигме ООП. Сборка с помощью Webpack.
+Логика элементов реализована на чистом языке Java Script в парадигме ООП. Сборка с помощью Webpack.
 
 **Валидация**
 
@@ -14,6 +14,18 @@
 * 984px
 * 620px
 * 586px
+
+### Стек технологий:
+<p>
+<img alt="JS" src="https://img.shields.io/badge/JS-yellow?style=flat-square&logo=JavaScript" />
+<img alt="html5" src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" />
+<img alt="CSS3" src="https://img.shields.io/badge/CSS-blue?style=flat-square&logo=CSS3" />
+<img alt="BEM" src="https://img.shields.io/badge/BEM-black?style=flat-square&logo=bem" />
+<img alt="git" src="https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white" />
+</p>  
+
+### Статус проекта:
+🟢 Завершен 
 
 **Git-pages**
 [ссылка на сайт](https://photokub.github.io/mesto/)
